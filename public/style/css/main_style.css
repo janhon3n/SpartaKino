@@ -1,14 +1,37 @@
 body {
   font-family: georgia;
   background-color: #78140C;
-  color: white; }
+  color: white;
+  font-size: 16px;
+  margin: 0px; }
 
 body :visited {
   color: white; }
 
 header {
-  height: 200px;
+  height: 70px;
+  font-size: 120%;
   background-color: #246068; }
+  header div#logo {
+    width: 200px;
+    float: left; }
+    header div#logo h1 {
+      margin: 12px; }
+  header div#links {
+    width: calc(100% - 200px);
+    float: right; }
+    header div#links ul {
+      margin: 10px;
+      margin-left: 40px; }
+      header div#links ul li {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px; }
+      header div#links ul li:hover {
+        background-color: #8BA9AE; }
+      header div#links ul div#infomessage {
+        float: right;
+        display: inline-block; }
 
 /* Hall edit */
 div.he_container table.he_map {

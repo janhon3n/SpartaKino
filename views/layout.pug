@@ -8,25 +8,27 @@ html
 	body
 		block header
 			header
-				a(href="/")
-					h1 SpartaKino
-				if user != undefined && user != null
-					div= 'Logged in as ' + user.username
+				div#logo
+					a(href="/")
+						h1 SpartaKino
+				div#links
 					ul
-						if user.type === "admin"
-							a(href="/admin")
-								li Admin controls
-						a(href="/user")
-							li Own reservations
-						a(href="/logout")
-							li Log out
-				else
-					ul
-						a(href="/login")
-							li Log in
-						a(href="/register")
-							li Create an account
+						if user != undefined && user != null
+							if user.type === "admin"
+								a(href="/admin")
+									li Admin controls
+							a(href="/user")
+								li Own reservations
+							a(href="/logout")
+								li Log out
+						else
+							a(href="/login")
+								li Log in
+							a(href="/register")
+								li Create an account
+						div#infomessage= 'Logged in as ' + user.username
 				
 		block content
+			div#content
 		block footer
 			div Created with Node.js and Express.js

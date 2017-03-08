@@ -23,6 +23,8 @@ body{
 	font-family:georgia;
 	background-color:$color-primary-3;
 	color:white;
+	font-size:16px;
+	margin:0px;
 }
 body :visited{
 	color:white;
@@ -30,12 +32,42 @@ body :visited{
 
 
 header {
-	height:200px;
+	height:70px;
+	font-size:120%;
 	background-color:$color-secondary-1-0;
+	
+	div#logo {
+		width:200px;
+		float:left;
+		
+		h1{
+		margin:12px;
+		}
+	}
+	div#links {
+		width:calc(100% - 200px);
+		float:right;
+		
+		ul {
+			margin:10px;
+			margin-left:40px;
+			
+			li {
+				display:inline-block;
+				padding:10px;
+				margin:5px;
+			}
+			li:hover {
+				background-color:$color-secondary-1-1;
+			}
+			
+			div#infomessage{
+				float:right;
+				display:inline-block;
+			}
+		}
+	}
 }
-
-
-
 
 
 
