@@ -21,14 +21,15 @@ html
 								li Own reservations
 							a(href="/logout")
 								li Log out
+							div#infomessage= 'Logged in as ' + user.username
 						else
 							a(href="/login")
 								li Log in
 							a(href="/register")
 								li Create an account
-						div#infomessage= 'Logged in as ' + user.username
 				
-		block content
-			div#content
+
+		div#content
+			block content
 		block footer
 			div Created with Node.js and Express.js

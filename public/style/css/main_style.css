@@ -33,6 +33,9 @@ header {
         float: right;
         display: inline-block; }
 
+div#content div#movies {
+  margin: 10px; }
+
 /* Hall edit */
 div.he_container table.he_map {
   border-spacing: 0px;
