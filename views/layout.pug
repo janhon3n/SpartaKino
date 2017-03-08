@@ -1,0 +1,32 @@
+//basic layout
+html
+	head
+		title SpartaKino
+		link(type="text/css" rel="stylesheet" href="/public/style/css/main_style.css")
+		block scripts
+			script(src='/public/js/jquery.js')
+	body
+		block header
+			header
+				a(href="/")
+					h1 SpartaKino
+				if user != undefined && user != null
+					div= 'Logged in as ' + user.username
+					ul
+						if user.type === "admin"
+							a(href="/admin")
+								li Admin controls
+						a(href="/user")
+							li Own reservations
+						a(href="/logout")
+							li Log out
+				else
+					ul
+						a(href="/login")
+							li Log in
+						a(href="/register")
+							li Create an account
+				
+		block content
+		block footer
+			div Created with Node.js and Express.js

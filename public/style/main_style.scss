@@ -1,0 +1,77 @@
+
+$color-primary-0: #AA4139;
+$color-primary-1: #FFD0CC;
+$color-primary-2: #DC847D;
+$color-primary-3: #78140C;
+$color-primary-4: #460500;
+
+$color-secondary-1-0: #246068;
+$color-secondary-1-1: #8BA9AE;
+$color-secondary-1-2: #4D8087;
+$color-secondary-1-3: #094249;
+$color-secondary-1-4: #00262B;
+
+$color-secondary-2-0: #779D34;
+$color-secondary-2-1: #DEEFBF;
+$color-secondary-2-2: #ABCC73;
+$color-secondary-2-3: #4A6F0B;
+$color-secondary-2-4: #294100;
+
+
+
+body{
+	font-family:georgia;
+	background-color:$color-primary-3;
+	color:white;
+}
+body :visited{
+	color:white;
+}
+
+
+header {
+	height:200px;
+	background-color:$color-secondary-1-0;
+}
+
+
+
+
+
+
+
+
+
+
+/* Hall edit */
+div.he_container {
+	
+	table.he_map {		
+		border-spacing:0px;
+		border-collapse:collapse;
+		td {
+			width:15px;
+			height:15px;
+			border-bottom:1px solid white;
+			border-right:1px solid white;
+			background-color:#eee;
+			margin:0px;
+			padding:0px;
+			display:inline-block;
+		}
+		tr:nth-child(even) td:nth-child(even) {
+			background-color:#eaeaea;
+		}
+		tr:nth-child(odd) td:nth-child(odd) {
+			background-color:#eaeaea;
+		}
+	}
+	
+	svg.chair {
+		rect{
+			stroke-width:1;
+			stroke:black;
+			fill:#aa2222;
+		}
+	}
+}

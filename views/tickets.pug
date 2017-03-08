@@ -1,0 +1,16 @@
+extends layout.pug
+block append scripts
+	srcipt(src="public/js/tickets.js")
+block content
+	h1= movie.name
+	p= movie.description
+	ul
+		li= 'Year: ' + movie.year
+		li= 'Director: ' + movie.director
+		li Actors:
+			ul
+				for a in movie.actors
+					li= a.name
+					
+	h2 Order tickets
+	

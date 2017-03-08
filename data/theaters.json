@@ -1,0 +1,12 @@
+{"theaters": [
+	{
+		"id":1,
+		"name":"Turku",
+		"address":"Kauppiaskatu 12"	
+	},
+	{
+		"id":2,
+		"name":"Helsinki",
+		"address":"Koulukatu 1"
+	}]
+}

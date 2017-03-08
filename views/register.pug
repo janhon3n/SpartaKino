@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+	h1 Create a new account
+	p Rekistöröidy uudeksi käyttäjäksi syöttämällä tarvittavat tiedot ja painamalla lähetä.
+	form
+		ul 
+			li
+				label(for="username") Username:
+				input#username(type="text")
+			li
+				label(for="password") Password:
+				input#password(type="password")
+			li
+				label(for="passwordre") Retype password:
+				input#passwordre(type="password")
+			input#submit(type="submit")
+		

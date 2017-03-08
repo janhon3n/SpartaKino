@@ -1,0 +1,34 @@
+body {
+  font-family: georgia;
+  background-color: #78140C;
+  color: white; }
+
+body :visited {
+  color: white; }
+
+header {
+  height: 200px;
+  background-color: #246068; }
+
+/* Hall edit */
+div.he_container table.he_map {
+  border-spacing: 0px;
+  border-collapse: collapse; }
+  div.he_container table.he_map td {
+    width: 15px;
+    height: 15px;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    background-color: #eee;
+    margin: 0px;
+    padding: 0px;
+    display: inline-block; }
+  div.he_container table.he_map tr:nth-child(even) td:nth-child(even) {
+    background-color: #eaeaea; }
+  div.he_container table.he_map tr:nth-child(odd) td:nth-child(odd) {
+    background-color: #eaeaea; }
+
+div.he_container svg.chair rect {
+  stroke-width: 1;
+  stroke: black;
+  fill: #aa2222; }

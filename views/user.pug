@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+	h1= user.username
+	ul
+		li= 'Street address: ' + user.address.street
+		li= 'City: ' + user.address.city
+		li= 'Postal code: ' + user.address.postcode
