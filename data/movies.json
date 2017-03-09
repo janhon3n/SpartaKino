@@ -17,12 +17,12 @@
 		"id": 2,
 		"name": "Fifty shades of Juho",
 		"year": 1999,
-		"director": "Joen Adams",
+		"director": "Mikael Janhoinen",
 		"actors": [
 			{"name" : "Juho Krönback"},
 			{"name" : "Adrian Bodyskoski"}
 		],
-		"description": "A story about two men. Not for children.",
+		"description": "A story about two men spending their valentine night. But what happens when their pet tiger gets out of its case. The party is heating up like never before. Not for children.",
 		"screenings": []
 	},
 	{

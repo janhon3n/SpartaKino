@@ -6,30 +6,33 @@ html
 		block scripts
 			script(src='/public/js/jquery.js')
 	body
-		block header
-			header
-				div#logo
-					a(href="/")
-						h1 SpartaKino
-				div#links
-					ul
+		div#maincontainer
+			block header
+				header
+					div#logo
+						a(href="/")
+							h1 SpartaKino
+					div#links
 						if user != undefined && user != null
-							if user.type === "admin"
-								a(href="/admin")
-									li Admin controls
-							a(href="/user")
-								li Own reservations
-							a(href="/logout")
-								li Log out
-							div#infomessage= 'Logged in as ' + user.username
+							div#otherlinks
+								if user.type === "admin"
+									a(href="/admin")
+										li.link Admin controls
+								a(href="/user")
+									li.link Own reservations
+							div#loginlinks
+								a(href="/logout")
+									li.link Log out
 						else
-							a(href="/login")
-								li Log in
-							a(href="/register")
-								li Create an account
-				
+							div#otherlinks
+							div#loginlinks
+								a(href="/login")
+									li.link Log in
+								a(href="/register")
+									li.link Create an account
+					
 
-		div#content
-			block content
-		block footer
-			div Created with Node.js and Express.js
+			div#content
+				block content
+			block footer
+				div Created with Node.js and Express.js

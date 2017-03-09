@@ -1,10 +1,11 @@
 $(document).ready(function(){
 	
 	function createMovieHtml(m){
-		html = '<a href="/movies/movie/'+m.id+'"><div class="movie">'
+		html = '<a class="movielink" href="/movies/movie/'+m.id+'">'
+			+ '<div class="movie">'
 			+ '<h2>'+m.name+'</h2>'
 			+ '<p>'+m.description+'</p>'
-			+ '<ul><li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></ul></div></a>';
+			+ '<li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></div></a>';
 		return html;
 	}
 	
