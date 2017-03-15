@@ -1,12 +1,14 @@
 $(document).ready(function(){
 	$("button#addActorButton").click(function(){
-		$("div#actorsRow").append(createActorInput());
+		var index = $(this).parent().parent().find('div#actorsRow input:last-child').attr("actorindex");
+		index++;
+		$("div#actorsRow").append(createActorInput(index));
 	});
 	$("button#removeActorButton").click(function(){
-		$(this).parent().parent().find('div#actorsRow input[name="actor"]:last-child').remove();
+		$(this).parent().parent().find('div#actorsRow input:last-child').remove();
 	});
 	
-	function createActorInput(){
-		return '<input type="text" name="actor">';
+	function createActorInput(ai){
+		return '<input type="text" actorindex="'+ai+'" name="movie[actors]['+ai+'][name]">';
 	}
 });

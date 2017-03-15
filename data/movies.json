@@ -1,51 +1,111 @@
-{"movies": [
-	{
+[{
 		"id": 1,
-		"name": "Nalle Puh",
+		"title": "Nalle Puh",
 		"year": 1999,
 		"director": "Joy Sully",
-		"actors": [
-			{"name" : "John Johnsson"}
+		"actors": [{
+				"name": "John Johnsson"
+			}
 		],
 		"description": "Very touching story about a bear who decided to run away from home.",
-		"screenings": [
-			{"theater" : 1, "timestamp":1497297600},
-			{"theater" : 2, "timestamp":1497474000}
+		"screenings": [{
+				"theater": 1,
+				"timestamp": 1497297600
+			}, {
+				"theater": 2,
+				"timestamp": 1497474000
+			}
 		]
-	},
-	{
+	}, {
 		"id": 2,
-		"name": "Fifty shades of Juho",
+		"title": "Fifty shades of Juho",
 		"year": 1999,
 		"director": "Mikael Janhoinen",
-		"actors": [
-			{"name" : "Juho Krönback"},
-			{"name" : "Adrian Bodyskoski"}
+		"actors": [{
+				"name": "Juho Krönback"
+			}, {
+				"name": "Adrian Bodyskoski"
+			}
 		],
 		"description": "A story about two men spending their valentine night. But what happens when their pet tiger gets out of its case. The party is heating up like never before. Not for children.",
 		"screenings": []
-	},
-	{
+	}, {
 		"id": 3,
-		"name": "302",
+		"title": "302",
 		"year": 1999,
 		"director": "David Switcher",
-		"actors": [
-			{"name" : "Leonardo"}
+		"actors": [{
+				"name": "Leonardo"
+			}
 		],
 		"description": "Sparta strikes again. This time it's personal.",
 		"screenings": []
-	},
-		{
+	}, {
 		"id": 4,
-		"name": "Jummiland",
+		"title": "Jummiland",
 		"year": 1997,
 		"director": "Mikael Janhonen",
-		"actors": [
-			{"name" : "Julia Pihlaja"},
-			{"name" : "Panda"}
+		"actors": [{
+				"name": "Julia Pihlaja"
+			}, {
+				"name": "Panda"
+			}
 		],
 		"description": "Jummi starts her new job at the animal rescue home and becomes friends with the most intellegent cat. Together they have very fun adventures in the forest. But someone is planning to ruin their friendship... ",
 		"screenings": []
-	}]
-}
+	}, {
+		"title": "aeb",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": [{}
+		],
+		"screenings": [],
+		"id": 5
+	}, {
+		"title": "Testileffa 1",
+		"description": "Kiva leffa kantsii kattoo",
+		"year": "2016",
+		"director": "Pekka",
+		"actors": [{
+				"name": "Matti"
+			}
+		],
+		"screenings": [],
+		"id": 6
+	}, {
+		"title": "Tosi pitkän nimen omaava elokuva joka kertoo jostain jutusta josta en kerro sen enempää tässä vaan saatte katsoa leffan itse",
+		"description": "jooh",
+		"year": "2015",
+		"director": "",
+		"actors": [{
+				"name": ["", "", ""]
+			}
+		],
+		"screenings": [],
+		"id": 7
+	}, {
+		"title": "moimoimoim",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": {
+			"name": ["asdf", "asdf2"]
+		},
+		"screenings": [],
+		"id": 8
+	}, {
+		"title": "Juho ja tietoverkkotekniikat",
+		"description": "Älä katso",
+		"year": "1996",
+		"director": "Mikael Janhonen",
+		"actors": [{
+				"name": "Juho Krönback"
+			}, {
+				"name": "Mikael Janhonen"
+			}
+		],
+		"screenings": [],
+		"id": 9
+	}
+]

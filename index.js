@@ -21,7 +21,7 @@ app.use(sassMiddleware({
 }));
 
 //To parse URL encoded data
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 //To parse json data
 app.use(bodyParser.json())
 

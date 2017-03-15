@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var dataManager = require('../data_manager.js');
 
 
 router.get('/', function(req, res){
@@ -9,11 +10,10 @@ router.get('/', function(req, res){
 });
 
 router.use('/movie/:id([0-9]{1,5})', function(req,res,next){
-	fs.readFile('./data/movies.json', 'utf8', function (err, data) {
+	dataManager.loadMovies(function (err, movies) {
 		if(err){
 			next(err);
 		} else {
-			movies = JSON.parse(data).movies;
 			movs = movies.filter(function(m){
 				if(m.id == req.params.id)
 					return true;

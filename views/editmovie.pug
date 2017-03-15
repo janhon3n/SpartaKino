@@ -7,47 +7,48 @@ block content
 			h1= 'Edit movie'
 		else
 			h1= 'Add new movie'
-		form
+		form(action="" method="post")
 			div.formrow
-				label(for="title") Movie title:
+				label(for="movie[title]") Movie title:
 				if movie != undefined
-					input(type="text" name="title" value=movie.name)
+					input(type="text" name="movie[title]" required value=movie.title)
 				else
-					input(type="text" name="title")
+					input(type="text" name="movie[title]" required)
 
 			div.formrow
-				label(for="description") Description:
+				label(for="movie[description]") Description:
 				if movie != undefined
-					textarea(name="description")= movie.description
+					textarea(name="movie[description]")= movie.description
 				else
-					textarea(name="description")
+					textarea(name="movie[description]")
 
 			div.formrow
-				label(for="year") Year:
+				label(for="movie[year]") Year:
 				if movie != undefined
-					input(type="number" min="1800" max="2050" name="year" value=movie.year)
+					input(type="number" min="1800" max="2050" name="movie[year]" value=movie.year)
 				else
-					input(type="number" min="1800" max="2050" name="year")
+					input(type="number" min="1800" max="2050" name="movie[year]")
 				
 				
 			div.formrow
-				label(for="director") Director:
+				label(for="movie[director]") Director:
 				if movie != undefined
-					input(type="text" name="director" value=movie.director)
+					input(type="text" name="movie[director]" value=movie.director)
 				else
-					input(type="text" name="director")
+					input(type="text" name="movie[director]")
 				
 			div.formrow
-				label(for="actors") Actors:
+				label(for="movie[actors]") Actors:
 				
 				div#actorsRow
 					if movie != undefined
+						- var i = 0
 						each a in movie.actors
-							input(type="text" name="actor" value=a.name)
+							input(type="text" actorIndex=i name="movie[actors]["+i+"][name]" value=a.name)
+							- i++
 					else
-						input(type="text" name="actor")
-						input(type="text" name="actor")
-						input(type="text" name="actor")
+						input(type="text" actorindex="0" name="movie[actors][0][name]")
+						input(type="text" actorindex="1" name="movie[actors][1][name]")
 						
 				div#actorButtons
 					button#addActorButton(type="button") +

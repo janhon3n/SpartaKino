@@ -40,6 +40,15 @@ router.get('/editmovie/:id([0-9]{1,5})', function(req,res){
 		res.render('editmovie', {user: req.session.user, movie: movie[0]});
 	}
 });
+router.post('/editmovie', function(req,res){
+	dataManager.editMovie(req.body.movie);
+	res.redirect('/admin');
+});
+router.post('/editmovie/:id([0-9]{1,5})', function(req,res){
+	req.body.movie.id = req.params.id;
+	dataManager.editMovie(req.body.movie);
+	res.redirect('/admin');
+});
 
 router.use('/theater/:theater_id([0-9]{1,5})', function(req,res,next){
 	fs.readFile('./data/theaters.json', 'utf8', function (err, data) {

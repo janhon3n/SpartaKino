@@ -15,7 +15,6 @@ router.get('/', function(req, res){
 })
 router.post('/', function(req, res){
 	var username = req.body.username;
-	console.log(req.body);
 	console.log(username + " is trying to log in");
 	var password = req.body.password;
 	console.log(bcrypt.hashSync(password, 10));
