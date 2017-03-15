@@ -81,6 +81,9 @@ header {
       background-color: #4D8087;
       height: 100%; }
 
+div#content div.padding {
+  margin: 35px; }
+
 div#content div#movies div#search {
   padding: 20px; }
 
@@ -93,6 +96,9 @@ div#content div#movies div#results div.movie {
 
 div#content div#movies div#results a.movielink:nth-child(2n) div.movie {
   background-color: #FFF; }
+
+footer {
+  text-align: right; }
 
 /* Hall edit */
 div.he_container table.he_map {

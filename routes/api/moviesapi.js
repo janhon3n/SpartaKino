@@ -1,69 +1,49 @@
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
+var dataManager = require('../../data_manager.js');
 
-router.get('/', function(req, res){
-	fs.readFile('./data/movies.json', 'utf-8', function(err, data) {
+router.use(function(req,res,next){
+	dataManager.loadMovies(function(err, movies){
 		if(err){
-			console.log(err);
-			res.json({error:"Error fetching movies"})
+			console.log("Error fetching movies");
+			next(err);
 		} else {
-			movies = JSON.parse(data).movies;
-			console.log(movies);
-			res.json(movies);
+			req.movies = movies;
+			console.log(req.movies);
+			next();
 		}
 	});	
+});
+
+router.get('/', function(req, res){
+	res.json(req.movies);
 })
 
 router.get('/amount/:from([0-9])/:amount([0-9])', function(req,res){
-	fs.readFile('./data/movies.json', 'utf8', function (err, data) {
-		if(err){
-			console.log(err);
-			res.json({error:"Error fetching movies"})
-		} else {
-			movies = JSON.parse(data).movies;
-			movies = movies.slice(req.params.from, req.params.from + req.params.amount)
-			res.json(movies);
-		}
-	});
+	var movies = req.movies.slice(req.params.from, req.params.from + req.params.amount)
+	res.json(movies);
 });
 
 router.get('/search/:name', function(req,res){
-	fs.readFile('./data/movies.json', 'utf8', function (err, data) {
-		if(err){
-			console.log(err);
-			res.json({error:"Error fetching movies"})
-		} else {
-			movies = JSON.parse(data).movies;
-			movies = movies.filter(function(m){
-				if(m.name.toLowerCase().includes(req.params.name.toLowerCase())
-					|| req.params.name === "*"){
-					return true;
-				}
-			});
-			res.json(movies);
+	var movies = req.movies.filter(function(m){
+		if(m.name.toLowerCase().includes(req.params.name.toLowerCase())
+			|| req.params.name === "*"){
+			return true;
 		}
-	});			
+	});
+	res.json(movies);
 });
 
 router.get('/id/:id([0-9])', function(req,res){
-	fs.readFile('./data/movies.json', 'utf8', function (err, data) {
-		if(err){
-			console.log(err);
-			res.json({error:"Error fetching movies"})
-		} else {
-			movies = JSON.parse(data).movies;
-			movie = movies.filter(function(m){
-				if(m.id == req.params.id)
-					return true;
-			});
-			if(err || movie.length != 1){
-				res.json({error:"Error fetching movies"})
-			} else {
-				res.json(movie[0]);
-			}
-		}
-	});	
+	var movie = req.movies.filter(function(m){
+		if(m.id == req.params.id)
+			return true;
+	});
+	if(movie.length != 1){
+		res.json({error:"Error fetching movies"})
+	} else {
+		res.json(movie[0]);
+	}
 })
 
 //export this router to use in our index.js

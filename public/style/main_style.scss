@@ -122,6 +122,10 @@ header {
 
 div#content {
 
+	div.padding {
+		margin:35px;
+	}
+
 	div#movies {
 
 		div#search {
@@ -142,6 +146,10 @@ div#content {
 			}
 		}
 	}
+}
+
+footer {
+	text-align:right;
 }
 
 

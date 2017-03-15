@@ -1,7 +1,24 @@
 extends layout.pug
 
 block content
-	h1 Admin controls
-	ul
-		a(href="./addmovie")
+	div.padding
+		h1 Admin controls
+		table
+			caption Movies
+			tr
+				th Title
+				th Year
+				th Description
+				th
+				th
+				each m in movies
+					tr
+						td= m.name
+						td= m.year
+						td= m.description
+						td.edit
+							a(href="/admin/editmovie/"+m.id) edit
+						td.remove
+							a(href="/admin/removemovie/"+m.id) remove
+		a(href="/admin/editmovie")
 			li Add a movie

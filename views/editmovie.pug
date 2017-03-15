@@ -1,0 +1,58 @@
+extends layout.pug
+block append scripts
+	script(src="/public/js/editmovie.js")
+block content
+	div.padding
+		if movie != undefined
+			h1= 'Edit movie'
+		else
+			h1= 'Add new movie'
+		form
+			div.formrow
+				label(for="title") Movie title:
+				if movie != undefined
+					input(type="text" name="title" value=movie.name)
+				else
+					input(type="text" name="title")
+
+			div.formrow
+				label(for="description") Description:
+				if movie != undefined
+					textarea(name="description")= movie.description
+				else
+					textarea(name="description")
+
+			div.formrow
+				label(for="year") Year:
+				if movie != undefined
+					input(type="number" min="1800" max="2050" name="year" value=movie.year)
+				else
+					input(type="number" min="1800" max="2050" name="year")
+				
+				
+			div.formrow
+				label(for="director") Director:
+				if movie != undefined
+					input(type="text" name="director" value=movie.director)
+				else
+					input(type="text" name="director")
+				
+			div.formrow
+				label(for="actors") Actors:
+				
+				div#actorsRow
+					if movie != undefined
+						each a in movie.actors
+							input(type="text" name="actor" value=a.name)
+					else
+						input(type="text" name="actor")
+						input(type="text" name="actor")
+						input(type="text" name="actor")
+						
+				div#actorButtons
+					button#addActorButton(type="button") +
+					button#removeActorButton(type="button") -
+			
+			div.formrow
+				if movie != undefined
+				input(type="submit" value="Save movie")

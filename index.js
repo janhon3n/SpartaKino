@@ -73,8 +73,6 @@ app.all('*', function(req, res){
 	res.render('notfound', {path: req.url})
 })
 
-
-
 server = app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
