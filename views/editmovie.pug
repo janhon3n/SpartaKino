@@ -12,7 +12,7 @@ block content
 			h1= 'Edit movie'
 		else
 			h1= 'Add new movie'
-		form(action="" method="post")
+		form#movieForm(action="" method="post")
 			div.formrow
 				label(for="movie[title]") Movie title:
 				if movie != undefined

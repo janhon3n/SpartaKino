@@ -11,7 +11,26 @@ $(document).ready(function(){
 	function createActorInput(ai){
 		return '<input type="text" actorindex="'+ai+'" name="movie[actors]['+ai+'][name]">';
 	}
-
+	
+	$('form#movieForm').submit(function(event) {
+		if(cropper != undefined){
+			var cdata = cropper.getData();
+			// Add cropper data to form
+			$('<input />').attr('type', 'hidden').attr('name', "cropper[x]")
+				.attr('value', cdata.x).appendTo('form#movieForm');
+			$('<input />').attr('type', 'hidden').attr('name', "cropper[y]")
+				.attr('value', cdata.y).appendTo('form#movieForm');
+			$('<input />').attr('type', 'hidden').attr('name', "cropper[width]")
+				.attr('value', cdata.width).appendTo('form#movieForm');
+			$('<input />').attr('type', 'hidden').attr('name', "cropper[height]")
+				.attr('value', cdata.height).appendTo('form#movieForm');
+			$('<input />').attr('type', 'hidden').attr('name', "cropper[filename]")
+				.attr('value', cropperFilename).appendTo('form#movieForm');
+		}
+		return true;
+	});
+	
+	var cropperFilename;
 	$('form#imageUpload').submit(function(event) {
 		event.preventDefault();
 		$("#status").empty().text("File is uploading...");
@@ -21,6 +40,7 @@ $(document).ready(function(){
 			},
 			success: function(res) {
 				console.log(res);
+				cropperFilename = res.filename;
 				$("#status").empty().text(res.msg);
 				$("#cropImage").attr("src",res.path);
 				createCropper();
@@ -28,23 +48,16 @@ $(document).ready(function(){
 		});
 	});
 	
+	var cropper;
 	function createCropper(){
 		var image = document.getElementById('cropImage');
-		var cropper = new Cropper(image, {
-		aspectRatio: 182 / 268,
-		viewMode: 1,
-		dragMode: 'move',
-		preview: document.getElementById('cropPreview'),
-		crop: function(e) {
-			console.log(e.detail.x);
-			console.log(e.detail.y);
-			console.log(e.detail.width);
-			console.log(e.detail.height);
-			console.log(e.detail.rotate);
-			console.log(e.detail.scaleX);
-			console.log(e.detail.scaleY);
-			}
+		cropper = new Cropper(image, {
+			aspectRatio: 91 / 134,
+			viewMode: 1,
+			dragMode: 'move',
+			preview: document.getElementById('cropPreview'),
 		});
+
 		$("button#cropButton").click(function(){
 			$("div#editmovie div#cropContainer").toggle();
 		});

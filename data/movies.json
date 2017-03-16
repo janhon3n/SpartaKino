@@ -1,112 +1,98 @@
 [{
-		"id": 1,
-		"title": "Nalle Puh",
-		"year": 1999,
-		"director": "Joy Sully",
-		"actors": [{
-				"name": "John Johnsson"
-			}
-		],
-		"description": "Very touching story about a bear who decided to run away from home.",
-		"screenings": [{
-				"theater": 1,
-				"timestamp": 1497297600
-			}, {
-				"theater": 2,
-				"timestamp": 1497474000
-			}
-		],
-		"imgname": "nalle.jpg"
-	}, {
-		"id": 2,
-		"title": "Fifty shades of Juho",
-		"year": 1999,
-		"director": "Mikael Janhoinen",
-		"actors": [{
-				"name": "Juho Krönback"
-			}, {
-				"name": "Adrian Bodyskoski"
-			}
-		],
-		"description": "A story about two men spending their valentine night. But what happens when their pet tiger gets out of its case. The party is heating up like never before. Not for children.",
-		"screenings": []
-	}, {
-		"id": 3,
-		"title": "302",
-		"year": 1999,
-		"director": "David Switcher",
-		"actors": [{
-				"name": "Leonardo"
-			}
-		],
-		"description": "Sparta strikes again. This time it's personal.",
-		"screenings": []
-	}, {
-		"id": 4,
-		"title": "Jummiland",
-		"year": 1997,
-		"director": "Mikael Janhonen",
-		"actors": [{
-				"name": "Julia Pihlaja"
-			}, {
-				"name": "Panda"
-			}
-		],
-		"description": "Jummi starts her new job at the animal rescue home and becomes friends with the most intellegent cat. Together they have very fun adventures in the forest. But someone is planning to ruin their friendship... ",
-		"screenings": []
-	}, {
-		"title": "aeb",
+		"title": "kilpikonna",
 		"description": "",
 		"year": 2000,
 		"director": "",
-		"actors": [{}
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
 		],
+		"imagefile": "_______Nature-Animals-Wallpapers.jpg",
+		"screenings": [],
+		"id": 1
+	}, {
+		"title": "Laskut",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "_sea-night-moonlit-lane.jpg",
+		"screenings": [],
+		"id": 2
+	}, {
+		"title": "Moro",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "space-shuttle-columbia-hd-wallpapers-for-desktop.jpg",
+		"screenings": [],
+		"id": 3
+	}, {
+		"title": "Mehudisko",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "unnamed.jpg",
+		"screenings": [],
+		"id": 4
+	}, {
+		"title": "Aa",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "ax_aircraft_of_world_war_ii__1600x900.jpg",
 		"screenings": [],
 		"id": 5
 	}, {
-		"title": "Testileffa 1",
-		"description": "Kiva leffa kantsii kattoo",
-		"year": "2016",
-		"director": "Pekka",
-		"actors": [{
-				"name": "Matti"
-			}
-		],
-		"screenings": [],
-		"id": 6
-	}, {
-		"title": "Tosi pitkän nimen omaava elokuva joka kertoo jostain jutusta josta en kerro sen enempää tässä vaan saatte katsoa leffan itse",
-		"description": "jooh",
+		"title": "Default Movie 2",
+		"description": "Jeejeje ej eje je je je ejeej ",
 		"year": "2015",
-		"director": "",
+		"director": "Julia Pihlaja",
 		"actors": [{
-				"name": ["", "", ""]
-			}
-		],
-		"screenings": [],
-		"id": 7
-	}, {
-		"title": "moimoimoim",
-		"description": "",
-		"year": 2000,
-		"director": "",
-		"actors": {
-			"name": ["asdf", "asdf2"]
-		},
-		"screenings": [],
-		"id": 8
-	}, {
-		"title": "Juho ja tietoverkkotekniikat",
-		"description": "Älä katso",
-		"year": "1996",
-		"director": "Mikael Janhonen",
-		"actors": [{
-				"name": "Juho Krönback"
-			}, {
 				"name": "Mikael Janhonen"
 			}
 		],
+		"imagefile": "default.jpg",
 		"screenings": [],
-		"id": 9
+		"id": 6
+	}, {
+		"title": "Kilpikonnan uudet kuoret",
+		"description": "Kilpikonna on kiva kaveri, mutta sillä on kova ulkokuori. Joskus kilpikonna kuitenkin uskaltaa ulos kuorestaan kohti uutta maailmaa.",
+		"year": "1999",
+		"director": "Joni Pihlaja",
+		"actors": [{
+				"name": "John Von Nevmann"
+			}, {
+				"name": "Saare"
+			}
+		],
+		"imagefile": "Nature-Animals-Wallpapers.jpg",
+		"screenings": [],
+		"id": 7
 	}
 ]

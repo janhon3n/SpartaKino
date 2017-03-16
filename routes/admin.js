@@ -3,6 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 var dataManager = require('../data_manager.js');
 var multer = require('multer')
+var jimp = require('jimp')
 
 var upload = multer({ dest: '/uploads/' })
 
@@ -44,9 +45,45 @@ router.get('/editmovie/:id([0-9]{1,5})', function(req,res){
 	}
 });
 router.post('/editmovie', function(req,res){
-	dataManager.editMovie(req.body.movie);
-	res.redirect('/admin');
+	var movie = req.body.movie;
+	console.log(req.body.cropper);
+	if(req.body.cropper.filename != undefined){
+		var filename = req.body.cropper.filename;
+		while(fs.existsSync("./public/img/movies/o_"+filename)
+			|| fs.existsSync("./public/img/movies/b_"+filename)
+			|| fs.existsSync("./public/img/movies/s_"+filename)) {
+		
+			filename = "_"+filename;
+		}
+		console.log(filename);
+		//image saved at /public/img/upload, crop it and save
+		jimp.read("./public/img/upload/"+req.body.cropper.filename, function(err, img){
+			if(err){
+				console.log(err);
+			} else {
+				img.write("./public/img/movies/o_"+filename)
+					.crop(Number(req.body.cropper.x),Number(req.body.cropper.y),
+						Number(req.body.cropper.width), Number(req.body.cropper.height))
+					.resize(91*13, 134*13)
+					.write("./public/img/movies/b_"+filename)
+					.resize(91*5, 134*5)
+					.write("./public/img/movies/s_"+filename)					
+			}
+		});
+		movie.imagefile = filename;
+	} else {
+		movie.imagefile = "default.jpg";
+	}
+	
+	dataManager.editMovie(movie, function(err){
+		if(err){
+			res.render("error", {user: req.session.user, error: err.getMessage()});
+		} else {
+			res.redirect('/admin');	
+		}
+	});
 });
+
 router.post('/editmovie/:id([0-9]{1,5})', function(req,res){
 	req.body.movie.id = req.params.id;
 	dataManager.editMovie(req.body.movie);
@@ -68,7 +105,7 @@ router.post('/editmovie/imageupload', upload.single('img'), function(req,res){
 		var dest = fs.createWriteStream(target_path + filename, { mode: 0x777 });
 		src.pipe(dest);
 		src.on('end', function() {
-			res.json({success:1, path: "/public/img/upload/"+filename, msg: "File uploaded successfully"});
+			res.json({success:1, path: "/public/img/upload/"+filename, filename: filename, msg: "File uploaded successfully"});
 		});
 		src.on('error', function(err) {
 			res.json({success:0, msg: "Error uploading file"});

@@ -1,7 +1,7 @@
-{"movies": [
+[
 	{
 		"id": 1,
-		"name": "Nalle Puh",
+		"title": "Nalle Puh",
 		"year": 1999,
 		"director": "Joy Sully",
 		"actors": [
@@ -15,7 +15,7 @@
 	},
 	{
 		"id": 2,
-		"name": "Fifty shades of Juho",
+		"title": "Fifty shades of Juho",
 		"year": 1999,
 		"director": "Mikael Janhoinen",
 		"actors": [
@@ -27,7 +27,7 @@
 	},
 	{
 		"id": 3,
-		"name": "302",
+		"title": "302",
 		"year": 1999,
 		"director": "David Switcher",
 		"actors": [
@@ -38,7 +38,7 @@
 	},
 		{
 		"id": 4,
-		"name": "Jummiland",
+		"title": "Jummiland",
 		"year": 1997,
 		"director": "Mikael Janhonen",
 		"actors": [
@@ -47,5 +47,5 @@
 		],
 		"description": "Jummi starts her new job at the animal rescue home and becomes friends with the most intellegent cat. Together they have very fun adventures in the forest. But someone is planning to ruin their friendship... ",
 		"screenings": []
-	}]
-}
+	}
+]

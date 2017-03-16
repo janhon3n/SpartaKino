@@ -43,6 +43,7 @@ function loadMovies(callback){
 
 function editMovie(mov, callback){
 	fixMovie(mov, function(movie){
+		console.log(movie);
 //		lockFile.lock(moviesFile, {wait: lockWaitTime}, function(err){
 //			if(err){
 //				console.log(err);
@@ -55,7 +56,11 @@ function editMovie(mov, callback){
 					} else {
 						if(movie.id == undefined || movie.id == 0){
 							//add movie as a new object
-							movie.id = movies[movies.length - 1].id + 1;
+							if(movies.length > 0){
+								movie.id = movies[movies.length - 1].id + 1;
+							} else {
+								movie.id = 1;
+							}
 							movies[movies.length] = movie;
 						} else {
 							//overwrite old movie with same id
@@ -73,8 +78,10 @@ function editMovie(mov, callback){
 							}
 						}
 						
+						console.log("JSON TO WRITE: ");
+						console.log(movies);
 						//save the modified movies object
-						jsonFile.writeFile(moviesFile, movies, function(err3, json){
+						jsonFile.writeFile(moviesFile, movies, function(err3){
 							if(err3){
 								console.log(err3);
 								callback(err3);
@@ -115,6 +122,9 @@ function fixMovie(movie, callback){
 	if(!movie.screenings){
 		movie.screenings = [];
 	}
+	if(!movie.imagefile){
+		movie.imagefile = "default.jpg";
+	}
 	callback(movie);
 }
 
@@ -133,7 +143,7 @@ function loadUsers(callback){
 
 function editUser(usr, callback){
 	fixUser(usr, function(user){
-//		lockFile.lock(moviesFile, {wait: lockWaitTime}, function(err){
+//		lockFile.lock(usersFile, {wait: lockWaitTime}, function(err){
 //			if(err){
 //				console.log(err);
 //				callback(err);
@@ -145,7 +155,11 @@ function editUser(usr, callback){
 					} else {
 						if(user.id == undefined || user.id == 0){
 							//add user as a new object
-							user.id = users[users.length - 1].id + 1;
+							if(users.length > 0){
+								user.id = users[users.length - 1].id + 1;
+							} else {
+								user.id = 1;
+							}
 							users[users.length] = user;
 						} else {
 							//overwrite old movie with same id
