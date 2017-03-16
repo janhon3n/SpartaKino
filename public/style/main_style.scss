@@ -136,7 +136,7 @@ div#content {
 				text-decoration:none;
 				padding:15px;
 				background-color:#EEE;
-				
+			
 				h2{
 					margin:5px;
 				}
@@ -144,6 +144,20 @@ div#content {
 			a.movielink:nth-child(2n) div.movie{
 				background-color:#FFF;
 			}
+		}
+	}
+	
+	div#editmovie {
+		div#cropContainer{
+			img#cropImage{
+				max-height:500px;
+				width:100%;
+			}
+		}
+		div#cropPreview {
+			width: 182px;
+			height: 268px;
+			overflow:hidden;
 		}
 	}
 }

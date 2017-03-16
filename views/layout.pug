@@ -2,7 +2,8 @@
 html
 	head
 		title SpartaKino
-		link(type="text/css" rel="stylesheet" href="/public/style/css/main_style.css")
+		block stylesheets
+			link(type="text/css" rel="stylesheet" href="/public/style/css/main_style.css")
 		block scripts
 			script(src='/public/js/jquery.js')
 	body

@@ -2,8 +2,8 @@ var config = require('./config.js')
 var express = require('express')
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
-var bodyParser = require('body-parser');
-var sassMiddleware = require('node-sass-middleware');
+var bodyParser = require('body-parser')
+var sassMiddleware = require('node-sass-middleware')
 var path = require('path');
 var app = express()
 var idGiver = 0;
@@ -20,17 +20,34 @@ app.use(sassMiddleware({
 	prefix: "/public/style/css/"
 }));
 
-//To parse URL encoded data
-app.use(bodyParser.urlencoded({ extended: true }))
-//To parse json data
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) //To parse URL encoded data
+app.use(bodyParser.json()) //To parse json data
+app.use(cookieParser()) //To parse cookies
 
+
+
+//Set /public folder to be open to every request
 app.use('/public', express.static('public'))
-app.use(cookieParser())
+//Start session
 app.use(session({secret: "aJboIc779c2cCOIJoac"}))
 
 //own middleware for client tracking
 app.use(function(req, res, next){
+	
+	// NEXT IS TO LOGIN AS ADMIN AUTOMATICALLY
+	// PLS DELETE AFTER TESTING PHASE
+	req.session.user = {
+		"id": 2,
+		"username": "admin",
+		"passhash": "$2a$10$Nnfbqc6njoC9C4ZWgu.tTuQk/UVeo4p17G.WHjCLwegJfiU2uYGO2",
+		"address": {
+			"street": "Yliopistonkatu 5",
+			"city": "Turku",
+			"postcode": 20100
+		},
+		"type": "admin"
+	}
+	
 	if(typeof req.cookies.id == 'undefined'){
 		//add new id to client with no id. expires after 3 years.
 		res.cookie('id', idGiver++, {expire: 94608000000})

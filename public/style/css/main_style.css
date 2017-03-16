@@ -97,6 +97,15 @@ div#content div#movies div#results div.movie {
 div#content div#movies div#results a.movielink:nth-child(2n) div.movie {
   background-color: #FFF; }
 
+div#content div#editmovie div#cropContainer img#cropImage {
+  max-height: 500px;
+  width: 100%; }
+
+div#content div#editmovie div#cropPreview {
+  width: 182px;
+  height: 268px;
+  overflow: hidden; }
+
 footer {
   text-align: right; }
 
