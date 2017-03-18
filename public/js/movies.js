@@ -2,8 +2,8 @@ $(document).ready(function(){
 	
 	function createMovieHtml(m){
 		html = '<a class="movielink" href="/movies/movie/'+m.id+'">'
-			+ '<img src="/public/img/movies/s_'+m.imagefile+'">'
 			+ '<div class="movie">'
+			+ '<img src="/public/img/movies/s_'+m.imagefile+'">'
 			+ '<h2>'+m.title+'</h2>'
 			+ '<p>'+m.description+'</p>'
 			+ '<li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></div></a>';

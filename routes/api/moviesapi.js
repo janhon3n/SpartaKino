@@ -34,17 +34,27 @@ router.get('/search/:title', function(req,res){
 	res.json(movies);
 });
 
-router.get('/id/:id([0-9])', function(req,res){
+router.get('/id/:id([0-9]{1,5})', function(req,res){
 	var movie = req.movies.filter(function(m){
 		if(m.id == req.params.id)
 			return true;
 	});
 	if(movie.length != 1){
-		res.json({error:"Error fetching movies"})
+		res.json({error:"Error fetching the movie"})
 	} else {
 		res.json(movie[0]);
 	}
 })
+
+router.post('/delete/id/:id([0-9]{1,5})', function(req,res){
+	dataManager.deleteMovie(Number(req.params.id), function(err){
+		if(err){
+			res.json({success: "fail", msg:"Failed to delete movie"});
+		} else {
+			res.json({success: "success", msg: "Movie deleted"});
+		}
+	});
+});
 
 //export this router to use in our index.js
 module.exports = router;

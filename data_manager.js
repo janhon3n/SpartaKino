@@ -3,6 +3,7 @@ var lockFile = require('lockfile');
 
 var moviesFile = './data/movies.json';
 var usersFile = './data/users.json';
+var theatersFile = './data/theaters.json';
 var lockWaitTime = 2000;
 
 function loadJsonFile(filename, callback){
@@ -103,6 +104,43 @@ function editMovie(mov, callback){
 //		});
 	});
 }
+function deleteMovie(id, callback){
+	if(id == undefined || id <= 0)
+		callback(new Error("Movie id can't be <= 0"));
+	jsonFile.readFile(moviesFile, function(err2, movies) {
+		if(err2){
+			console.log(err2);
+			callback(err2);
+		} else {
+			movies2 = movies.filter(function(u){
+				if(u.id == id) return false;
+				return true;
+			});
+			if(movies2.length != movies.length - 1){
+				// no movie with id id found
+				callback(new Error("Movie with id "+id+" not found"));
+			} else {
+				//save the modified movies object
+				jsonFile.writeFile(moviesFile, movies2, function(err3, json){
+					if(err3){
+						console.log(err3);
+						callback(err3);
+					} else {
+	//					lockFile.unlock(moviesFile, function(err4){
+	//						if(err4){
+	//							console.log(err4);
+	//							callback(err4);
+	//						} else {
+								callback();
+	//						}
+	//					});
+					}
+				});		
+			}
+		}
+	});			
+}
+
 function fixMovie(movie, callback){
 	if(!movie.title){
 		movie.title = "No Name No Name";
@@ -200,9 +238,215 @@ function editUser(usr, callback){
 //		});
 	});
 }
+function deleteUser(id, callback){
+	if(id == undefined || id <= 0)
+		callback(new Error("Movie id can't be <= 0"));
+	jsonFile.readFile(usersFile, function(err2, users) {
+		if(err2){
+			console.log(err2);
+			callback(err2);
+		} else {
+			users2 = users.filter(function(u){
+				if(u.id == id) return false;
+				return true;
+			});
+			if(users2.length != users.length - 1){
+				// no movie with id id found
+				callback(new Error("Movie with id "+id+" not found"));
+			} else {
+				//save the modified users object
+				jsonFile.writeFile(usersFile, users2, function(err3, json){
+					if(err3){
+						console.log(err3);
+						callback(err3);
+					} else {
+	//					lockFile.unlock(moviesFile, function(err4){
+	//						if(err4){
+	//							console.log(err4);
+	//							callback(err4);
+	//						} else {
+								callback();
+	//						}
+	//					});
+					}
+				});		
+			}
+		}
+	});			
+}
+
+
+
+
+/* THEATERS */
+function loadTheaters(callback){
+	loadJsonFile(theatersFile, function(err, theaters) {
+		if(err){
+			console.log(err);
+			callback(err, undefined);
+		} else {
+			callback(undefined, theaters);
+		}
+	});
+}
+
+function editTheater(thea, callback){
+	fixTheater(thea, function(theater){
+		console.log(theater);
+//		lockFile.lock(theatersFile, {wait: lockWaitTime}, function(err){
+//			if(err){
+//				console.log(err);
+//				callback(err);
+//			} else {
+				jsonFile.readFile(theatersFile, function(err2, theaters) {
+					if(err2){
+						console.log(err2);
+						callback(err2);
+					} else {
+						if(theater.id == undefined || theater.id == 0){
+							//add theater as a new object
+							if(theaters.length > 0){
+								theater.id = theaters[theaters.length - 1].id + 1;
+							} else {
+								theater.id = 1;
+							}
+							theaters[theaters.length] = theater;
+						} else {
+							//overwrite old theater with same id
+							var index = 0;
+							for(var i = 0; i < theaters.length; i++){
+								if(theaters[i].id == i){
+									index = i;
+								}
+							}
+							if(index == 0){
+								callback(new Error("theater not found"));
+								return;
+							} else {
+								theaters[index] = theater;
+							}
+						}
+						
+						console.log("JSON TO WRITE: ");
+						console.log(theaters);
+						//save the modified theaters object
+						jsonFile.writeFile(theatersFile, theaters, function(err3){
+							if(err3){
+								console.log(err3);
+								callback(err3);
+							} else {
+//								lockFile.unlock(theatersFile, function(err4){
+//									if(err4){
+//										console.log(err4);
+//										callback(err4);
+//									} else {
+										callback();
+//									}
+//								});
+							}
+						});
+						
+					}
+				});			
+//			}
+//		});
+	});
+}
+function deleteTheater(id, callback){
+	if(id == undefined || id <= 0)
+		callback(new Error("Theater id can't be <= 0"));
+	jsonFile.readFile(theatersFile, function(err2, theaters) {
+		if(err2){
+			console.log(err2);
+			callback(err2);
+		} else {
+			theaters2 = theaters.filter(function(u){
+				if(u.id == id) return false;
+				return true;
+			});
+			if(theaters2.length != theaters.length - 1){
+				// no theater with id id found
+				callback(new Error("theater with id "+id+" not found"));
+			} else {
+				//save the modified theaters object
+				jsonFile.writeFile(theatersFile, theaters2, function(err3, json){
+					if(err3){
+						console.log(err3);
+						callback(err3);
+					} else {
+	//					lockFile.unlock(theatersFile, function(err4){
+	//						if(err4){
+	//							console.log(err4);
+	//							callback(err4);
+	//						} else {
+								callback();
+	//						}
+	//					});
+					}
+				});		
+			}
+		}
+	});			
+}
+function fixTheater(theater, callback){
+	if(!theater.name){
+		theater.year = "No Name No Name";
+	}
+	if(!theater.address){
+		theater.address = "";
+	}
+	callback(theater);
+}
+
+
+//Middleware functions
+function loadMoviesMW(req,res,next){
+	loadMovies(function(err, movies){
+		if(err){
+			console.log(err.getMessage());
+			next(err);
+		} else {
+			req.movies = movies;
+			next();
+		}
+	});
+}
+function loadUsersMW(req,res,next){
+	loadUsers(function(err, users){
+		if(err){
+			console.log(err.getMessage());
+			next(err);
+		} else {
+			req.users = users;
+			next();
+		}
+	});
+}
+function loadTheatersMW(req,res,next){
+	loadTheaters(function(err, theaters){
+		if(err){
+			console.log(err.getMessage());
+			next(err);
+		} else {
+			req.theaters = theaters;
+			next();
+		}
+	});
+}
 
 
 exports.loadMovies = loadMovies;
 exports.editMovie = editMovie;
+exports.deleteMovie = deleteMovie;
+
 exports.loadUsers = loadUsers;
 exports.editUser = editUser;
+exports.deleteUser = deleteUser;
+
+exports.loadTheaters = loadTheaters;
+exports.editTheater = editTheater;
+exports.deleteTheater = deleteTheater;
+
+exports.loadMoviesMW = loadMoviesMW;
+exports.loadUsersMW = loadUsersMW;
+exports.loadTheatersMW = loadTheatersMW;

@@ -7,6 +7,7 @@ var jimp = require('jimp')
 
 var upload = multer({ dest: '/uploads/' })
 
+/* Middleware to check if user is admin */
 router.use(function(req, res, next){
 	if(req.session.user == undefined || req.session.user.type !== "admin"){
 		res.redirect('/')
@@ -14,26 +15,15 @@ router.use(function(req, res, next){
 	next();
 })
 
-router.use('/', function(req,res,next){
-	dataManager.loadMovies(function(err, movies){
-		if(err){
-			console.log("Error fetching movies");
-			next(err);
-		} else {
-			req.movies = movies;
-			next();
-		}
-	});	
+router.get('/', dataManager.loadMoviesMW, dataManager.loadUsersMW, dataManager.loadTheatersMW, function(req, res){
+	res.render('admin', {user: req.session.user, movies: req.movies, users: req.users, theaters: req.theaters});
 });
 
-router.get('/', function(req, res){
-	res.render('admin', {user: req.session.user, movies: req.movies});
-});
-
+/* Movie editing form stuff */
 router.get('/editmovie', function(req,res){
 	res.render('editmovie', {user: req.session.user});
 });
-router.get('/editmovie/:id([0-9]{1,5})', function(req,res){
+router.get('/editmovie/:id([0-9]{1,5})', dataManager.loadMoviesMW, function(req,res){
 	var movie = req.movies.filter(function(m){
 		if(m.id == req.params.id)
 			return true;
@@ -47,7 +37,7 @@ router.get('/editmovie/:id([0-9]{1,5})', function(req,res){
 router.post('/editmovie', function(req,res){
 	var movie = req.body.movie;
 	console.log(req.body.cropper);
-	if(req.body.cropper.filename != undefined){
+	if(req.body.cropper != undefined && req.body.cropper.filename != undefined){
 		var filename = req.body.cropper.filename;
 		while(fs.existsSync("./public/img/movies/o_"+filename)
 			|| fs.existsSync("./public/img/movies/b_"+filename)
@@ -64,9 +54,9 @@ router.post('/editmovie', function(req,res){
 				img.write("./public/img/movies/o_"+filename)
 					.crop(Number(req.body.cropper.x),Number(req.body.cropper.y),
 						Number(req.body.cropper.width), Number(req.body.cropper.height))
-					.resize(91*13, 134*13)
+					.resize(91*12, 134*12)
 					.write("./public/img/movies/b_"+filename)
-					.resize(91*5, 134*5)
+					.resize(91*3, 134*3)
 					.write("./public/img/movies/s_"+filename)					
 			}
 		});
@@ -89,9 +79,9 @@ router.post('/editmovie/:id([0-9]{1,5})', function(req,res){
 	dataManager.editMovie(req.body.movie);
 	res.redirect('/admin');
 });
-
+// image posting
 router.post('/editmovie/imageupload', upload.single('img'), function(req,res){
-	if(req.file != undefined){
+	if(req.file != undefined && req.file.mimetype.match("image/*")){
 		var tmp_path = req.file.path;
 		var filename = req.file.originalname;
 		var target_path = './public/img/upload/';
@@ -116,6 +106,7 @@ router.post('/editmovie/imageupload', upload.single('img'), function(req,res){
 });
 
 
+/* Theater editing */
 router.use('/theater/:theater_id([0-9]{1,5})', function(req,res,next){
 	fs.readFile('./data/theaters.json', 'utf8', function (err, data) {
 		if(err){
@@ -142,6 +133,7 @@ router.get('/theater/:theater([0-9]{1,5})/edithall/:hall([0-9]{1,5})', function(
 router.get('/theater/:theater([0-9]{1,5})/edithall/:hall([0-9]{1,5})/editor', function(req,res){
 	res.render("editor", {user: req.session.user, theater: req.theater, hall: req.params.hall});
 });
+
 
 //export this router to use in our index.js
 module.exports = router;
