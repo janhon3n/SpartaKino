@@ -2,11 +2,48 @@
 	{
 		"id":1,
 		"name":"Turku",
-		"address":"Kauppiaskatu 12"	
+		"address": {
+			"street":"Kauppiaskatu 12",
+			"city":"Turku",
+			"postcode":"20100"
+		},
+		"halls": [
+			{
+				"id":1,
+				"name": "Hall 1",
+				"seats":82
+			}
+		]
 	},
 	{
 		"id":2,
 		"name":"Helsinki",
-		"address":"Koulukatu 1"
+		"address": {
+			"street":"Hämeenkatu 3",
+			"city":"Helsinki",
+			"postcode":"00100"
+		},
+		"halls":[
+			{
+				"id":1,
+				"name": "Big hall",
+				"seats":104
+			},
+			{
+				"id":2,
+				"name": "Small hall",
+				"seats":20
+			}
+		]
+	},
+	{
+		"id":3,
+		"name":"Tampere",
+		"address": {
+			"street": "Teekkarinkatu 1",
+			"city": "Tampere",
+			"postcode":"40120"
+		},
+		"halls":[]
 	}
 ]

@@ -5,7 +5,7 @@
 		"address": {
 			"street": "Käsityöläiskatu 5A12",
 			"city": "Yo kaupunki east side 4 life",
-			"postcode": 20100
+			"postcode": "20100"
 		},
 		"type": "basic"
 	}, {
@@ -15,7 +15,7 @@
 		"address": {
 			"street": "Yliopistonkatu 5",
 			"city": "Turku",
-			"postcode": 20100
+			"postcode": "20100"
 		},
 		"type": "admin"
 	}

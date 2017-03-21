@@ -37,6 +37,13 @@ function loadMovies(callback){
 			console.log(err);
 			callback(err, undefined);
 		} else {
+			// add additional data
+			movies.forEach(function(m){
+				m.imagepath = {};
+				m.imagepath.orginal = "/public/img/movies/o_" + m.imagefile;
+				m.imagepath.big = "/public/img/movies/b_" + m.imagefile;
+				m.imagepath.small = "/public/img/movies/s_" + m.imagefile;
+			});
 			callback(undefined, movies);
 		}
 	});
@@ -44,7 +51,6 @@ function loadMovies(callback){
 
 function editMovie(mov, callback){
 	fixMovie(mov, function(movie){
-		console.log(movie);
 //		lockFile.lock(moviesFile, {wait: lockWaitTime}, function(err){
 //			if(err){
 //				console.log(err);
@@ -65,13 +71,11 @@ function editMovie(mov, callback){
 							movies[movies.length] = movie;
 						} else {
 							//overwrite old movie with same id
-							var index = 0;
+							var index = -1;
 							for(var i = 0; i < movies.length; i++){
-								if(movies[i].id == i){
-									index = i;
-								}
+								if(movies[i].id == movie.id) index = i;
 							}
-							if(index == 0){
+							if(index == -1){
 								callback(new Error("Movie not found"));
 								return;
 							} else {
@@ -79,8 +83,6 @@ function editMovie(mov, callback){
 							}
 						}
 						
-						console.log("JSON TO WRITE: ");
-						console.log(movies);
 						//save the modified movies object
 						jsonFile.writeFile(moviesFile, movies, function(err3){
 							if(err3){
@@ -425,7 +427,7 @@ function loadUsersMW(req,res,next){
 function loadTheatersMW(req,res,next){
 	loadTheaters(function(err, theaters){
 		if(err){
-			console.log(err.getMessage());
+			console.log(err.message);
 			next(err);
 		} else {
 			req.theaters = theaters;

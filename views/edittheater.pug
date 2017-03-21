@@ -1,0 +1,30 @@
+extends layout.pug
+block append scripts
+	script(src="/public/js/edithall.js")
+block content
+	div.padding#edittheater
+		if theater
+			h1= "Edit theater "+theater.name
+		else
+			h1 Create a new theater
+			
+		form#theaterForm
+			div.formrow
+				label(for="theater[name]") Theater name:
+				if theater
+					input(type="text" name="theater[name]" value=theater.name)
+				else 
+					input(type="text" name="theater[name]")
+			
+			div.formrow
+				label(for="theater[address]") Address:
+				if(theater)
+					input(type="text" placeholder="Street address" name="theater[address][street]")
+					input(type="text" placeholder="City" name="theater[address][city]")
+					input(type="text" placeholder="Postal code" name="theater[address][postcode]")
+			
+			h2 Halls
+			each hall in theater.halls
+				div.hall
+					h3= hall.name
+					label= "Size: "+hall.seats+" seats"

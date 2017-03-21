@@ -1,51 +1,146 @@
-[
-	{
-		"id": 1,
-		"title": "Nalle Puh",
-		"year": 1999,
-		"director": "Joy Sully",
-		"actors": [
-			{"name" : "John Johnsson"}
-		],
-		"description": "Very touching story about a bear who decided to run away from home.",
-		"screenings": [
-			{"theater" : 1, "timestamp":1497297600},
-			{"theater" : 2, "timestamp":1497474000}
-		]
-	},
-	{
-		"id": 2,
-		"title": "Fifty shades of Juho",
-		"year": 1999,
-		"director": "Mikael Janhoinen",
-		"actors": [
-			{"name" : "Juho Krönback"},
-			{"name" : "Adrian Bodyskoski"}
-		],
-		"description": "A story about two men spending their valentine night. But what happens when their pet tiger gets out of its case. The party is heating up like never before. Not for children.",
-		"screenings": []
-	},
-	{
-		"id": 3,
-		"title": "302",
-		"year": 1999,
-		"director": "David Switcher",
-		"actors": [
-			{"name" : "Leonardo"}
-		],
-		"description": "Sparta strikes again. This time it's personal.",
-		"screenings": []
-	},
-		{
+[{
 		"id": 4,
 		"title": "Jummiland",
 		"year": 1997,
 		"director": "Mikael Janhonen",
-		"actors": [
-			{"name" : "Julia Pihlaja"},
-			{"name" : "Panda"}
+		"actors": [{
+				"name": "Julia Pihlaja"
+			}, {
+				"name": "Panda"
+			}
 		],
 		"description": "Jummi starts her new job at the animal rescue home and becomes friends with the most intellegent cat. Together they have very fun adventures in the forest. But someone is planning to ruin their friendship... ",
+		"screenings": [],
+		"imagefile": "default.jpg"
+	}, {
+		"title": "Testileffa",
+		"description": "ALKJFLAKEJFLA EJLAKEJVEAK EAKJ VLAKVE ",
+		"year": "1929",
+		"director": "Matti",
+		"actors": [{
+				"name": "Aapeli"
+			}, {
+				"name": "Kaapeli"
+			}
+		],
+		"imagefile": "_unnamed.jpg",
+		"screenings": [],
+		"id": 5
+	}, {
+		"title": "aabe",
+		"description": "aeb",
+		"year": "1999",
+		"director": "ab",
+		"actors": [{
+				"name": "jlöjölkj"
+			}, {
+				"name": "ölkjölkb"
+			}
+		],
+		"imagefile": "Nature-Animals-Wallpapers.jpg",
+		"screenings": [],
+		"id": 6
+	}, {
+		"title": "bea",
+		"description": "bwe",
+		"year": "1800",
+		"director": "b4wb4wb4w",
+		"actors": [{
+				"name": "bwqb4wb4w"
+			}, {
+				"name": "wrm"
+			}
+		],
+		"imagefile": "sea-night-moonlit-lane.jpg",
+		"imagecropper": {
+			"x": "320.38542309115576",
+			"y": "0",
+			"width": "611.1940298507462",
+			"height": "900"
+		},
+		"screenings": [],
+		"id": 7
+	}, {
+		"title": "kilpikonna",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "default.jpg",
+		"screenings": [],
+		"id": 8
+	}, {
+		"title": "Jaskaa",
+		"description": "",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"screenings": [],
+		"imagefile": "default.jpg",
+		"id": 9
+	}, {
+		"title": "aFÖLAKJBEÖ",
+		"description": "AEBEABAEBAEB",
+		"year": "1800",
+		"director": "VREAB",
+		"actors": [{
+				"name": "VRELÖVJÖKJ"
+			}, {
+				"name": "ÖLKJ"
+			}
+		],
+		"screenings": [],
+		"imagefile": "default.jpg",
+		"id": 10
+	}, {
+		"title": "öljölkj",
+		"description": "beölkjölkj",
+		"year": "1999",
+		"director": "ölkjölk",
+		"actors": [{
+				"name": "ölkjölkj"
+			}, {
+				"name": "ölkjölkj"
+			}
+		],
+		"imagefile": "__unnamed.jpg",
+		"imagecropper": {
+			"x": "1019.2026567164187",
+			"y": "287.24737500000003",
+			"width": "318.0042537313433",
+			"height": "468.27000000000004"
+		},
+		"screenings": [],
+		"id": 11
+	}, {
+		"title": "Raketti ja Verneri",
+		"description": "Lorem ipsum dolololo Lorem ipsum dolololo Lorem ipsum dolololo Lorem ipsum dolololoLorem ipsum dolololo Lorem ipsum dolololoLorem ipsum dolololoLorem ipsum dolololo Lorem ipsum dolololoLorem ipsum dolololoLorem ipsum dolololov",
+		"year": "2000",
+		"director": "Mikael Janhonen",
+		"actors": [{
+				"name": "Verneri"
+			}, {
+				"name": "Matti"
+			}
+		],
+		"imagefile": "space-shuttle-columbia-hd-wallpapers-for-desktop.jpg",
+		"imagecropper": {
+			"x": "547.6985074626863",
+			"y": "230.40000000000003",
+			"width": "317.90149253731346",
+			"height": "468.1186813186814"
+		},
+		"id": 12,
 		"screenings": []
 	}
 ]

@@ -1,12 +1,20 @@
-{"theaters": [
+[
 	{
 		"id":1,
 		"name":"Turku",
-		"address":"Kauppiaskatu 12"	
+		"address": {
+			"street":"Kauppiaskatu 12",
+			"city":"Turku",
+			"postcode":20100
+		}
 	},
 	{
 		"id":2,
 		"name":"Helsinki",
-		"address":"Koulukatu 1"
-	}]
-}
+		"address": {
+			"street":"Hämeenkatu 3",
+			"city":"Helsinki",
+			"postcode":00100
+		}
+	}
+]
