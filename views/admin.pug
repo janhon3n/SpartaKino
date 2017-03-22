@@ -4,45 +4,52 @@ block append scripts
 	script(src="/public/js/admin.js")
 
 block content
-	div.padding
+	div.padding#admin
 		h1 Admin controls
-		table#moviesTable
-			caption Movies
-			tr
-				th Title
-				th Year
-				th Description
-				th
-				th
-			each m in movies
+		div.tableSection
+			table#moviesTable
+				caption Movies
 				tr
-					td= m.title
-					td= m.year
-					td= m.description
-					td.edit
-						a(href="/admin/editmovie/"+m.id) edit
-					td.remove
-						a.remove(movie_id=m.id) remove
-		a(href="/admin/editmovie")
-			li Add a movie
+					th Title
+					th Year
+					th Description
+					th
+					th
+				each m in movies
+					tr
+						td= m.title
+						td= m.year
+						td= m.description
+						td.edit
+							a(href="/admin/editmovie/"+m.id) edit
+						td.delete
+							a.delete(movie_id=m.id) delete
+			a(href="/admin/editmovie") Add a movie
+
+		div.tableSection
+			table#usersTable
+				caption Users
+				tr
+					th Username
+					th Account type
+				each u in users
+					tr
+						td= u.username
+						td= u.type
 			
-		table#usersTable
-			caption Users
-			tr
-				th Username
-				th Account type
-			each u in users
+		div.tableSection
+			table#theatersTable
+				caption Theaters
 				tr
-					td= u.username
-					td= u.type
-		
-		table#theatersTable
-			caption Theaters
-			tr
-				th Name
-				th Address
-			each t in theaters
-				tr
-					td= t.name
-					td= t.address
-			
+					th Name
+					th Address
+				each t in theaters
+					tr
+						td= t.name
+						td= t.address.street + " " + t.address.city
+						td.edit
+							a(href="/admin/edittheater/"+t.id) edit
+						td.delete
+							a.delete(theater_id=t.id) delete
+			a(href="/admin/edittheater") Add a theater
+				

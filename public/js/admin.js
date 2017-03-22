@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	
+	//remove movie
 	$("table#moviesTable a.remove").click(function(){
 		var elem = $(this);
 		var id = elem.attr("movie_id");
@@ -12,4 +14,5 @@ $(document).ready(function(){
 			}
 		});
 	});
+
 });

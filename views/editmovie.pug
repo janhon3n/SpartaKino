@@ -60,10 +60,12 @@ block content
 					button#removeActorButton(type="button") -
 			
 			div.formrow
-				div#cropPreview
 				div#cropContainer
-					img#cropImage
-				button#cropButton(type="button") Edit crop
+					if movie && movie.imagefile != "default.jpg" && movie.imagecropper
+						img#cropImage(src=movie.imagepath.orginal imagefile=movie.imagefile cdatax=movie.imagecropper.x cdatay=movie.imagecropper.y cdatawidth=movie.imagecropper.width cdataheight=movie.imagecropper.height)
+					else
+						img#cropImage
+						
 				
 			div.formrow
 				if movie != undefined

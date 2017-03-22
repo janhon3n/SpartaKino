@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Serif);
 
 $color-primary-0: #AA4139;
 $color-primary-1: #FFD0CC;
@@ -16,6 +17,7 @@ $color-secondary-2-1: #DEEFBF;
 $color-secondary-2-2: #ABCC73;
 $color-secondary-2-3: #4A6F0B;
 $color-secondary-2-4: #294100;
+
 
 
 @font-face {
@@ -40,7 +42,9 @@ button, input[type="submit"]{
 	padding-left:20px;
 	padding-right:20px;
 }
-
+h1, h2, h3 {
+	font-family:serif;
+}
 
 a {
 color:black;
@@ -48,18 +52,18 @@ text-decoration:none;
 }
 
 body{
-	font-family:georgia;
+	font-family:'PT Serif', arial;
 	font-size:16px;
 	margin:0px;
 	background-color:$color-secondary-1-1;
+	height:100%;
 }
 div#maincontainer {
 	max-width:1000px;
 	margin-left:auto;
 	margin-right:auto;
-	background-color:white;
-	color:black;
 	box-shadow:0 0 50px;
+	height:100%;
 }
 
 header :visited{
@@ -68,6 +72,7 @@ header :visited{
 }
 header {
 	height:70px;
+	margin:0px;
 	font-size:120%;
 	background-color:$color-secondary-1-0;
 	color:white;
@@ -77,6 +82,7 @@ header {
 		text-decoration:none;
 	}
 	div#logo {
+		height:100%;
 		width:220px;
 		float:left;
 		
@@ -121,13 +127,23 @@ header {
 }
 
 div#content {
+	background-color:white;
+	color:black;
+	height:calc(100% - 70px);
+	overflow-y:auto;
+	overflow-x:hidden;
+	width:100%;
+	margin:0px;
+	
+	
+	div#contentContainer {
 
+	}
 	div.padding {
 		margin:35px;
 	}
 
 	div#movies {
-
 		div#search {
 			padding:20px;
 		}
@@ -156,7 +172,18 @@ div#content {
 			}
 		}
 	}
-	
+	div#admin {
+		div.tableSection{
+			margin:20px;
+			background-color:$color-secondary-1-1;
+			
+			table{
+				tr:hover{
+				background-color:$color-secondary-1-2;
+				}
+			}
+		}
+	}
 	div#editmovie {
 		div#cropContainer{
 			img#cropImage{
