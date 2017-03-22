@@ -30,7 +30,7 @@ body {
   background-color: #8BA9AE; }
 
 div#maincontainer {
-  max-width: 1200px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
   background-color: white;
@@ -88,11 +88,16 @@ div#content div#movies div#search {
   padding: 20px; }
 
 div#content div#movies div#results div.movie {
+  display: inline-block;
   text-decoration: none;
-  padding: 15px;
+  padding: 10px;
   background-color: #EEE; }
+  div#content div#movies div#results div.movie img {
+    border-radius: 2px; }
   div#content div#movies div#results div.movie h2 {
     margin: 5px; }
+  div#content div#movies div#results div.movie div.hidecontent {
+    display: none; }
 
 div#content div#movies div#results a.movielink:nth-child(2n) div.movie {
   background-color: #FFF; }
