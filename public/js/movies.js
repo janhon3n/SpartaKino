@@ -1,12 +1,13 @@
 $(document).ready(function(){
 	
 	function createMovieHtml(m){
-		html = '<a class="movielink" href="/movies/movie/'+m.id+'">'
-			+ '<div class="movie">'
+		html = '<div class="movie">'
 			+ '<img src="/public/img/movies/s_'+m.imagefile+'">'
-			+ '<h2>'+m.title+'</h2>'
+			+ '<div class="hidecontent">'
+			+ '<a class="movielink" href="/movies/movie/'+m.id+'">'
+			+ '<h2>'+m.title+'</h2></a>'
 			+ '<p>'+m.description+'</p>'
-			+ '<li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></div></a>';
+			+ '<li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></div></div>';
 		return html;
 	}
 	
@@ -17,6 +18,7 @@ $(document).ready(function(){
 				html += createMovieHtml(m);
 			})
 			$('div#movies div#results').html(html);
+			setMoviesFunctionality();
 		});		
 	}
 	function searchMovies(searchParams){
@@ -29,6 +31,7 @@ $(document).ready(function(){
 				html += createMovieHtml(m)
 			})
 			$('div#movies div#results').html(html);
+			setMoviesFunctionality();
 		});				
 	}
 	updateMovies(0,10);
@@ -38,4 +41,12 @@ $(document).ready(function(){
 		if(title === "") title = "*";
 		searchMovies({title: title});
 	});
+
+	function setMoviesFunctionality(){
+		$('div.movie img').click(function(){
+			$(this).parent().find('div.hidecontent').slideToggle();
+		});
+	}
+
+
 });
