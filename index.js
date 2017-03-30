@@ -72,8 +72,11 @@ app.use('/logout', logout)
 var register = require('./routes/register.js')
 app.use('/register', register)
 
-var api = require('./routes/api/moviesapi.js')
-app.use('/api/movies', api)
+var moviesapi = require('./routes/api/moviesapi.js')
+app.use('/api/movies', moviesapi)
+
+var theatersapi = require('./routes/api/theatersapi.js')
+app.use('/api/theaters', theatersapi)
 
 var user = require('./routes/user.js')
 app.use('/user/', user)

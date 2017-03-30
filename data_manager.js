@@ -203,13 +203,13 @@ function editUser(usr, callback){
 							users[users.length] = user;
 						} else {
 							//overwrite old movie with same id
-							var index = 0;
+							var index = -1;
 							for(var i = 0; i < users.length; i++){
-								if(users[i].id == i){
+								if(users[i].id == user.id){
 									index = i;
 								}
 							}
-							if(index == 0){
+							if(index < 0){
 								callback(new Error("User not found"));
 								return;
 							} else {
@@ -294,7 +294,6 @@ function loadTheaters(callback){
 
 function editTheater(thea, callback){
 	fixTheater(thea, function(theater){
-		console.log(theater);
 //		lockFile.lock(theatersFile, {wait: lockWaitTime}, function(err){
 //			if(err){
 //				console.log(err);
@@ -315,13 +314,16 @@ function editTheater(thea, callback){
 							theaters[theaters.length] = theater;
 						} else {
 							//overwrite old theater with same id
-							var index = 0;
+							var index = -1;
 							for(var i = 0; i < theaters.length; i++){
-								if(theaters[i].id == i){
+								console.log(theaters[i])
+								console.log(theater)
+								if(theaters[i].id == theater.id){
 									index = i;
 								}
 							}
-							if(index == 0){
+							console.log(index);
+							if(index < 0){
 								callback(new Error("theater not found"));
 								return;
 							} else {

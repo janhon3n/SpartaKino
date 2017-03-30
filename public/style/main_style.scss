@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=PT+Serif);
+@import url('https://fonts.googleapis.com/css?family=Bitter|Cabin|Droid+Serif|Merriweather+Sans|Noto+Serif|Poppins');
 
 $color-primary-0: #AA4139;
 $color-primary-1: #FFD0CC;
@@ -42,8 +42,26 @@ button, input[type="submit"]{
 	padding-left:20px;
 	padding-right:20px;
 }
-h1, h2, h3 {
-	font-family:serif;
+h1, h2, h3, h4, h5, h6 {
+	font-family:bitter;
+	margin:0px;
+	padding:10px;
+}
+
+form {
+	div.formRow{
+		margin:5px;
+		
+		label{
+			vertical-align:middle;
+			display:inline-block;
+			min-width:120px;
+		}
+		input, textarea {
+			vertical-align:middle;
+		}
+	}
+
 }
 
 a {
@@ -51,8 +69,17 @@ color:black;
 text-decoration:none;
 }
 
+
+.hideable .hidebutton{
+	cursor:pointer;
+	background-color:$color-secondary-1-0;
+	padding:5px;
+	color:white;
+}
+
+
 body{
-	font-family:'PT Serif', arial;
+	font-family:'Poppins', arial;
 	font-size:16px;
 	margin:0px;
 	background-color:$color-secondary-1-1;
@@ -187,47 +214,75 @@ div#content {
 			overflow:hidden;
 		}
 	}
-}
-
-footer {
-	text-align:right;
-}
-
-
-
-
-
-
-
-/* Hall edit */
-div.he_container {
-	
-	table.he_map {		
-		border-spacing:0px;
-		border-collapse:collapse;
-		td {
-			width:15px;
-			height:15px;
-			border-bottom:1px solid white;
-			border-right:1px solid white;
-			background-color:#eee;
-			margin:0px;
-			padding:0px;
-			display:inline-block;
-		}
-		tr:nth-child(even) td:nth-child(even) {
-			background-color:#eaeaea;
-		}
-		tr:nth-child(odd) td:nth-child(odd) {
-			background-color:#eaeaea;
-		}
-	}
-	
-	svg.chair {
-		rect{
-			stroke-width:1;
-			stroke:black;
-			fill:#aa2222;
+	div#edittheater{
+		div.hall{
+			div.editor{
+				overflow-x:auto;
+			
+				div.editorwrap{
+				width:1000px;
+				}
+				
+				padding:20px;
+				background-color:$color-secondary-1-4;
+				display:none;
+				color:white;
+				
+				svg{
+					background-color:#111;
+					
+					
+					svg.box{
+						cursor:pointer;
+						
+						rect.boxrect{
+							stroke:#444;
+							fill:rgba(0,0,0,0);
+						}
+						rect.boxrect:hover{
+							fill:rgba(256,256,256,0.3);
+						}
+					}
+				}
+				
+				div.options{
+					display:inline-block;
+					vertical-align:top;
+					
+					div.svgelementChooser {
+						display:inline-block;
+						vertical-align:top;
+						
+						div{
+							border:1px solid #777;
+							background-color:#222;
+							padding:3px;
+							width:40px;
+							height:40px;
+							cursor:pointer;
+							
+							img{
+								overflow:visible;
+								width:100%;
+								height:100%;
+							}
+						}
+						div.rotate{
+							width:30px;
+							height:30px;
+							float:right;
+						}
+						div[current="true"] {
+							background-color:$color-secondary-1-1;
+						}
+					}
+					
+					div.svgSizeEditor {
+						display:inline-block;
+						vertical-align:top;
+					}
+				}
+			}
 		}
 	}
 }
