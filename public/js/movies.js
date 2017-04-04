@@ -1,18 +1,24 @@
 $(document).ready(function(){
 	
+	var moviesSave;
+
 	function createMovieHtml(m){
 		html = '<div class="movie">'
-			+ '<img src="/public/img/movies/s_'+m.imagefile+'">'
-			+ '<div class="hidecontent">'
-			+ '<a class="movielink" href="/movies/movie/'+m.id+'">'
-			+ '<h2>'+m.title+'</h2></a>'
-			+ '<p>'+m.description+'</p>'
-			+ '<li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></div></div>';
+			+ '<img src="/public/img/movies/s_'+m.imagefile+'" movie_id="'+m.id+'">'
+			+ '</div>';
 		return html;
+	}
+	function createMovieContentHtml(m){
+		return '<div class="movieContent">'
+		+ '<a class="movielink" href="/movies/movie/'+m.id+'">'
+		+ '<h2>'+m.title+'</h2></a>'
+		+ '<p>'+m.description+'</p>'
+		+ '<li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></div>';
 	}
 	
 	function updateMovies(fr, amount){
 		$.getJSON("/api/movies/amount/"+fr+"/"+amount, function(movies){
+			moviesSave = movies;
 			var html = '';
 			movies.forEach(function(m){
 				html += createMovieHtml(m);
@@ -25,7 +31,7 @@ $(document).ready(function(){
 		var url = "/api/movies/search/"+searchParams.title + "/";
 		console.log(url);
 		$.getJSON(url, function(movies){
-			console.log(movies);
+			moviesSave = movies;
 			var html = '';
 			movies.forEach(function(m){
 				html += createMovieHtml(m)
@@ -44,7 +50,12 @@ $(document).ready(function(){
 
 	function setMoviesFunctionality(){
 		$('div.movie img').click(function(){
-			$(this).parent().find('div.hidecontent').slideToggle();
+			var movieId = Number($(this).attr("movie_id"));
+			var movs = movies.filter(function(m){
+				if(m.id == movieId) return true;
+				return false;
+			});
+			$("div#movieContent").html(createMovieContentHtml(movs[0]));
 		});
 	}
 
