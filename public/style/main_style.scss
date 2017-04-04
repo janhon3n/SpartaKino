@@ -48,6 +48,8 @@ h1, h2, h3, h4, h5, h6 {
 	padding:10px;
 }
 
+
+
 form {
 	div.formRow{
 		margin:5px;
@@ -61,20 +63,57 @@ form {
 			vertical-align:middle;
 		}
 	}
-
 }
-
-a {
-color:black;
+a{
 text-decoration:none;
 }
-
+a:visited {
+color:black;
+}
 
 .hideable .hidebutton{
 	cursor:pointer;
 	background-color:$color-secondary-1-0;
 	padding:5px;
 	color:white;
+}
+
+table{
+	table-layout: fixed;
+	box-sizing:border-box;
+	width:100%;
+    border-collapse: collapse;
+	background-color:$color-secondary-1-1;
+	
+	tr{
+		box-sizing:border-box;
+		width:100%;
+	}
+	td, th{
+		box-sizing:border-box;
+		padding:3px;
+		border:1px solid $color-secondary-1-0;
+	}
+	td.shrink, th.shrink {
+		white-space:nowrap;
+		overflow:hidden;
+	}
+	td.small, th.small{
+		width:100px;
+		text-align:center;
+	}
+	td.medium, th.medium{
+		width:200px;
+	}
+	td.delete:hover{
+		background-color:$color-primary-3;
+		color:white;
+		cursor:pointer;
+	}
+	td.edit:hover{
+		background-color:$color-secondary-1-2;
+		cursor:pointer;
+	}
 }
 
 
@@ -192,13 +231,6 @@ div#content {
 	div#admin {
 		div.tableSection{
 			margin:20px;
-			background-color:$color-secondary-1-1;
-			
-			table{
-				tr:hover{
-				background-color:$color-secondary-1-2;
-				}
-			}
 		}
 	}
 	div#editmovie {

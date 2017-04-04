@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Bitter|Cabin|Droid+Serif|Merriweather+Sans|Noto+Serif|Poppins");
 @font-face {
   font-family: curvyFont;
   src: url(/public/fonts/Angeline_Vintage.ttf); }
@@ -19,23 +20,74 @@ button, input[type="submit"] {
   padding-left: 20px;
   padding-right: 20px; }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: bitter;
+  margin: 0px;
+  padding: 10px; }
+
+form div.formRow {
+  margin: 5px; }
+  form div.formRow label {
+    vertical-align: middle;
+    display: inline-block;
+    min-width: 120px; }
+  form div.formRow input, form div.formRow textarea {
+    vertical-align: middle; }
+
 a {
-  color: black;
   text-decoration: none; }
 
+a:visited {
+  color: black; }
+
+.hideable .hidebutton {
+  cursor: pointer;
+  background-color: #246068;
+  padding: 5px;
+  color: white; }
+
+table {
+  table-layout: fixed;
+  box-sizing: border-box;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #8BA9AE; }
+  table tr {
+    box-sizing: border-box;
+    width: 100%; }
+  table td, table th {
+    box-sizing: border-box;
+    padding: 3px;
+    border: 1px solid #246068; }
+  table td.shrink, table th.shrink {
+    white-space: nowrap;
+    overflow: hidden; }
+  table td.small, table th.small {
+    width: 100px;
+    text-align: center; }
+  table td.medium, table th.medium {
+    width: 200px; }
+  table td.delete:hover {
+    background-color: #78140C;
+    color: white;
+    cursor: pointer; }
+  table td.edit:hover {
+    background-color: #4D8087;
+    cursor: pointer; }
+
 body {
-  font-family: georgia;
+  font-family: 'Poppins', arial;
   font-size: 16px;
   margin: 0px;
-  background-color: #8BA9AE; }
+  background-color: #8BA9AE;
+  height: 100%; }
 
 div#maincontainer {
-  max-width: 1000px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  background-color: white;
-  color: black;
-  box-shadow: 0 0 50px; }
+  box-shadow: 0 0 50px;
+  height: 100%; }
 
 header :visited {
   color: white;
@@ -43,6 +95,7 @@ header :visited {
 
 header {
   height: 70px;
+  margin: 0px;
   font-size: 120%;
   background-color: #246068;
   color: white; }
@@ -50,6 +103,7 @@ header {
     color: white;
     text-decoration: none; }
   header div#logo {
+    height: 100%;
     width: 220px;
     float: left; }
     header div#logo h1 {
@@ -81,58 +135,75 @@ header {
       background-color: #4D8087;
       height: 100%; }
 
-div#content div.padding {
-  margin: 35px; }
-
-div#content div#movies div#search {
-  padding: 20px; }
-
-div#content div#movies div#results div.movie {
-  display: inline-block;
-  text-decoration: none;
-  padding: 10px;
-  background-color: #EEE; }
-  div#content div#movies div#results div.movie img {
-    border-radius: 2px; }
-  div#content div#movies div#results div.movie h2 {
-    margin: 5px; }
-  div#content div#movies div#results div.movie div.hidecontent {
-    display: none; }
-
-div#content div#movies div#results a.movielink:nth-child(2n) div.movie {
-  background-color: #FFF; }
-
-div#content div#editmovie div#cropContainer img#cropImage {
-  max-height: 500px;
-  width: 100%; }
-
-div#content div#editmovie div#cropPreview {
-  width: 182px;
-  height: 268px;
-  overflow: hidden; }
-
-footer {
-  text-align: right; }
-
-/* Hall edit */
-div.he_container table.he_map {
-  border-spacing: 0px;
-  border-collapse: collapse; }
-  div.he_container table.he_map td {
-    width: 15px;
-    height: 15px;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    background-color: #eee;
-    margin: 0px;
-    padding: 0px;
-    display: inline-block; }
-  div.he_container table.he_map tr:nth-child(even) td:nth-child(even) {
-    background-color: #eaeaea; }
-  div.he_container table.he_map tr:nth-child(odd) td:nth-child(odd) {
-    background-color: #eaeaea; }
-
-div.he_container svg.chair rect {
-  stroke-width: 1;
-  stroke: black;
-  fill: #aa2222; }
+div#content {
+  background-color: white;
+  color: black;
+  height: calc(100% - 70px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0px; }
+  div#content div.padding {
+    margin: 35px; }
+  div#content div#movies div#search {
+    padding: 20px; }
+  div#content div#movies div#results div.movie {
+    text-decoration: none;
+    padding: 15px;
+    background-color: #EEE; }
+    div#content div#movies div#results div.movie h2 {
+      margin: 5px; }
+  div#content div#movies div#results a.movielink:nth-child(2n) div.movie {
+    background-color: #FFF; }
+  div#content div#admin div.tableSection {
+    margin: 20px; }
+  div#content div#editmovie div#cropContainer img#cropImage {
+    max-height: 500px;
+    width: 100%; }
+  div#content div#editmovie div#cropPreview {
+    width: 182px;
+    height: 268px;
+    overflow: hidden; }
+  div#content div#edittheater div.hall div.editor {
+    overflow-x: auto;
+    padding: 20px;
+    background-color: #00262B;
+    display: none;
+    color: white; }
+    div#content div#edittheater div.hall div.editor div.editorwrap {
+      width: 1000px; }
+    div#content div#edittheater div.hall div.editor svg {
+      background-color: #111; }
+      div#content div#edittheater div.hall div.editor svg svg.box {
+        cursor: pointer; }
+        div#content div#edittheater div.hall div.editor svg svg.box rect.boxrect {
+          stroke: #444;
+          fill: transparent; }
+        div#content div#edittheater div.hall div.editor svg svg.box rect.boxrect:hover {
+          fill: rgba(255, 255, 255, 0.3); }
+    div#content div#edittheater div.hall div.editor div.options {
+      display: inline-block;
+      vertical-align: top; }
+      div#content div#edittheater div.hall div.editor div.options div.svgelementChooser {
+        display: inline-block;
+        vertical-align: top; }
+        div#content div#edittheater div.hall div.editor div.options div.svgelementChooser div {
+          border: 1px solid #777;
+          background-color: #222;
+          padding: 3px;
+          width: 40px;
+          height: 40px;
+          cursor: pointer; }
+          div#content div#edittheater div.hall div.editor div.options div.svgelementChooser div img {
+            overflow: visible;
+            width: 100%;
+            height: 100%; }
+        div#content div#edittheater div.hall div.editor div.options div.svgelementChooser div.rotate {
+          width: 30px;
+          height: 30px;
+          float: right; }
+        div#content div#edittheater div.hall div.editor div.options div.svgelementChooser div[current="true"] {
+          background-color: #8BA9AE; }
+      div#content div#edittheater div.hall div.editor div.options div.svgSizeEditor {
+        display: inline-block;
+        vertical-align: top; }

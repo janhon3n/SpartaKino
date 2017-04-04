@@ -6,50 +6,55 @@ block append scripts
 block content
 	div.padding#admin
 		h1 Admin controls
-		div.tableSection
-			table#moviesTable
-				caption Movies
-				tr
-					th Title
-					th Year
-					th Description
-					th
-					th
-				each m in movies
+		div.tableSection.hideable
+			h2.hidebutton Movies
+			div.hidecontent
+				table#moviesTable
 					tr
-						td= m.title
-						td= m.year
-						td= m.description
-						td.edit
-							a(href="/admin/editmovie/"+m.id) edit
-						td.delete
-							a.delete(movie_id=m.id) delete
-			a(href="/admin/editmovie") Add a movie
+						th.medium Title
+						th.small Year
+						th.shrink Description
+						th.small
+						th.small
+					each m in movies
+						tr
+							td.medium= m.title
+							td.small= m.year
+							td.shrink= m.description
+							td.small.edit.button
+								a(href="/admin/editmovie/"+m.id) edit
+							td.small.delete.button
+								a.delete(movie_id=m.id) delete
+				a(href="/admin/editmovie") Add a movie
 
-		div.tableSection
-			table#usersTable
-				caption Users
-				tr
-					th Username
-					th Account type
-				each u in users
+		div.tableSection.hideable
+			h2.hidebutton Users
+			div.hidecontent
+				table#usersTable
 					tr
-						td= u.username
-						td= u.type
-			
-		div.tableSection
-			table#theatersTable
-				caption Theaters
-				tr
-					th Name
-					th Address
-				each t in theaters
-					tr
-						td= t.name
-						td= t.address.street + " " + t.address.city
-						td.edit
-							a(href="/admin/edittheater/"+t.id) edit
-						td.delete
-							a.delete(theater_id=t.id) delete
-			a(href="/admin/edittheater") Add a theater
+						th Username
+						th Account type
+					each u in users
+						tr
+							td= u.username
+							td= u.type
 				
+		div.tableSection.hideable
+			h2.hidebutton Theaters
+			div.hidecontent
+				table#theatersTable
+					tr
+						th Name
+						th Address
+						th.small
+						th.small
+					each t in theaters
+						tr
+							td= t.name
+							td= t.address.street + " " + t.address.city
+							td.small.edit.button
+								a(href="/admin/edittheater/"+t.id) edit
+							td.small.delete.button
+								a.delete(theater_id=t.id) delete
+				a(href="/admin/edittheater") Add a theater
+					
