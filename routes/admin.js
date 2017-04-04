@@ -152,6 +152,58 @@ router.get('/edittheater/:id([0-9]{1,5})', dataManager.loadTheatersMW, function(
 		res.render('edittheater', {user: req.session.user, theater: theater[0]});
 	}
 });
+router.post('/edittheater', function(req,res){
+	theater = req.body.theater;
+	theater = fixNumbersForTheaters(theater);
+	theater.id = 0;
+	dataManager.editTheater(theater, function(err){
+		if(err){
+			console.log(err);
+			res.render("error");
+		} else {
+			res.redirect('/admin');
+			console.log("Theater "+theater.name+" added by "+req.session.user.username);
+		}	
+	});
+});
+
+router.post('/edittheater/:id([0-9]{1,5})', function(req,res){
+	theater = req.body.theater;
+	theater = fixNumbersForTheaters(theater);
+	dataManager.editTheater(theater, function(err){
+		if(err){
+			console.log(err);
+			res.render("error");
+		} else {
+			res.redirect('/admin');
+			console.log("Theater "+theater.name+" edited by "+req.session.user.username);
+		}
+	});
+});
+
+// Make numbers in string for into real numbers
+function fixNumbersForTheaters(theater){
+	theater.id = Number(theater.id);
+	if(theater.halls){
+		theater.halls.forEach(function(h){
+			h.id = Number(h.id);
+			h.rows = Number(h.rows);
+			h.cols = Number(h.cols);
+			h.seats = Number(h.cols);
+			if(h.elements){
+				h.elements.forEach(function(e){
+					e.row = Number(e.row);
+					e.col = Number(e.col);
+					e.rotation = Number(e.rotation);
+				});
+			}
+		});
+	}
+	return theater;
+}
+	
+
+
 
 
 
