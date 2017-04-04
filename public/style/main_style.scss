@@ -51,6 +51,20 @@ color:black;
 text-decoration:none;
 }
 
+.button{
+	background-color:$color-secondary-1-2;
+	border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+.button:hover{
+	background-color:$color-secondary-1-3;
+}
+
 body{
 	font-family:'PT Serif', arial;
 	font-size:16px;
@@ -145,19 +159,35 @@ div#content {
 
 	div#movies {
 		div#search {
-			padding:20px;
+			background-color:$color-secondary-1-1;
+			padding:7px;
+			div#searchContent {
+				padding: 2px;
+				display: inline-block;
+				background-color: $color-secondary-1-2; 
+			}
 		}
 		div#results {
+
+			
+			white-space: nowrap;
+ 			overflow-x: visible;
+  			overflow-y: hidden;
+  			height: 50%;
+
 			div.movie {
+
 				display:inline-block;
 				text-decoration:none;
-				padding:10px;
+				padding:3px;
 				background-color:#EEE;
-
+				height: 100%;
+				width: 20%;
 				
 				img{
 
-					border-radius: 2px;
+					height: 100%;
+					border-radius: 2px;			
 				}
 
 				h2{

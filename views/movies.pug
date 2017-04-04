@@ -4,9 +4,11 @@ block append scripts
 block append content
 	div#movies
 		div#search Search:
-			input#title(type="text",placeholder="Title")
-			select#theater
-				option(value="turku") Turku
-				option(value="turku") Helsinki
-			button#updateButton Update list
+			div#searchContent
+				input#title(type="text",placeholder="Title")
+				select#theater
+					option(value="turku") Turku
+					option(value="turku") Helsinki
+			button.button#updateButton Update list
 		div#results Results:
+		div#movieContent Content:
