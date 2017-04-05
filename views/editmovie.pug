@@ -1,58 +1,77 @@
 extends layout.pug
+
+block append stylesheets
+	link(href="/public/js/cropperjs/dist/cropper.css" rel="stylesheet")
 block append scripts
+	script(src="/public/js/jquery_form.js")
+	script(src="/public/js/cropperjs/dist/cropper.js")
 	script(src="/public/js/editmovie.js")
 block content
-	div.padding
+	div.padding#editmovie
 		if movie != undefined
 			h1= 'Edit movie'
 		else
 			h1= 'Add new movie'
-		form
+		form#movieForm(action="" method="post")
 			div.formrow
-				label(for="title") Movie title:
+				label(for="movie[title]") Movie title:
 				if movie != undefined
-					input(type="text" name="title" value=movie.name)
+					input(type="text" name="movie[title]" required value=movie.title)
 				else
-					input(type="text" name="title")
+					input(type="text" name="movie[title]" required)
 
 			div.formrow
-				label(for="description") Description:
+				label(for="movie[description]") Description:
 				if movie != undefined
-					textarea(name="description")= movie.description
+					textarea(name="movie[description]")= movie.description
 				else
-					textarea(name="description")
+					textarea(name="movie[description]")
 
 			div.formrow
-				label(for="year") Year:
+				label(for="movie[year]") Year:
 				if movie != undefined
-					input(type="number" min="1800" max="2050" name="year" value=movie.year)
+					input(type="number" min="1800" max="2050" name="movie[year]" value=movie.year)
 				else
-					input(type="number" min="1800" max="2050" name="year")
+					input(type="number" min="1800" max="2050" name="movie[year]")
 				
 				
 			div.formrow
-				label(for="director") Director:
+				label(for="movie[director]") Director:
 				if movie != undefined
-					input(type="text" name="director" value=movie.director)
+					input(type="text" name="movie[director]" value=movie.director)
 				else
-					input(type="text" name="director")
+					input(type="text" name="movie[director]")
 				
 			div.formrow
-				label(for="actors") Actors:
+				label(for="movie[actors]") Actors:
 				
 				div#actorsRow
 					if movie != undefined
+						- var i = 0
 						each a in movie.actors
-							input(type="text" name="actor" value=a.name)
+							input(type="text" actorIndex=i name="movie[actors]["+i+"][name]" value=a.name)
+							- i++
 					else
-						input(type="text" name="actor")
-						input(type="text" name="actor")
-						input(type="text" name="actor")
+						input(type="text" actorindex="0" name="movie[actors][0][name]")
+						input(type="text" actorindex="1" name="movie[actors][1][name]")
 						
 				div#actorButtons
 					button#addActorButton(type="button") +
 					button#removeActorButton(type="button") -
 			
 			div.formrow
+				div#cropContainer
+					if movie && movie.imagefile != "default.jpg" && movie.imagecropper
+						img#cropImage(src=movie.imagepath.orginal imagefile=movie.imagefile cdatax=movie.imagecropper.x cdatay=movie.imagecropper.y cdatawidth=movie.imagecropper.width cdataheight=movie.imagecropper.height)
+					else
+						img#cropImage
+						
+				
+			div.formrow
 				if movie != undefined
 				input(type="submit" value="Save movie")
+				
+		form#imageUpload(action="/admin/editmovie/imageupload" method="post")
+			input(type="file" name="img" accept="image/*")
+			input(type="submit")
+			div#status

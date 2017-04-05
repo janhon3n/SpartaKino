@@ -1,0 +1,55 @@
+[
+	{
+		"id": 1,
+		"title": "Nalle Puh",
+		"year": 1999,
+		"director": "Joy Sully",
+		"actors": [
+			{"name" : "John Johnsson"}
+		],
+		"description": "Very touching story about a bear who decided to run away from home.",
+		"screenings": [
+			{"theater" : 1, "timestamp":1497297600},
+			{"theater" : 2, "timestamp":1497474000}
+		],
+		"imagefile": "default.jpg"
+	},
+	{
+		"id": 2,
+		"title": "Fifty shades of Juho",
+		"year": 1999,
+		"director": "Mikael Janhoinen",
+		"actors": [
+			{"name" : "Juho Krönback"},
+			{"name" : "Adrian Bodyskoski"}
+		],
+		"description": "A story about two men spending their valentine night. But what happens when their pet tiger gets out of its case. The party is heating up like never before. Not for children.",
+		"screenings": [],
+		"imagefile": "default.jpg"
+	},
+	{
+		"id": 3,
+		"title": "302",
+		"year": 1999,
+		"director": "David Switcher",
+		"actors": [
+			{"name" : "Leonardo"}
+		],
+		"description": "Sparta strikes again. This time it's personal.",
+		"screenings": [],
+		"imagefile": "default.jpg"
+	},
+		{
+		"id": 4,
+		"title": "Jummiland",
+		"year": 1997,
+		"director": "Mikael Janhonen",
+		"actors": [
+			{"name" : "Julia Pihlaja"},
+			{"name" : "Panda"}
+		],
+		"description": "Jummi starts her new job at the animal rescue home and becomes friends with the most intellegent cat. Together they have very fun adventures in the forest. But someone is planning to ruin their friendship... ",
+		"screenings": [],
+		"imagefile": "default.jpg"
+	}
+]

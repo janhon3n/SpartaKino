@@ -19,32 +19,42 @@ router.get('/', function(req, res){
 	res.json(req.movies);
 })
 
-router.get('/amount/:from([0-9])/:amount([0-9])', function(req,res){
-	var movies = req.movies.slice(req.params.from, req.params.from + req.params.amount)
-	res.json(movies);
+router.get('/amount/:fromi([0-9]{1,3})/:amount([0-9]{1,3})', function(req,res){
+	var movis = req.movies.slice(Number(req.params.fromi), Number(req.params.fromi) + Number(req.params.amount))
+	res.json(movis);
 });
 
-router.get('/search/:name', function(req,res){
+router.get('/search/:title', function(req,res){
 	var movies = req.movies.filter(function(m){
-		if(m.name.toLowerCase().includes(req.params.name.toLowerCase())
-			|| req.params.name === "*"){
+		if(m.title.toLowerCase().includes(req.params.title.toLowerCase())
+			|| req.params.title === "*"){
 			return true;
 		}
 	});
 	res.json(movies);
 });
 
-router.get('/id/:id([0-9])', function(req,res){
+router.get('/id/:id([0-9]{1,5})', function(req,res){
 	var movie = req.movies.filter(function(m){
 		if(m.id == req.params.id)
 			return true;
 	});
 	if(movie.length != 1){
-		res.json({error:"Error fetching movies"})
+		res.json({error:"Error fetching the movie"})
 	} else {
 		res.json(movie[0]);
 	}
 })
+
+router.post('/delete/id/:id([0-9]{1,5})', function(req,res){
+	dataManager.deleteMovie(Number(req.params.id), function(err){
+		if(err){
+			res.json({success: "fail", msg:"Failed to delete movie"});
+		} else {
+			res.json({success: "success", msg: "Movie deleted"});
+		}
+	});
+});
 
 //export this router to use in our index.js
 module.exports = router;

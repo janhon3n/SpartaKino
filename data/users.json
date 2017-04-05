@@ -1,20 +1,22 @@
-{"users":[
-	{"username":"juho88",
-	"passhash":"$2a$10$1ut3G9oWm713bgNk8sN2W.TJex7v5x43Rn/3sxgNCk4ywlRDrDupy",
-	"address": {
-		"street": "Käsityöläiskatu 5A12",
-		"city":	"Turku",
-		"postcode": 20100
+[{
+		"id": 1,
+		"username": "juho88",
+		"passhash": "$2a$10$1ut3G9oWm713bgNk8sN2W.TJex7v5x43Rn/3sxgNCk4ywlRDrDupy",
+		"address": {
+			"street": "Käsityöläiskatu 5A12",
+			"city": "Yo kaupunki east side 4 life",
+			"postcode": "20100"
 		},
-	"type":"basic"
-	},
-	{"username":"admin",
-	"passhash":"$2a$10$Nnfbqc6njoC9C4ZWgu.tTuQk/UVeo4p17G.WHjCLwegJfiU2uYGO2",
-	"address": {
-		"street": "Yliopistonkatu 5",
-		"city":	"Turku",
-		"postcode": 20100
+		"type": "basic"
+	}, {
+		"id": 2,
+		"username": "admin",
+		"passhash": "$2a$10$Nnfbqc6njoC9C4ZWgu.tTuQk/UVeo4p17G.WHjCLwegJfiU2uYGO2",
+		"address": {
+			"street": "Yliopistonkatu 5",
+			"city": "Turku",
+			"postcode": "20100"
 		},
-	"type":"admin"
+		"type": "admin"
 	}
-]}
+]

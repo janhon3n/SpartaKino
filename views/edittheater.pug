@@ -1,0 +1,51 @@
+extends layout.pug
+block append scripts
+	script(src="/public/js/edithall.js")
+block content
+	div.padding#edittheater
+		if theater
+			h1= "Edit theater "+theater.name
+		else
+			h1 Create a new theater
+		
+		
+		form#theaterForm(method="post")
+			if(theater)
+				input#theaterId(type="hidden" name="theater[id]" value=theater.id)
+			div.formrow
+				label(for="theater[name]") Theater name:
+				if theater
+					input(type="text" name="theater[name]" value=theater.name)
+				else 
+					input(type="text" name="theater[name]")
+			
+			div.formrow
+				label(for="theater[address]") Address:
+				if(theater)
+					input(type="text" placeholder="Street address" name="theater[address][street]" value=theater.address.street)
+					input(type="text" placeholder="City" name="theater[address][city]" value=theater.address.city)
+					input(type="text" placeholder="Postal code" name="theater[address][postcode]" value=theater.address.postcode)
+				else
+					input(type="text" placeholder="Street address" name="theater[address][street]")
+					input(type="text" placeholder="City" name="theater[address][city]")
+					input(type="text" placeholder="Postal code" name="theater[address][postcode]")
+			div#halls
+				h2 Halls
+				hr
+				if(theater)
+					if(theater.halls)
+						- var i = 0;
+						each hall in theater.halls
+							div.hall(hall_id=hall.id)
+								div.formrow
+									label Hall name:
+									input(type="text" name="theater[halls]["+hall.id+"][name]" value=hall.name)
+								div.hideable
+									h3.hidebutton Editor
+									div.editor.hidecontent
+								hr
+							- i = i+1
+			button#addNewHallButton(type="button") Add a hall
+				
+			div.formrow
+				input(type="submit")
