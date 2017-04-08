@@ -1,9 +1,7 @@
-doctype html
-html
-	head
-		title="404 Not found"
-	body
-		div#error
-			h1 404 Page not found
-			p The content you are looking for cannot be found.
-			p= path
+extends layout.pug
+block append content
+	div#notfound.padding
+		img#sad(src="/public/img/sad.jpg")
+		h1 404 Not found
+		p The content you are looking for cannot be found
+		p= error

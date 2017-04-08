@@ -6,6 +6,7 @@ var bodyParser = require('body-parser')
 var sassMiddleware = require('node-sass-middleware')
 var path = require('path');
 var app = express()
+var dm = require('./data_manager.js')
 var idGiver = 0;
 
 app.set('view engine', 'pug')
@@ -33,9 +34,12 @@ app.use(session({secret: "aJboIc779c2cCOIJoac"}))
 
 //own middleware for client tracking
 app.use(function(req, res, next){
+	req.dm = dm;
 	
+
 	// NEXT IS TO LOGIN AS ADMIN AUTOMATICALLY
 	// PLS DELETE AFTER TESTING PHASE
+/*
 	req.session.user = {
 		"id": 2,
 		"username": "admin",
@@ -47,7 +51,7 @@ app.use(function(req, res, next){
 		},
 		"type": "admin"
 	}
-	
+*/
 	if(typeof req.cookies.id == 'undefined'){
 		//add new id to client with no id. expires after 3 years.
 		res.cookie('id', idGiver++, {expire: 94608000000})
@@ -57,6 +61,14 @@ app.use(function(req, res, next){
 	}
 	next()
 })
+
+/* Middleware to check if user is admin */
+var requireAdmin = function(req,res,next){
+	if(req.session.user == undefined || req.session.user.type !== "admin") {
+		res.redirect('/')
+	}
+	next();
+}
 
 
 //routes
@@ -81,17 +93,32 @@ app.use('/api/theaters', theatersapi)
 var user = require('./routes/user.js')
 app.use('/user/', user)
 
-var admin = require('./routes/admin.js')
-app.use('/admin/', admin)
+var admin = require('./routes/admin/admin.js')
+app.use('/admin/', requireAdmin, admin)
+
+var editmovie = require('./routes/admin/editmovie.js')
+app.use('/admin/editmovie/', requireAdmin, editmovie)
+
+var edittheater = require('./routes/admin/edittheater.js')
+app.use('/admin/edittheater/', requireAdmin, edittheater)
+
 
 
 app.get('/', function(req, res){
 	res.redirect('/movies')
 })
+
 //route for 404
 app.all('*', function(req, res){
-	res.render('notfound', {path: req.url})
+	res.render('notfound', {path: req.url, user:req.session.user})
 })
+
+
+//error handling
+app.use(function(err, req, res, next){
+	console.log(err);
+	res.render('error', {user:req.session.user, error:err});
+});
 
 server = app.listen(3000, function () {
   console.log('Example app listening on port 3000!')

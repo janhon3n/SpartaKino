@@ -12,7 +12,7 @@ block content
 			h1= 'Edit movie'
 		else
 			h1= 'Add new movie'
-		form#movieForm(action="" method="post")
+		form#movieForm(action="?" method="post")
 			div.formrow
 				label(for="movie[title]") Movie title:
 				if movie != undefined
@@ -61,7 +61,7 @@ block content
 			
 			div.formrow
 				div#cropContainer
-					if movie && movie.imagefile != "default.jpg" && movie.imagecropper
+					if movie && movie.imagefile != "default.jpg" && movie.imagecropper && movie.imagepath
 						img#cropImage(src=movie.imagepath.orginal imagefile=movie.imagefile cdatax=movie.imagecropper.x cdatay=movie.imagecropper.y cdatawidth=movie.imagecropper.width cdataheight=movie.imagecropper.height)
 					else
 						img#cropImage

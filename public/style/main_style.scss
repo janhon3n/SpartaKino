@@ -47,10 +47,16 @@ h1, h2, h3, h4, h5, h6 {
 	margin:0px;
 	padding:10px;
 }
+.error{
+color:$color-primary-3;
+}
 
 
 
 form {
+	div.formblock{
+		margin-bottom:20px;
+	}
 	div.formRow{
 		margin:5px;
 		
@@ -129,7 +135,7 @@ div#maincontainer {
 	margin-left:auto;
 	margin-right:auto;
 	box-shadow:0 0 50px;
-	height:100%;
+	max-height:100%;
 }
 
 header :visited{
@@ -195,7 +201,7 @@ header {
 div#content {
 	background-color:white;
 	color:black;
-	height:calc(100% - 70px);
+	max-height:calc(100% - 70px);
 	overflow-y:auto;
 	overflow-x:hidden;
 	width:100%;
@@ -209,6 +215,17 @@ div#content {
 		margin:35px;
 	}
 
+	
+	div#notfound{
+		img#sad{
+			width:50%;
+			float:right;
+			margin:50px;
+			margin-top:0px;
+			border: 1px solid black;
+		}
+	}
+	
 	div#movies {
 		div#search {
 			padding:20px;

@@ -1,1 +1,150 @@
-[{"title":"Nalle Puh","description":"Very touching story about a bear who decided to run away from home.","year":"1999","director":"Joy Sully","actors":[{"name":"John Johnsson"}],"imagefile":"flowers.jpg","imagecropper":{"x":"1170.772055465907","y":"0","width":"1466.8656716417913","height":"2160"},"id":1,"screenings":[]},{"title":"Fifty shades of Juho","description":"A story about two men spending their valentine night. But what happens when their pet tiger gets out of its case. The party is heating up like never before. Not for children.","year":"1999","director":"Mikael Janhoinen","actors":[{"name":"Juho Krönback"},{"name":"Adrian Bodyskoski"}],"imagefile":"sunset.jpg","imagecropper":{"x":"638.4927166229318","y":"0","width":"1466.8656716417909","height":"2160"},"id":2,"screenings":[]},{"title":"302","description":"Sparta strikes again. This time it's personal.","year":"1999","director":"David Switcher","actors":[{"name":"Leonardo"}],"imagefile":"butterfly.jpg","imagecropper":{"x":"1476.393565796847","y":"195.76918901045264","width":"1084.89223880597","height":"1597.5336263736262"},"id":3,"screenings":[]},{"title":"Jummiland","description":"Jummi starts her new job at the animal rescue home and becomes friends with the most intellegent cat. Together they have very fun adventures in the forest. But someone is planning to ruin their friendship... ","year":"1997","director":"Mikael Janhonen","actors":[{"name":"Julia Pihlaja"},{"name":"Panda"}],"imagefile":"tiger.jpg","imagecropper":{"x":"2147.270024317864","y":"0","width":"688.6640955223882","height":"1014.0768000000002"},"id":4,"screenings":[]},{"title":"Test1","description":"sdklfjsdlfjsldf","year":2000,"director":"","actors":[{"name":""},{"name":""}],"imagefile":"flower.jpg","imagecropper":{"x":"1804.8807057959714","y":"0","width":"1290.8417910447765","height":"1900.8000000000004"},"screenings":[],"id":5},{"title":"Test2","description":"sdklfjsdlfjsldf","year":"2000","director":"","actors":[{"name":""},{"name":""}],"imagefile":"city.jpg","imagecropper":{"x":"408.6720000000001","y":"259.1999999999996","width":"1290.8417910447765","height":"1900.8000000000004"},"id":6,"screenings":[]},{"title":"test3","description":"dfsfgfdfghtht","year":2000,"director":"","actors":[{"name":""},{"name":""}],"imagefile":"desert.jpg","imagecropper":{"x":"352.6137313432831","y":"315.36","width":"1173.492537313433","height":"1728.0000000000002"},"screenings":[],"id":7},{"title":"test 4","description":"weifkwefh","year":2000,"director":"","actors":[{"name":""},{"name":""}],"imagefile":"surf.jpg","imagecropper":{"x":"775.9737313432835","y":"0","width":"1173.492537313433","height":"1728.0000000000002"},"screenings":[],"id":8}]
+[[{
+		"title": "Nalle Puh",
+		"description": "Very touching story about a bear who decided to run away from home.",
+		"year": "1999",
+		"director": "Joy Sully",
+		"actors": [{
+				"name": "John Johnsson"
+			}
+		],
+		"imagefile": "flowers.jpg",
+		"imagecropper": {
+			"x": "1170.772055465907",
+			"y": "0",
+			"width": "1466.8656716417913",
+			"height": "2160"
+		},
+		"id": 1
+	}, {
+		"title": "Fifty shades of Juho",
+		"description": "A story about two men spending their valentine night. But what happens when their pet tiger gets out of its case. The party is heating up like never before. Not for children.",
+		"year": "1999",
+		"director": "Mikael Janhoinen",
+		"actors": [{
+				"name": "Juho Krönback"
+			}, {
+				"name": "Adrian Bodyskoski"
+			}
+		],
+		"imagefile": "sunset.jpg",
+		"imagecropper": {
+			"x": "638.4927166229318",
+			"y": "0",
+			"width": "1466.8656716417909",
+			"height": "2160"
+		},
+		"id": 2
+	}, {
+		"title": "302",
+		"description": "Sparta strikes again. This time it's personal.",
+		"year": "1999",
+		"director": "David Switcher",
+		"actors": [{
+				"name": "Leonardo"
+			}
+		],
+		"imagefile": "butterfly.jpg",
+		"imagecropper": {
+			"x": "1476.393565796847",
+			"y": "195.76918901045264",
+			"width": "1084.89223880597",
+			"height": "1597.5336263736262"
+		},
+		"id": 3
+	}, {
+		"title": "Jummiland",
+		"description": "Jummi starts her new job at the animal rescue home and becomes friends with the most intellegent cat. Together they have very fun adventures in the forest. But someone is planning to ruin their friendship... ",
+		"year": "1997",
+		"director": "Mikael Janhonen",
+		"actors": [{
+				"name": "Julia Pihlaja"
+			}, {
+				"name": "Panda"
+			}
+		],
+		"imagefile": "tiger.jpg",
+		"imagecropper": {
+			"x": "2147.270024317864",
+			"y": "0",
+			"width": "688.6640955223882",
+			"height": "1014.0768000000002"
+		},
+		"id": 4
+	}, {
+		"title": "Test1",
+		"description": "sdklfjsdlfjsldf",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "flower.jpg",
+		"imagecropper": {
+			"x": "1804.8807057959714",
+			"y": "0",
+			"width": "1290.8417910447765",
+			"height": "1900.8000000000004"
+		}
+		"id": 5
+	}, {
+		"title": "Test2",
+		"description": "sdklfjsdlfjsldf",
+		"year": "2000",
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "city.jpg",
+		"imagecropper": {
+			"x": "408.6720000000001",
+			"y": "259.1999999999996",
+			"width": "1290.8417910447765",
+			"height": "1900.8000000000004"
+		},
+		"id": 6
+	}, {
+		"title": "test3",
+		"description": "dfsfgfdfghtht",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "desert.jpg",
+		"imagecropper": {
+			"x": "352.6137313432831",
+			"y": "315.36",
+			"width": "1173.492537313433",
+			"height": "1728.0000000000002"
+		},
+		"id": 7
+	}, {
+		"title": "test 4",
+		"description": "weifkwefh",
+		"year": 2000,
+		"director": "",
+		"actors": [{
+				"name": ""
+			}, {
+				"name": ""
+			}
+		],
+		"imagefile": "surf.jpg",
+		"imagecropper": {
+			"x": "775.9737313432835",
+			"y": "0",
+			"width": "1173.492537313433",
+			"height": "1728.0000000000002"
+		},
+		"id": 8
+	}
+]

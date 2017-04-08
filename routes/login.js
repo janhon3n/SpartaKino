@@ -13,34 +13,19 @@ router.use(function(req, res, next){
 router.get('/', function(req, res){
 	res.render('login');
 })
-router.post('/', function(req, res){
-	var username = req.body.username;
-	console.log(username + " is trying to log in");
-	var password = req.body.password;
-	console.log(bcrypt.hashSync(password, 10));
+router.post('/', function(req, res, next){
+	var email = req.body.email;
 	
-	dataManager.loadUsers(function(err, users) {
-		console.log(users);
-		if(err){
-			console.log(err);
-			res.render("login", {error: err.message});
-		} else {
-			var user = users.filter(function(u){
-				if(u.username === username && bcrypt.compareSync(password, u.passhash)){
-					return true;
-				}
-			});
-			
-			if(user.length != 1){
-				res.render("login", {error: "Incorrect username or password"});
-			} else {
-				console.log(username + " logged in successfully");
-				req.session.user = user[0];
-				req.session.user.passhash = null;
-				res.redirect('/');
-			}
-		}
-	});	
+	req.dm.User.findOne({email: email}).select({_id: 1, email: 1, type: 1, passhash: 1}).exec(function(err, user){
+		if(err) return next(err);
+		if(!user) return res.render('login', {msg: 'Wrong username or password'})
+		if(!bcrypt.compareSync(req.body.password, user.passhash)) return res.render('login', {msg: 'Wrong username or password'})
+
+		user.passhash = undefined;
+		req.session.user = user;
+		console.log(user.email + " logged in");
+		res.redirect('/');
+	});
 })
 //export this router to use in our index.js
 module.exports = router;

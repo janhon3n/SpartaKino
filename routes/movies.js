@@ -9,7 +9,7 @@ router.get('/', function(req, res){
 	res.render('movies', {user: req.session.user});
 });
 
-router.use('/movie/:id([0-9]{1,5})', dataManager.loadMoviesMW, dataManager.loadTheatersMW, function(req,res,next){
+router.use('/movie/:id([0-9]{1,5})', function(req,res,next){
 	movs = req.movies.filter(function(m){
 		if(m.id == req.params.id)
 			return true;

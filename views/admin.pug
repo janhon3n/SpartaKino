@@ -22,9 +22,9 @@ block content
 							td.small= m.year
 							td.shrink= m.description
 							td.small.edit.button
-								a(href="/admin/editmovie/"+m.id) edit
+								a(href="/admin/editmovie/"+m._id) edit
 							td.small.delete.button
-								a.delete(movie_id=m.id) delete
+								a.delete(movie_id=m._id) delete
 				a(href="/admin/editmovie") Add a movie
 
 		div.tableSection.hideable
@@ -32,11 +32,11 @@ block content
 			div.hidecontent
 				table#usersTable
 					tr
-						th Username
+						th Email
 						th Account type
 					each u in users
 						tr
-							td= u.username
+							td= u.email
 							td= u.type
 				
 		div.tableSection.hideable
@@ -53,8 +53,8 @@ block content
 							td= t.name
 							td= t.address.street + " " + t.address.city
 							td.small.edit.button
-								a(href="/admin/edittheater/"+t.id) edit
+								a(href="/admin/edittheater/"+t._id) edit
 							td.small.delete.button
-								a.delete(theater_id=t.id) delete
+								a.delete(theater_id=t._id) delete
 				a(href="/admin/edittheater") Add a theater
 					

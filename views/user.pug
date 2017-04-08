@@ -1,8 +1,10 @@
 extends layout.pug
 
 block content
-	h1= user.username
-	ul
-		li= 'Street address: ' + user.address.street
-		li= 'City: ' + user.address.city
-		li= 'Postal code: ' + user.address.postcode
+	div.padding#user
+		h1= user.email
+		if user.address
+			ul
+				li= 'Street address: ' + user.address.street
+				li= 'City: ' + user.address.city
+				li= 'Postal code: ' + user.address.postcode
