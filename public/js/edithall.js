@@ -1,75 +1,158 @@
-var editors = [];
+var halls = [];
+var theaterId;
 
 $(document).ready(function () {
 	//if theater id set <==> editing an old theater
 	if($("div#edittheater form#theaterForm #theaterId").val()){
-		var theaterId = Number($("div#edittheater form#theaterForm #theaterId").val());
+		theaterId = $("div#edittheater form#theaterForm #theaterId").val();
 		console.log(theaterId);
-		$('div#edittheater div.hall').each(function(){
-			var hallId = Number($(this).attr("hall_id"));
-			console.log(hallId);
-			var editorEl = $(this).find("div.editor");
-			editorEl.html("Loading");
-			$.getJSON("/api/theaters/theater/" + theaterId + "/hall/" + hallId, function (hall) {
-				editors[hallId] = new HallEditor(editorEl, hall.rows, hall.cols, hallId, 700);
-				editors[hallId].createOptionsHtml();
-				editors[hallId].createSVGHtml(hall.elements);
-				editors[hallId].createOptionsJavascript();
-				editors[hallId].createSVGJavascript();
+		
+		//get halls
+		$.getJSON("/api/halls/theater/id/" + theaterId, function(hals){
+			console.log(hals);
+			hals.forEach(function(h){
+				createNewHallDiv(h);
 			});
 		});
 	}
 
-	$('form#theaterForm').submit(function(){
-		editors.forEach(function(e){
-			var data = e.getData();
-			console.log(e.hallId)
-			var html = '<input type="hidden" name="theater[halls]['+e.hallId+'][rows]" value='+data.rows+'>'
-				+ '<input type="hidden" name="theater[halls]['+e.hallId+'][id]" value='+e.hallId+'>'
-				+ '<input type="hidden" name="theater[halls]['+e.hallId+'][cols]" value='+data.cols+'>'
-				+ '<input type="hidden" name="theater[halls]['+e.hallId+'][seats]" value='+data.seats+'>';
-			for(var i = 0; i < data.svgElements.length; i++){
-				html += '<input type="hidden" name="theater[halls]['+e.hallId+'][elements]['+i+'][name]" value="'+data.svgElements[i].name+'">';
-				html += '<input type="hidden" name="theater[halls]['+e.hallId+'][elements]['+i+'][row]" value='+data.svgElements[i].row+'>';
-				html += '<input type="hidden" name="theater[halls]['+e.hallId+'][elements]['+i+'][col]" value='+data.svgElements[i].col+'>';
-				html += '<input type="hidden" name="theater[halls]['+e.hallId+'][elements]['+i+'][rotation]" value='+data.svgElements[i].rotation+'>';
+	//Submitting form
+	$('form#theaterForm').submit(function(e){
+		$("form#theaterForm .status").html('Saving theater...');
+	
+		//create theater
+		var theater = {
+			name: $('form#theaterForm input[name="theater[name]"]').val(),
+			address: {
+				street: $('form#theaterForm input[name="theater[address][street]"').val(),
+				city: $('form#theaterForm input[name="theater[address][city]"').val(),
+				postcode: $('form#theaterForm input[name="theater[address][postcode]"').val()
+				}
+		}
+		
+		// Save theater
+		url = '/api/theaters/';
+		if(theaterId){
+			url = '/api/theaters/id/' + theaterId;
+		}
+		console.log(url);
+		$.post(url, {theater: theater}).done(function(data){
+			console.log(data);
+			if(data.error){
+				$("form#theaterForm .status").html(data.error);
+				e.preventDefault();
+				return true;
 			}
-			$('form#theaterForm').append(html);
-		});				
-		return true;
+			if(data._id){
+				theaterId = data._id;
+			}
+			
+			// Save halls
+			$("form#theaterForm .status").html('Saving halls...');
+			halls.forEach(function(h){
+				var data = h.editor.getData();
+				h.editor = undefined;
+				h.name = h.element.find('input.hallname').val();
+				h.element = undefined;
+				h.theater = theaterId;
+				
+				//create hall element
+				h.rows = data.rows;
+				h.cols = data.cols;
+				h.elements = data.svgElements;
+				h.seats = data.seats;
+				console.log(h);
+
+				url = '/api/halls/';
+				if(h._id){
+					url = '/api/halls/id/'+h._id;
+					h._id = undefined;
+				}
+				$.post(url, {hall : h}).done(function(data){
+					console.log(data);
+					if(data.error){
+						$("form#theaterForm .status").html(data.error);
+						e.preventDefault();
+						return false;
+					} else {
+						$("form#theaterForm .status").html('Done');
+						return true;
+					}
+				});
+			});
+		});
 	});
 	
 	
-	
-	$('form#theaterForm #addNewHallButton').click(function(){
-		if($('form#theaterForm div#halls div.hall').last().attr("hall_id")){
-			var newHallId = Number($('form#theaterForm div#halls div.hall').last().attr("hall_id")) + 1;	
-		} else {
-			var newHallId = 1;
-		}
-		
-		
-		$('form#theaterForm div#halls').append(''
-			+ '<div class="hall" hall_id="'+newHallId+'">'
+
+	function createNewHallDiv(hall){
+		var $hallElement = $('<div class="hall">'
 			+ '<div class="formrow">'
 			+ '<label>Hall name:</label>'
-			+ '<input type="text">'
+			+ '<input class="hallname" type="text" required>'
 			+ '</div>'
 			+ '<div class="hideable">'
 			+ '<h3 class="hidebutton">Editor</h3>'
-			+ '<div class="editor hidecontent">'
-			+ '</div><hr></div>');
-			
-		var hallElement = $('form#theaterForm div#halls div.hall[hall_id="'+newHallId+'"]');
-		hallElement.find('.hidebutton').click(function(){
-				hallElement.find('.hidecontent').slideToggle();
+			+ '<div class="editor hidecontent"></div>'
+			+ '<div class="deletebutton">Delete</div>'
+			+ '<hr></div>');
+
+		if(hall)
+			$hallElement.find('input.hallname').val(hall.name);
+		$('form#theaterForm div#halls').append($hallElement);
+
+
+		if(!hall)
+			var editor = new HallEditor($hallElement.find('.editor'), 8, 6, 700);
+		else
+			var editor = new HallEditor($hallElement.find('.editor'), hall.rows, hall.cols, 700)
+
+		editor.createOptionsHtml();
+
+		if(hall && hall.elements)
+			editor.createSVGHtml(hall.elements);
+		else
+			editor.createSVGHtml();
+		
+		editor.createOptionsJavascript();
+		editor.createSVGJavascript();
+		var newHall = {editor: editor, element: $hallElement};
+		if(hall)
+			newHall._id = hall._id;
+		halls.push(newHall);
+
+
+		//set slidetoggle for editor
+		$hallElement.find('.hidebutton').click(function(){
+			$hallElement.find('.hidecontent').slideToggle();
 		});
 		
-		editors[newHallId] = new HallEditor(hallElement.find('.editor'), 10, 8, newHallId, 700);
-		editors[newHallId].createOptionsHtml();
-		editors[newHallId].createSVGHtml();
-		editors[newHallId].createOptionsJavascript();
-		editors[newHallId].createSVGJavascript();		
+		//set delete hall button action
+		$hallElement.find('.deletebutton').click(function(){
+			if(hall){
+				$.post('/api/halls/delete/id/'+hall._id, function(data){
+					if(data.error){
+						console.log(data.error)
+					} else {
+						$hallElement.remove();
+						let index = halls.indexOf(newHall);
+						console.log(index);
+						if(index !== -1)
+							halls.splice(index, 1);
+					}
+				});
+			} else {
+				$hallElement.remove();
+				let index = halls.indexOf(newHall);
+				console.log(index);
+				if(index !== -1)
+					halls.splice(index, 1);
+			}
+		});
+	}
+	
+	$('form#theaterForm #addNewHallButton').click(function(){
+		createNewHallDiv();
 	});
 });
 

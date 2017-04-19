@@ -8,7 +8,8 @@ block content
 		h1 Admin controls
 		div.tableSection.hideable
 			h2.hidebutton Movies
-			div.hidecontent
+			div.hidecontent.tableContainer
+				div.confirmContainer
 				table#moviesTable
 					tr
 						th.medium Title
@@ -17,44 +18,54 @@ block content
 						th.small
 						th.small
 					each m in movies
-						tr
+						tr(movie_id=m._id type="movie" name=m.title)
 							td.medium= m.title
 							td.small= m.year
 							td.shrink= m.description
 							td.small.edit.button
-								a(href="/admin/editmovie/"+m._id) edit
+								a(href="/admin/editmovie/"+m._id)
+									div edit
 							td.small.delete.button
-								a.delete(movie_id=m._id) delete
+								a.delete
+									div delete
 				a(href="/admin/editmovie") Add a movie
 
 		div.tableSection.hideable
 			h2.hidebutton Users
-			div.hidecontent
+			div.hidecontent.tableContainer
+				div.confirmContainer
 				table#usersTable
 					tr
-						th Email
-						th Account type
+						th.shrink Email
+						th.medium Account type
+						th.small
 					each u in users
-						tr
-							td= u.email
-							td= u.type
+						tr(user_id=u._id type="user" name=u.email)
+							td.shrink= u.email
+							td.medium= u.type
+							td.small.delete.button
+								a.delete(user_id=u._id)
+									div delete
 				
 		div.tableSection.hideable
 			h2.hidebutton Theaters
-			div.hidecontent
+			div.hidecontent.tableContainer
+				div.confirmContainer
 				table#theatersTable
 					tr
-						th Name
-						th Address
+						th.medium Name
+						th.shrink Address
 						th.small
 						th.small
 					each t in theaters
-						tr
-							td= t.name
-							td= t.address.street + " " + t.address.city
+						tr(theater_id=t._id type="theater" name=t.name)
+							td.medium= t.name
+							td.shrink= t.address.street + " " + t.address.city
 							td.small.edit.button
-								a(href="/admin/edittheater/"+t._id) edit
+								a(href="/admin/edittheater/"+t._id)
+									div edit
 							td.small.delete.button
-								a.delete(theater_id=t._id) delete
+								a.delete
+									div delete
 				a(href="/admin/edittheater") Add a theater
 					

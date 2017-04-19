@@ -39,7 +39,7 @@ app.use(function(req, res, next){
 
 	// NEXT IS TO LOGIN AS ADMIN AUTOMATICALLY
 	// PLS DELETE AFTER TESTING PHASE
-/*
+
 	req.session.user = {
 		"id": 2,
 		"username": "admin",
@@ -51,7 +51,7 @@ app.use(function(req, res, next){
 		},
 		"type": "admin"
 	}
-*/
+
 	if(typeof req.cookies.id == 'undefined'){
 		//add new id to client with no id. expires after 3 years.
 		res.cookie('id', idGiver++, {expire: 94608000000})
@@ -85,10 +85,13 @@ var register = require('./routes/register.js')
 app.use('/register', register)
 
 var moviesapi = require('./routes/api/moviesapi.js')
-app.use('/api/movies', moviesapi)
+app.use('/api/movies/', moviesapi)
 
 var theatersapi = require('./routes/api/theatersapi.js')
-app.use('/api/theaters', theatersapi)
+app.use('/api/theaters/', theatersapi)
+
+var hallsapi = require('./routes/api/hallsapi.js')
+app.use('/api/halls/', hallsapi)
 
 var user = require('./routes/user.js')
 app.use('/user/', user)

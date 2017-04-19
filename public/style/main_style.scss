@@ -18,6 +18,8 @@ $color-secondary-2-2: #ABCC73;
 $color-secondary-2-3: #4A6F0B;
 $color-secondary-2-4: #294100;
 
+$color-red: #af0e0e;
+
 
 
 @font-face {
@@ -48,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 	padding:10px;
 }
 .error{
-color:$color-primary-3;
+color:$color-red;
 }
 
 
@@ -72,8 +74,6 @@ form {
 }
 a{
 text-decoration:none;
-}
-a:visited {
 color:black;
 }
 
@@ -84,7 +84,11 @@ color:black;
 	color:white;
 }
 
+.tableContainer{
+	overflow:hidden;
+}
 table{
+	overflow:hidden;
 	table-layout: fixed;
 	box-sizing:border-box;
 	width:100%;
@@ -113,15 +117,44 @@ table{
 	}
 	td.delete:hover{
 		background-color:$color-primary-3;
-		color:white;
 		cursor:pointer;
+		
+		a{
+			color:white;
+		}
 	}
+	.deleteConfirmContainer{
+		position:absolute;
+	}
+	
 	td.edit:hover{
 		background-color:$color-secondary-1-2;
 		cursor:pointer;
 	}
 }
 
+div.confirmPrompt {
+	text-align:right;
+	display:none;
+	background-color:$color-red;
+
+	font-size:120%;
+	color:white;
+	padding:5px;
+	padding-left:15px;
+	margin:0px;
+	
+	a{
+		display:inline-block;
+		cursor:pointer;
+		padding:0px;
+		margin-left:20px;
+		color:white;
+	}
+	a:hover{
+		color:black;
+	}
+}
 
 body{
 	font-family:'Poppins', arial;

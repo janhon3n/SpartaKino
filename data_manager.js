@@ -8,6 +8,9 @@ mongoose.connection.on('error', function(err){
 });
 console.log('Connected to MongoDB')
 
+
+var ObjectId = mongoose.Schema.Types.ObjectId;
+
 var updateDates = function(next){
 	var currentDate = new Date();
 	this.updated_at = currentDate;
@@ -62,21 +65,29 @@ movieSchema.virtual('imagepath.big').get(function(){
 });
 movieSchema.pre('save', updateDates);
 
+
+var hallSchema = new Schema({
+	theater: {type: ObjectId, required: true},
+	name: {type: String, required: true},
+	rows: {type: Number, required: true},
+	cols: {type: Number, required: true},
+	seats: {type: Number, required: true},
+	elements: [{
+		name: String,
+		row: Number,
+		col: Number,
+		rotation: Number
+	}],
+	created_at: Date,
+	updated_at: Date
+});
+hallSchema.pre('save', updateDates);
+
+
 var theaterSchema = new Schema({
 	name: {type: String, required: true},
 	address: addressSchema,
-	halls:[{
-			name: String,
-			rows: Number,
-			cols: Number,
-			seats: Number,
-			elements: [{
-				name: String,
-				row: Number,
-				col: Number,
-				rotation: Number
-			}]
-		}],
+	halls:[hallSchema],
 	created_at: Date,
 	updated_at: Date
 });
@@ -86,7 +97,9 @@ theaterSchema.pre('save', updateDates);
 var User = mongoose.model('User', userSchema);
 var Movie = mongoose.model('Movie', movieSchema);
 var Theater = mongoose.model('Theater', theaterSchema);
+var Hall = mongoose.model('Hall', hallSchema);
 
 module.exports.User = User;
 module.exports.Movie = Movie;
 module.exports.Theater = Theater;
+module.exports.Hall = Hall;
