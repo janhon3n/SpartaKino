@@ -42,6 +42,7 @@ var movieSchema = new Schema({
 	title: {type: String, required:true},
 	description: String,
 	year: {type: Number, min:1900, max:2100},
+	length: {type:Number, min:1, max:1000, required:true},
 	director: String,
 	actors: [{name: String}],
 	imagefile: String,
@@ -93,13 +94,55 @@ var theaterSchema = new Schema({
 });
 theaterSchema.pre('save', updateDates);
 
+var resorvationSchema = new Schema({
+	user: {type: ObjectId, required: true},
+	screenings: {type: ObjectId, required: true},
+	created_at: Date,
+	updated_at: Date
+})
+resorvationSchema.pre('save', updateDates);
+
+var screeningSchema = new Schema({
+	movie: {type: ObjectId, required: true},
+	hall: {type: ObjectId, required: true},
+	time: {type: String, required: true},
+	date: {type: String, required: true},
+	price: {type: Number, required: true},
+	resorvations: [resorvationSchema],
+	created_at: Date,
+	updated_at: Date
+})
+screeningSchema.pre('save', updateDates);
+screeningSchema.path('time').validate(function(value) {
+	var hours = Number(value.substring(0,2));
+	if(!(hours >= 0 && hours < 24)) return false;
+	var minutes = Number(value.substring(3,5));
+	if(!(minutes >= 0 && minutes < 60)) return false;
+	return true;
+}, 'Time format invalid');
+
+screeningSchema.path('date').validate(function(value) {
+	console.log(value);
+	var year = Number(value.substring(0,4));
+	if(!(year >= 2015 && year < 3000)) return false;
+	var month = Number(value.substring(5,7));
+	if(!(month >= 1 && month <= 12)) return false;
+	var day = Number(value.substring(8,10));
+	if(!(day >= 1 && day <= 31)) return false;
+	return true;
+}, 'Date format invalid');
+
 
 var User = mongoose.model('User', userSchema);
 var Movie = mongoose.model('Movie', movieSchema);
 var Theater = mongoose.model('Theater', theaterSchema);
 var Hall = mongoose.model('Hall', hallSchema);
+var Screening = mongoose.model('Screening', screeningSchema);
+var Resorvation = mongoose.model('Resorvation', resorvationSchema);
 
 module.exports.User = User;
 module.exports.Movie = Movie;
 module.exports.Theater = Theater;
 module.exports.Hall = Hall;
+module.exports.Screening = Screening;
+module.exports.Resorvation = Resorvation;

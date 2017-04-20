@@ -6,6 +6,7 @@ block append scripts
 block content
 	div.padding#admin
 		h1 Admin controls
+		
 		div.tableSection.hideable
 			h2.hidebutton Movies
 			div.hidecontent.tableContainer
@@ -20,14 +21,10 @@ block content
 					each m in movies
 						tr(movie_id=m._id type="movie" name=m.title)
 							td.medium= m.title
-							td.small= m.year
+							td.small.center= m.year
 							td.shrink= m.description
-							td.small.edit.button
-								a(href="/admin/editmovie/"+m._id)
-									div edit
-							td.small.delete.button
-								a.delete
-									div delete
+							td.small.edit.button(onclick="redirect('/admin/editmovie/"+m._id+"')") edit
+							td.small.delete.button delete
 				a(href="/admin/editmovie") Add a movie
 
 		div.tableSection.hideable
@@ -42,10 +39,9 @@ block content
 					each u in users
 						tr(user_id=u._id type="user" name=u.email)
 							td.shrink= u.email
-							td.medium= u.type
+							td.medium.center= u.type
 							td.small.delete.button
-								a.delete(user_id=u._id)
-									div delete
+								a.delete(user_id=u._id) delete
 				
 		div.tableSection.hideable
 			h2.hidebutton Theaters
@@ -55,17 +51,15 @@ block content
 					tr
 						th.medium Name
 						th.shrink Address
+						th.medium
 						th.small
 						th.small
 					each t in theaters
 						tr(theater_id=t._id type="theater" name=t.name)
 							td.medium= t.name
 							td.shrink= t.address.street + " " + t.address.city
-							td.small.edit.button
-								a(href="/admin/edittheater/"+t._id)
-									div edit
-							td.small.delete.button
-								a.delete
-									div delete
+							td.medium.edit.button(onclick="redirect('/admin/editschedule/theater/"+t._id+"/week/0')") edit schedule
+							td.small.edit.button(onclick="redirect('/admin/edittheater/"+t._id+"')") edit
+							td.small.delete.button delete
 				a(href="/admin/edittheater") Add a theater
 					

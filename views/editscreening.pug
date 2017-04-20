@@ -1,0 +1,45 @@
+extends layout.pug
+
+block append scripts
+	script(src="/public/js/admin.js")
+	script(src="/public/js/editscreening.js")
+
+block content
+	div.padding#editscreening
+		if screening
+			h1= "Edit screening at "+screening.time
+		else 
+			h1= "Create new screening"
+			
+		form#screeningForm(method="post" action="?")
+			div.formRow
+				div.inlineInput
+					label.inline Date:
+					input(type="date" name="screening[date]" min=(moment().format('YYYY-MM-DD')) value=(moment().format('YYYY-MM-DD')) required)
+				div.inlineInput
+					label.inline Time:
+					input(type="time" name="screening[time]" value=(moment().format('HH:mm')) required)
+			div.formRow
+				label Movie:
+				select(name="screening[movie]")
+					if(movies)
+						each m in movies
+							option(value=m._id)= m.title
+			div.formRow
+				label Ticket price:
+				input(type="number" name="screening[price]" step="0.01" max="100" min="0" required)
+				span €
+				
+			div.formRow
+				div
+					input(type="radio" name="showtimes[radio]" value="single" selected)
+					span Show once
+				div
+					input(type="radio" name="showtimes[radio]" value="multiple")
+					span Show for multiple weeks
+					div.weekCountInput.hidden
+						label.inline How many weeks?
+						input(type="number" name="showtimes[weeks]" min="1" max="52")
+					
+			div.formRow
+				input(type="submit" value="Save screening")

@@ -7,6 +7,7 @@ var sassMiddleware = require('node-sass-middleware')
 var path = require('path');
 var app = express()
 var dm = require('./data_manager.js')
+app.locals.moment = require('moment');
 var idGiver = 0;
 
 app.set('view engine', 'pug')
@@ -93,6 +94,9 @@ app.use('/api/theaters/', theatersapi)
 var hallsapi = require('./routes/api/hallsapi.js')
 app.use('/api/halls/', hallsapi)
 
+var screeningsapi = require('./routes/api/screeningsapi.js')
+app.use('/api/screenings/', screeningsapi)
+
 var user = require('./routes/user.js')
 app.use('/user/', user)
 
@@ -105,6 +109,8 @@ app.use('/admin/editmovie/', requireAdmin, editmovie)
 var edittheater = require('./routes/admin/edittheater.js')
 app.use('/admin/edittheater/', requireAdmin, edittheater)
 
+var editschedule = require('./routes/admin/editschedule.js')
+app.use('/admin/editschedule/', requireAdmin, editschedule);
 
 
 app.get('/', function(req, res){
@@ -112,13 +118,24 @@ app.get('/', function(req, res){
 })
 
 //route for 404
+app.all('/api/*', function(req,res,next){
+	next({error: '404 not found'});
+})
 app.all('*', function(req, res){
 	res.render('notfound', {path: req.url, user:req.session.user})
 })
 
 
-//error handling
-app.use(function(err, req, res, next){
+
+
+// Error handling
+//   json api
+app.use('/api', function(err, req, res, next){
+	console.log(err);
+	res.json({error:err});
+});
+//   html pages
+app.use('/', function(err,req,res,next){
 	console.log(err);
 	res.render('error', {user:req.session.user, error:err});
 });

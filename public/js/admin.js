@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	console.log(confirmPrompt);
 	
-	$("table a.delete").click(function(){
+	$("table td.delete").click(function(){
 		$el = $(this).closest('tr');
 		$confirmEl = $el.closest('.tableContainer').find('div.confirmContainer');
 		confirmPrompt($confirmEl, 'Delete ' + $el.attr("type") +' '+ $el.attr("name") + '?', 'Delete', 'Cancel', function(callback){
