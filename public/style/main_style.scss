@@ -125,7 +125,7 @@ body{
 	height:100%;
 }
 div#maincontainer {
-	max-width:1200px;
+	max-width:900px;
 	margin-left:auto;
 	margin-right:auto;
 	box-shadow:0 0 50px;
@@ -209,22 +209,64 @@ div#content {
 		margin:35px;
 	}
 
-	div#movies {
+	div#movies{
 		div#search {
-			padding:20px;
+
+			display: inline-block;
+			width: 100%;
+			padding: 7px 7px 7px 80px;
+			background: #8BA9AE;
+
+			div#searchContent{
+				input#title{
+					width: 350px;
+				}
+			}
 		}
+
+		div#samples{
+			div.movie{
+				
+			}
+		}
+
 		div#results {
 			div.movie {
 				text-decoration:none;
 				padding:15px;
 				background-color:#EEE;
-			
-				h2{
-					margin:5px;
+				display: inline-block;
+				width: 98%;
+				
+				div.main{
+					display: inline-block;
+					img{
+						border: 1px solid;
+   						border-radius: 5px;
+   						box-shadow: 3px 3px 3px black;
+					}
+
+					h2{
+						font-size: 30px;
+						margin:5px;
+					}
+				}
+				div.discription{
+					margin-top: 55px;
+					float: right;
+					max-width: 61%;
+					min-width: 61%;
+					p{
+						text-align: justify;
+						font-size: 20px;
+				 		margin:5px;
+				 		padding-right: 15px;
+					}
 				}
 			}
-			a.movielink:nth-child(2n) div.movie{
-				background-color:#FFF;
+			div.movie:hover {
+				transition: background-color 0.2s ease;
+				background-color: $color-secondary-1-2;
 			}
 		}
 	}

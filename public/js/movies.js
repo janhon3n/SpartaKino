@@ -4,8 +4,14 @@ $(document).ready(function(){
 
 	function createMovieHtml(m){
 		html = '<div class="movie">'
+		    + '<div class="main">'
+		    + '<a class="movielink" href="/movies/movie/'+m.id+'">'
+			+ '<h2>'+m.title+'</h2>'
 			+ '<img src="/public/img/movies/s_'+m.imagefile+'" movie_id="'+m.id+'">'
-			+ '</div>';
+			+ '</a></div>'
+			+ '<div class="discription">'
+			+ '<p id="discription">'+m.description+'</p>'
+			+ '<li>Year: '+m.year+'</li><li>Director: '+m.director+'</li></div></div>';
 		return html;
 	}
 	function createMovieContentHtml(m){
