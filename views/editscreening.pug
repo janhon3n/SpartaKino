@@ -15,10 +15,16 @@ block content
 			div.formRow
 				div.inlineInput
 					label.inline Date:
-					input(type="date" name="screening[date]" min=(moment().format('YYYY-MM-DD')) value=(moment().format('YYYY-MM-DD')) required)
+					if screening
+						input(type="date" name="screening[date]" min=(moment().format('YYYY-MM-DD')) value=screening.date required)
+					else
+						input(type="date" name="screening[date]" min=(moment().format('YYYY-MM-DD')) value=(moment().format('YYYY-MM-DD')) required)
 				div.inlineInput
 					label.inline Time:
-					input(type="time" name="screening[time]" value=(moment().format('HH:mm')) required)
+					if screening
+						input(type="time" name="screening[time]" value=screening.time required)
+					else
+						input(type="time" name="screening[time]" value=(moment().format('HH:mm')) required)
 			div.formRow
 				label Movie:
 				select(name="screening[movie]")
@@ -27,19 +33,24 @@ block content
 							option(value=m._id)= m.title
 			div.formRow
 				label Ticket price:
-				input(type="number" name="screening[price]" step="0.01" max="100" min="0" required)
+				if screening
+					input(type="number" name="screening[price]" step="0.01" max="100" min="0" value=screening.price required)
+				else
+					input(type="number" name="screening[price]" step="0.01" max="100" min="0" required)
+				
 				span €
 				
-			div.formRow
-				div
-					input(type="radio" name="showtimes[radio]" value="single" selected)
-					span Show once
-				div
-					input(type="radio" name="showtimes[radio]" value="multiple")
-					span Show for multiple weeks
-					div.weekCountInput.hidden
-						label.inline How many weeks?
-						input(type="number" name="showtimes[weeks]" min="1" max="52")
-					
+			if !screening
+				div.formRow
+					div
+						input(type="radio" name="showtimes[radio]" value="single" selected)
+						span Show once
+					div
+						input(type="radio" name="showtimes[radio]" value="multiple")
+						span Show for multiple weeks
+						div.weekCountInput.hidden
+							label.inline How many weeks?
+							input(type="number" name="showtimes[weeks]" min="1" max="52")
+							
 			div.formRow
 				input(type="submit" value="Save screening")

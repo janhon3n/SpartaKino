@@ -4,6 +4,13 @@ var fs = require('fs');
 var moment = require('moment');
 
 // Screening schedule editing
+router.get('/theater/:theater_id([0-9a-f]{24})',function(req,res){
+	res.redirect('/admin/editschedule/theater/'+req.params.theater_id+'/week/0');
+});
+router.get('/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})',function(req,res){
+	res.redirect('/admin/editschedule/theater/'+req.params.theater_id+'/hall/'+req.params.hall_id+'/week/0');
+});
+
 router.get('/theater/:theater_id([0-9a-f]{24})/week/:week([0-9])', function (req, res, next) {
 	req.dm.Theater.findOne({_id : req.params.theater_id}, function(err, theater){
 		if(err) return next(err);
@@ -50,12 +57,11 @@ router.get('/editscreening/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a
 });
 router.post('/editscreening/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})/:id([0-9a-f]{24})', function(req,res,next){
 	//update screening
-	req.dm.Screening.findOne({_id: req.params.id}, function(err,screening){
+	var screening = req.body.screening;
+	screening.hall = req.params.hall_id;
+	req.dm.Screening.update({_id: req.params.id}, screening, function(err){
 		if(err) return next(err);
-		req.dm.Movie.find().select('title _id').exec(function(err, movies){
-			if(err) return next(err);
-			res.render('editscreening', {user:req.session.user, screening: screening, movies:movies});
-		})
+		res.redirect('/admin/editschedule/theater/'+req.params.theater_id+'/hall/'+req.params.hall_id);
 	});
 });
 router.post('/editscreening/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})', function(req,res,next){

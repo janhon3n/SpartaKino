@@ -2,10 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var url = 'mongodb://spartakino.dy.fi/spartakino';
-mongoose.connect(url);
-mongoose.connection.on('error', function(err){
-	console.log(err);
-});
+var connectWithRetry = function() {
+	mongoose.connect(url, function(err){
+		if(err) {
+			console.log(err);
+			setTimeout(connectWithRetry, 5);
+		}
+	});
+}
+connectWithRetry();
+
+
 console.log('Connected to MongoDB')
 
 
@@ -112,6 +119,9 @@ var screeningSchema = new Schema({
 	created_at: Date,
 	updated_at: Date
 })
+screeningSchema.virtual('name').get(function(){
+	return this.date + " " + this.time;
+});
 screeningSchema.pre('save', updateDates);
 screeningSchema.path('time').validate(function(value) {
 	var hours = Number(value.substring(0,2));

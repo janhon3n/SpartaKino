@@ -64,7 +64,7 @@ div.inlineInput{
 }
 
 
-
+/* FORM */
 form {
 	div.formblock{
 		margin-bottom:20px;
@@ -105,6 +105,9 @@ a:hover{
 .tableContainer{
 	overflow:hidden;
 }
+
+
+/* TABLE */
 div.tableSection{
 	margin:0px;
 	margin-top:25px;
@@ -162,6 +165,7 @@ table{
 		text-align:center;
 	}
 }
+
 
 div.confirmPrompt {
 	text-align:right;
@@ -426,6 +430,10 @@ table#scheduleTable {
 			}
 			.elevatorBox{
 				background-color:white;
+			}
+			.nowmarker{
+			height:5px;
+			background-color:$color-red;
 			}
 		}
 	}
