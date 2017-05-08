@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css?family=Bitter|Cabin|Droid+Serif|Merriweather+Sans|Noto+Serif|Poppins');
 
 $color-primary-0: #AA4138;
@@ -317,4 +318,367 @@ div#content {
 			}
 		}
 	}
+=======
+@import url('https://fonts.googleapis.com/css?family=Bitter|Cabin|Droid+Serif|Merriweather+Sans|Noto+Serif|Poppins');
+
+$color-primary-0: #AA4139;
+$color-primary-1: #FFD0CC;
+$color-primary-2: #DC847D;
+$color-primary-3: #78140C;
+$color-primary-4: #460500;
+
+$color-secondary-1-0: #246068;
+$color-secondary-1-1: #8BA9AE;
+$color-secondary-1-2: #4D8087;
+$color-secondary-1-3: #094249;
+$color-secondary-1-4: #00262B;
+
+$color-secondary-2-0: #779D34;
+$color-secondary-2-1: #DEEFBF;
+$color-secondary-2-2: #ABCC73;
+$color-secondary-2-3: #4A6F0B;
+$color-secondary-2-4: #294100;
+
+
+
+@font-face {
+    font-family: curvyFont;
+    src: url(/public/fonts/Angeline_Vintage.ttf);
+}
+@font-face {
+    font-family: greekFont;
+    src: url(/public/fonts/Ravenia.ttf);
+}
+@font-face {
+    font-family: isisFont;
+    src: url(/public/fonts/ohmightyisis.ttf);
+}
+
+input, select, button {
+	font-size:15px;
+	padding:5px;
+	margin:2px;
+}
+button, input[type="submit"]{
+	padding-left:20px;
+	padding-right:20px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family:bitter;
+	margin:0px;
+	padding:10px;
+}
+
+
+
+form {
+	div.formRow{
+		margin:5px;
+		
+		label{
+			vertical-align:middle;
+			display:inline-block;
+			min-width:120px;
+		}
+		input, textarea {
+			vertical-align:middle;
+		}
+	}
+}
+a{
+text-decoration:none;
+}
+a:visited {
+color:black;
+}
+
+.hideable .hidebutton{
+	cursor:pointer;
+	background-color:$color-secondary-1-0;
+	padding:5px;
+	color:white;
+}
+
+table{
+	table-layout: fixed;
+	box-sizing:border-box;
+	width:100%;
+    border-collapse: collapse;
+	background-color:$color-secondary-1-1;
+	
+	tr{
+		box-sizing:border-box;
+		width:100%;
+	}
+	td, th{
+		box-sizing:border-box;
+		padding:3px;
+		border:1px solid $color-secondary-1-0;
+	}
+	td.shrink, th.shrink {
+		white-space:nowrap;
+		overflow:hidden;
+	}
+	td.small, th.small{
+		width:100px;
+		text-align:center;
+	}
+	td.medium, th.medium{
+		width:200px;
+	}
+	td.delete:hover{
+		background-color:$color-primary-3;
+		color:white;
+		cursor:pointer;
+	}
+	td.edit:hover{
+		background-color:$color-secondary-1-2;
+		cursor:pointer;
+	}
+}
+
+
+body{
+	font-family:'Poppins', arial;
+	font-size:16px;
+	margin:0px;
+	background-color:$color-secondary-1-1;
+	height:100%;
+}
+div#maincontainer {
+	max-width:900px;
+	margin-left:auto;
+	margin-right:auto;
+	box-shadow:0 0 50px;
+	height:100%;
+}
+
+header :visited{
+	color:white;
+	text-decoration:none;
+}
+header {
+	height:70px;
+	margin:0px;
+	font-size:120%;
+	background-color:$color-secondary-1-0;
+	color:white;
+	
+	a{
+		color:white;
+		text-decoration:none;
+	}
+	div#logo {
+		height:100%;
+		width:220px;
+		float:left;
+		
+		h1{
+			margin:10px;
+			padding:0px;
+			font-family:isisFont;
+			font-size:55px;
+			text-decoration:none;
+			}
+	}
+	div#links {
+		display:flex;
+		flex-direction:row;
+		justify-content:space-between;
+		width:calc(100% - 220px);
+		float:right;
+		padding:0px;
+		height:100%;
+		
+		li.link {
+				display:inline-block;
+				padding:10px;
+				margin:10px;
+				margin-top:15px;
+		}
+		li.link:hover {
+			background-color:$color-secondary-1-1;
+		}
+		
+		div#otherlinks {
+			flex-shrink:1;
+			height:100%;
+		}
+		
+		div#loginlinks {
+			flex-shrink:0;
+			background-color:$color-secondary-1-2;
+			height:100%;
+		}
+	}
+}
+
+div#content {
+	background-color:white;
+	color:black;
+	height:calc(100% - 70px);
+	overflow-y:auto;
+	overflow-x:hidden;
+	width:100%;
+	margin:0px;
+	
+	
+	div#contentContainer {
+
+	}
+	div.padding {
+		margin:35px;
+	}
+
+	div#movies{
+		div#search {
+
+			display: inline-block;
+			width: 100%;
+			padding: 7px 7px 7px 80px;
+			background: #8BA9AE;
+
+			div#searchContent{
+				input#title{
+					width: 350px;
+				}
+			}
+		}
+
+		div#samples{
+			div.movie{
+				
+			}
+		}
+
+		div#results {
+			div.movie {
+				text-decoration:none;
+				padding:15px;
+				background-color:#EEE;
+				display: inline-block;
+				width: 98%;
+				
+				div.main{
+					display: inline-block;
+					img{
+						border: 1px solid;
+   						border-radius: 5px;
+   						box-shadow: 3px 3px 3px black;
+					}
+
+					h2{
+						font-size: 30px;
+						margin:5px;
+					}
+				}
+				div.discription{
+					margin-top: 55px;
+					float: right;
+					max-width: 61%;
+					min-width: 61%;
+					p{
+						text-align: justify;
+						font-size: 20px;
+				 		margin:5px;
+				 		padding-right: 15px;
+					}
+				}
+			}
+			div.movie:hover {
+				transition: background-color 0.2s ease;
+				background-color: $color-secondary-1-2;
+			}
+		}
+	}
+	div#admin {
+		div.tableSection{
+			margin:20px;
+		}
+	}
+	div#editmovie {
+		div#cropContainer{
+			img#cropImage{
+				max-height:500px;
+				width:100%;
+			}
+		}
+		div#cropPreview {
+			width: 182px;
+			height: 268px;
+			overflow:hidden;
+		}
+	}
+	div#edittheater{
+		div.hall{
+			div.editor{
+				overflow-x:auto;
+			
+				div.editorwrap{
+				width:1000px;
+				}
+				
+				padding:20px;
+				background-color:$color-secondary-1-4;
+				display:none;
+				color:white;
+				
+				svg{
+					background-color:#111;
+					
+					
+					svg.box{
+						cursor:pointer;
+						
+						rect.boxrect{
+							stroke:#444;
+							fill:rgba(0,0,0,0);
+						}
+						rect.boxrect:hover{
+							fill:rgba(256,256,256,0.3);
+						}
+					}
+				}
+				
+				div.options{
+					display:inline-block;
+					vertical-align:top;
+					
+					div.svgelementChooser {
+						display:inline-block;
+						vertical-align:top;
+						
+						div{
+							border:1px solid #777;
+							background-color:#222;
+							padding:3px;
+							width:40px;
+							height:40px;
+							cursor:pointer;
+							
+							img{
+								overflow:visible;
+								width:100%;
+								height:100%;
+							}
+						}
+						div.rotate{
+							width:30px;
+							height:30px;
+							float:right;
+						}
+						div[current="true"] {
+							background-color:$color-secondary-1-1;
+						}
+					}
+					
+					div.svgSizeEditor {
+						display:inline-block;
+						vertical-align:top;
+					}
+				}
+			}
+		}
+	}
+>>>>>>> origin/pekka
 }

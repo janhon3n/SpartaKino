@@ -3,12 +3,20 @@ block append scripts
 	script(src='/public/js/movies.js')
 block append content
 	div#movies
-		div#search Search:
+		div#search
 			div#searchContent
-				input#title(type="text",placeholder="Title")
+				input#title(type="text",placeholder="Search for movies: ")
 				select#theater
+					option(value="all") All Theaters
 					option(value="turku") Turku
 					option(value="turku") Helsinki
-			button.button#updateButton Update list
+				select#date
+					option(value="any time") Any time
+					option(value="today") Today
+					option(value="tommorow") Tommorow
+					option(value="afer tommorow") After Tommorow
+					option(value="following days") Following Days
+				button.button#updateButton Search
+		div#samples Samples:
 		div#results Results:
 		div#movieContent Content:
