@@ -13,9 +13,7 @@ $(document).ready(function(){
 	var weekstart = now.clone().weekday(0).hours(0).minutes(0).seconds(0);
 	console.log(weekstart);
 	
-	$('table#scheduleTable tr.content div[type="day"][day="'+day+'"]').append('<div class="nowmarker elevator"'
-	+ 'style="top:'+(((now.hours() * 60 + now.minutes()) / 1440) * 100)+'%;">'
-	+ '</div>');
+
 
 	
 	$.get('/api/screenings/theater/'+theater_id+'/hall/'+hall_id, function(screenings){
@@ -72,6 +70,9 @@ $(document).ready(function(){
 						}
 					});
 					setupTableDeletes();
+					$('table#scheduleTable tr.content div[type="day"][day="'+day+'"]').append('<div class="nowmarker elevator"'
+					+ 'style="top:'+(((now.hours() * 60 + now.minutes()) / 1440) * 100)+'%;">'
+					+ '</div>');
 					
 					function createScreeningElevator(fromTop, height, s){
 						$('div#editschedule table#scheduleTable div[type="day"][day="'+s.day+'"]')
