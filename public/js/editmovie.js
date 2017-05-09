@@ -55,8 +55,13 @@ $(document).ready(function(){
 				newImage = true;
 				$('img#cropImage').attr("imagefile", res.filename)
 				$("#status").empty().text(res.msg);
-				$("#cropImage").attr("src",res.path);
-				if(!cropper) createCropper();
+				$("img#cropImage").attr("src",res.path);
+				if(!cropper){
+					createCropper();
+				} else {
+					cropper.destroy();
+					createCropper();
+				}
 			}
 		});
 	});

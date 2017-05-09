@@ -316,8 +316,9 @@ div#content {
 
 	div#editmovie {
 		div#cropContainer{
+			margin:20px;
+			height:400px;
 			img#cropImage{
-				max-height:500px;
 				width:100%;
 			}
 		}
@@ -328,7 +329,9 @@ div#content {
 		}
 		form#imageUpload{
 			position:relative;
-			top:-50px;
+			top:-60px;
+			width:500px;
+			overflow-x:hidden;
 		}
 		div#submitRow{
 			position:relative;
