@@ -8,13 +8,13 @@ $(document).ready(function(){
 	for(i = 0; i < 24; i++){
 		$timetd.append('<div class="elevator" style="top:'+ (100/24 * i) +'%;">'+i+':00<div>');
 	}
-	var now = new Date();
-	var day = now.getDay();
-	var weekstart = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (day == 0?-6:1) - day + (week * 7));
+	var now = moment();
+	var day = now.weekday();
+	var weekstart = now.clone().weekday(0).hours(0).minutes(0).seconds(0);
 	console.log(weekstart);
 	
 	$('table#scheduleTable tr.content div[type="day"][day="'+day+'"]').append('<div class="nowmarker elevator"'
-	+ 'style="top:'+(((now.getHours() * 60 + now.getMinutes()) / 1440) * 100)+'%;">'
+	+ 'style="top:'+(((now.hours() * 60 + now.minutes()) / 1440) * 100)+'%;">'
 	+ '</div>');
 
 	
@@ -39,14 +39,16 @@ $(document).ready(function(){
 						} else {
 							s.movietitle = movie[0].title;
 							s.length = movie[0].length;
-							var date = new Date(s.date + ' ' + s.time);
-							s.day = date.getDay();
+							var date = moment(s.datetime);
+							s.day = date.day();
+							s.date = date.format("DD.MM.YYYY");
+							s.time = date.format("HH:mm");
 							s.name = s.date + " " +s.time;
-							s.minutes = (date.getHours() * 60) + date.getMinutes();
+							s.minutes = (date.hours() * 60) + date.minutes();
 							console.log(s.minutes);
-							var enddate = new Date(date);
-							enddate.setMinutes(enddate.getMinutes() + s.length);
-							s.endtime = enddate.getHours() + ":" + enddate.getMinutes();
+							var enddate = moment(date);
+							enddate.minutes(enddate.minutes() + s.length);
+							s.endtime = enddate.hours() + ":" + enddate.minutes();
 						
 							
 							//create list row
@@ -60,7 +62,7 @@ $(document).ready(function(){
 
 								
 							//draw to timetable if on this week
-							if(date.getTime() >= weekstart.getTime() && date.getTime() <= weekstart.getTime() + (7*24*60*60*1000)){
+							if(weekstart.isBefore(date) && weekstart.clone().add(7, "days").isAfter(date)){
 								//create timetable item
 								createScreeningElevator((s.minutes / 1440) * 100, (s.length / 1440) * 100, s);
 								if(s.minutes + s.length > 1440){

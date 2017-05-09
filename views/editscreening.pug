@@ -16,13 +16,13 @@ block content
 				div.inlineInput
 					label.inline Date:
 					if screening
-						input(type="date" name="screening[date]" min=(moment().format('YYYY-MM-DD')) value=screening.date required)
+						input(type="date" name="screening[date]" min=(moment().format('YYYY-MM-DD')) value=moment(screening.datetime).format('YYYY-MM-DD') required)
 					else
 						input(type="date" name="screening[date]" min=(moment().format('YYYY-MM-DD')) value=(moment().format('YYYY-MM-DD')) required)
 				div.inlineInput
 					label.inline Time:
 					if screening
-						input(type="time" name="screening[time]" value=screening.time required)
+						input(type="time" name="screening[time]" value=moment(screening.time).format('HH:mm') required)
 					else
 						input(type="time" name="screening[time]" value=(moment().format('HH:mm')) required)
 			div.formRow

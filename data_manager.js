@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+require('mongoose-moment')(mongoose);
+var moment = require('moment');
 var Schema = mongoose.Schema;
 
 var url = 'mongodb://spartakino.dy.fi/spartakino';
@@ -19,7 +21,7 @@ console.log('Connected to MongoDB')
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var updateDates = function(next){
-	var currentDate = new Date();
+	var currentDate = moment();
 	this.updated_at = currentDate;
 	
 	if(!this.created_at)
@@ -40,8 +42,8 @@ var userSchema = new Schema({
 	passhash: {type: String, required: true},
 	type: {type: String, enum:['basic', 'admin'], default:'basic', required: true},
 	address: addressSchema,
-	created_at: Date,
-	updated_at: Date
+	created_at: 'Moment',
+	updated_at: 'Moment'
 });
 userSchema.pre('save', updateDates);
 
@@ -59,8 +61,8 @@ var movieSchema = new Schema({
 		width: Number,
 		height: Number
 	},
-	created_at: Date,
-	updated_at: Date
+	created_at: 'Moment',
+	updated_at: 'Moment'
 });
 movieSchema.virtual('imagepath.orginal').get(function(){
 	return '/public/img/movies/o_'+this.imagefile;
@@ -86,8 +88,8 @@ var hallSchema = new Schema({
 		col: Number,
 		rotation: Number
 	}],
-	created_at: Date,
-	updated_at: Date
+	created_at: 'Moment',
+	updated_at: 'Moment'
 });
 hallSchema.pre('save', updateDates);
 
@@ -96,52 +98,29 @@ var theaterSchema = new Schema({
 	name: {type: String, required: true},
 	address: addressSchema,
 	halls:[hallSchema],
-	created_at: Date,
-	updated_at: Date
+	created_at: 'Moment',
+	updated_at: 'Moment'
 });
 theaterSchema.pre('save', updateDates);
 
 var resorvationSchema = new Schema({
 	user: {type: ObjectId, required: true},
-	screenings: {type: ObjectId, required: true},
-	created_at: Date,
-	updated_at: Date
+	screening: {type: ObjectId, required: true},
+	created_at: 'Moment',
+	updated_at: 'Moment'
 })
 resorvationSchema.pre('save', updateDates);
 
 var screeningSchema = new Schema({
 	movie: {type: ObjectId, required: true},
 	hall: {type: ObjectId, required: true},
-	time: {type: String, required: true},
-	date: {type: String, required: true},
+	datetime: {type: 'Moment', required: true},
 	price: {type: Number, required: true},
 	resorvations: [resorvationSchema],
-	created_at: Date,
-	updated_at: Date
+	created_at: 'Moment',
+	updated_at: 'Moment'
 })
-screeningSchema.virtual('name').get(function(){
-	return this.date + " " + this.time;
-});
 screeningSchema.pre('save', updateDates);
-screeningSchema.path('time').validate(function(value) {
-	var hours = Number(value.substring(0,2));
-	if(!(hours >= 0 && hours < 24)) return false;
-	var minutes = Number(value.substring(3,5));
-	if(!(minutes >= 0 && minutes < 60)) return false;
-	return true;
-}, 'Time format invalid');
-
-screeningSchema.path('date').validate(function(value) {
-	console.log(value);
-	var year = Number(value.substring(0,4));
-	if(!(year >= 2015 && year < 3000)) return false;
-	var month = Number(value.substring(5,7));
-	if(!(month >= 1 && month <= 12)) return false;
-	var day = Number(value.substring(8,10));
-	if(!(day >= 1 && day <= 31)) return false;
-	return true;
-}, 'Date format invalid');
-
 
 var User = mongoose.model('User', userSchema);
 var Movie = mongoose.model('Movie', movieSchema);

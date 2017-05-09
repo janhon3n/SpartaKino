@@ -58,6 +58,7 @@ router.get('/editscreening/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a
 router.post('/editscreening/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})/:id([0-9a-f]{24})', function(req,res,next){
 	//update screening
 	var screening = req.body.screening;
+	screening.datetime = new Date(screening.date + " " + screening.time);
 	screening.hall = req.params.hall_id;
 	req.dm.Screening.update({_id: req.params.id}, screening, function(err){
 		if(err) return next(err);
@@ -69,6 +70,7 @@ router.post('/editscreening/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9
 	if(req.body.showtimes.radio == "multiple")
 		weeks = Number(req.body.showtimes.weeks);
 	var screening = req.body.screening;
+	screening.datetime = new Date(screening.date + " " + screening.time);
 	screening.hall = req.params.hall_id;
 	console.log(screening);
 	

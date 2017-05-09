@@ -63,6 +63,11 @@ app.use(function(req, res, next){
 	next()
 })
 
+app.use(function(req,res,next){
+	req.dm.Screening.find({});
+	next();
+});
+
 /* Middleware to check if user is admin */
 var requireAdmin = function(req,res,next){
 	if(req.session.user == undefined || req.session.user.type !== "admin") {
