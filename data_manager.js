@@ -54,7 +54,7 @@ var movieSchema = new Schema({
 	length: {type:Number, min:1, max:1000, required:true},
 	director: String,
 	actors: [{name: String}],
-	imagefile: String,
+	imagefile: {type: String, default: "undefined.jpg"},
 	imagecropper: {
 		x: Number,
 		y: Number,

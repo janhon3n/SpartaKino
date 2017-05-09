@@ -326,6 +326,14 @@ div#content {
 			height: 268px;
 			overflow:hidden;
 		}
+		form#imageUpload{
+			position:relative;
+			top:-50px;
+		}
+		div#submitRow{
+			position:relative;
+			top:50px;
+		}
 	}
 	
 	div#edittheater{
