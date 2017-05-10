@@ -24,6 +24,7 @@ router.get('/amount/:fromi([0-9]{1,3})/:amount([0-9]{1,3})', function(req,res){
 });
 
 router.get('/search/:title', function(req,res){
+	
 	req.dm.Movie.find({title: {"$regex": req.params.title, "$options": "i"}}, function(err, movies){
 		if(err){
 			console.log(err);
