@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var moviesSave;
 
 	function createMovieHtml(m){
-		html = '<div class="movie" onclick=\'redirect("/movies/movie/'+m._id+'")\'">'
+		html = '<div class="movie coolImage" onclick=\'redirect("/movies/movie/'+m._id+'")\'">'
 			+ '<img src="/public/img/movies/s_'+m.imagefile+'">'
 			+ '<div class="movieInfo">'+m.title+'</div>'
 		    + '</div>';
@@ -18,7 +18,6 @@ $(document).ready(function(){
 				html += createMovieHtml(movies[i]);
 			}
 			$('div#movies div#results').html(html);
-			setMoviesFunctionality();
 		});		
 	}
 	function searchMovies(searchParams){
@@ -31,25 +30,13 @@ $(document).ready(function(){
 				html += createMovieHtml(m)
 			})
 			$('div#movies div#results').html(html);
-			setMoviesFunctionality();
 		});				
 	}
 	updateMovies();
 
 	$("div#movies div#search button#updateButton").click(function(){
 		var title = $("div#movies div#search input#title").val();
-		if(title === "") title = "*";
+		if(title === "") title = ".*";
 		searchMovies({title: title});
 	});
-
-	function setMoviesFunctionality(){
-		$('div.movie img').click(function(){
-			var movieId = Number($(this).attr("movie_id"));
-			var movs = movies.filter(function(m){
-				if(m.id == movieId) return true;
-				return false;
-			});
-			$("div#movieContent").html(createMovieContentHtml(movs[0]));
-		});
-	}
 });

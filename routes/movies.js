@@ -11,7 +11,10 @@ router.get('/', function(req, res){
 router.get('/movie/:id([0-9a-f]{24})', function(req,res,next){
 	req.dm.Movie.findOne({_id: req.params.id}, function(err, movie){
 		if(err) return next(err);
-		res.render("movie", {user: req.session.user, movie: movie});
+		req.dm.Theater.find({}, 'name _id', function(err, theaters){
+			if(err) return next(err);
+			res.render("movie", {user: req.session.user, movie: movie, theaters: theaters});
+		});
 	});
 });
 router.get('/movie/:id([0-9a-f]{24})/tickets', function(req, res){

@@ -1,11 +1,14 @@
 extends layout.pug
 
+block append scripts
+	script(src='/public/js/movie.js')
+	
 block append content
-	div.padding#movie
+	div.padding#movie(movie_id=movie._id)
 		div#movieContainer
 			div#movieRight
-				img(src=movie.imagepath.big)
-			div#movieLeft
+				img.coolImage(src=movie.imagepath.big)
+			div#movieLeft.backgroundContent
 				h1= movie.title
 				p= movie.description
 				ul
@@ -21,23 +24,21 @@ block append content
 							ul
 								for a in movie.actors
 									li= a.name
+			div.clearBoth
 		div#movieScreenings
 			h2 Find a screening
 			div#movieScreeningsSearch
 				div.inlineInput
-					input(type="date" value=moment().format("YYYY-MM-DD") min=moment().format("YYYY-MM-DD"))
+					input#screeningDate(type="date" value=moment().format("YYYY-MM-DD") min=moment().format("YYYY-MM-DD"))
 				div.inlineInput
-					select
-						option Turku
+					select#screeningTheater
+						each t in theaters
+							option(value=t._id)= t.name
+				div.inlineInput
+					button#updateScreeningsButton(type="button") Update list
 			div.tableSection.hideable
 				h2.hidebutton Screenings
 				div.hidecontent.tableContainer
 					table#movieScreeningsTable
-						tr
-							th.medium City
-							th.medium Date
-							th.medium Time
-							th.medium Resorvations
-							th.shrink
-							th.small
+
 				

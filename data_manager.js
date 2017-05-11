@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+ var mongoose = require('mongoose');
 require('mongoose-moment')(mongoose);
 var moment = require('moment');
 var Schema = mongoose.Schema;
