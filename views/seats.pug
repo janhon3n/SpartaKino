@@ -1,0 +1,17 @@
+extends layout.pug
+block append scripts
+	script(src="/public/js/seatpicker.js")
+	script(src="/public/js/seats.js")
+block content
+	div.padding#seats(hall_id=hall._id screening_id=screening._id tickets_normal=tickets.normal tickets_wheelchair=tickets.wheelchair)
+		h1 Pick your seats
+		label= "Normal seats: "
+			b= tickets.normal
+		label= "Wheelchair seats: "
+			b= tickets.wheelchair
+	
+		div#seatpicker Loading...
+		
+		div#info
+		div.formRow
+			input(type="submit" value="Next")

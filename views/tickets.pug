@@ -2,15 +2,22 @@ extends layout.pug
 block append scripts
 	srcipt(src="public/js/tickets.js")
 block content
-	h1= movie.name
-	p= movie.description
-	ul
-		li= 'Year: ' + movie.year
-		li= 'Director: ' + movie.director
-		li Actors:
-			ul
-				for a in movie.actors
-					li= a.name
-					
-	h2 Order tickets
+	div.padding#tickets
+		h1= "Tickets for " + movie.title
+		form(action="/movies/screening/"+screening._id+"/tickets/seats" method="post")
+			h3 Tickets:
+			div.formRow
+				label Normal:
+				input(type="number" name="tickets[normal]" min=0 max=20)
+				label
+					b= screening.price
+					span € per ticket
+			div.formRow
+				label Wheelchair:
+				input(type="number" name="tickets[wheelchair]" min=0 max=20)
+				label
+					b= screening.price
+					span € per ticket
+			div.formRow
+				input(type="submit" value="Next")
 	

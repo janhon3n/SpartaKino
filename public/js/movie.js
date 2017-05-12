@@ -4,10 +4,10 @@ $(document).ready(function(){
 	var moviesSave;
 
 	function createScreeningRowHtml(s){
-		html = '<tr><td class="medium">'+s.hallName+'</td>'
-			+ '<td class="small">'+s.time+'</td>'
+		html = '<tr><td class="small">'+s.time+'</td>'
+			+ '<td class="medium">'+s.hallName+'</td>'
 			+ '<td class="medium">'+s.resorvations+'</td>'
-			+ '<td class="medium reserve" onclick=\'redirect("tickets")\'>Get tickets</td>';
+			+ '<td class="medium redirect" onclick=\'redirect("/movies/screening/'+s._id+'/tickets")\'>Get tickets</td>';
 		return html;
 	}
 	
@@ -19,7 +19,7 @@ $(document).ready(function(){
 			if(screenings.error){
 				console.log(screenings.error);
 			} else {
-				html = '<tr><th class="medium">Hall</th><th class="small">Time</th><th class="medium">Resorvations</th><th class="medium"></th></tr>';
+				html = '<tr><th class="small">Time</th><th class="medium">Hall</th><th class="medium">Resorvations</th><th class="medium"></th></tr>';
 				screenings.forEach(function(s){
 					s.time = moment(s.datetime).format("HH:mm");
 					html += createScreeningRowHtml(s);

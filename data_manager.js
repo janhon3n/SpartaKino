@@ -106,6 +106,8 @@ theaterSchema.pre('save', updateDates);
 var resorvationSchema = new Schema({
 	user: {type: ObjectId, required: true},
 	screening: {type: ObjectId, required: true},
+	row: {type: Number, required: true},
+	col: {type: Number, required: true},
 	created_at: 'Moment',
 	updated_at: 'Moment'
 })
