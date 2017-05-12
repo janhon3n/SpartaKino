@@ -82,6 +82,7 @@ var hallSchema = new Schema({
 	rows: {type: Number, required: true},
 	cols: {type: Number, required: true},
 	seats: {type: Number, required: true},
+	wheelchair_seats: {type: Number, required: true},
 	elements: [{
 		name: String,
 		row: Number,

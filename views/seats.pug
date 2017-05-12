@@ -13,5 +13,6 @@ block content
 		div#seatpicker Loading...
 		
 		div#info
-		div.formRow
-			input(type="submit" value="Next")
+		form(action="/movies/screening/"+screening._id+"/tickets/confirm" method="post")
+			div.formRow
+				input(type="submit" value="Next")

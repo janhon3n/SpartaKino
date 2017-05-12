@@ -132,6 +132,7 @@ function HallEditor(el, rows, cols, hallId, maxwidth) {
 		};
 
 		var seats = 0;
+		var wheelchairSeats = 0;
 		this.svg.find('svg.box[svgelement]').each(function () {
 			if ($(this).attr("svgelement") && $(this).attr("svgelement") != "null") {
 				data.svgElements.push({
@@ -144,8 +145,12 @@ function HallEditor(el, rows, cols, hallId, maxwidth) {
 			if($(this).attr("svgelement") == "chair"){
 				seats++;
 			}
+			if($(this).attr("svgelement") == "wheelchair"){
+				wheelchairSeats++;
+			}
 		});
 		data.seats = seats;
+		data.wheelchairSeats = wheelchairSeats;
 		return data;
 	}
 }

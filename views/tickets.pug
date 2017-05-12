@@ -3,9 +3,15 @@ block append scripts
 	srcipt(src="public/js/tickets.js")
 block content
 	div.padding#tickets
-		h1= "Tickets for " + movie.title
+		h1= "Select the amount of tickets"
 		form(action="/movies/screening/"+screening._id+"/tickets/seats" method="post")
-			h3 Tickets:
+			h3 Your hall:
+			div.subdiv
+				div
+					b= hall.name
+				div= "Normal seats: " + hall.seats
+				div= "Wheelchair seats: " + hall.wheelchair_seats
+			h3 Choose your tickets:
 			div.formRow
 				label Normal:
 				input(type="number" name="tickets[normal]" min=0 max=20)

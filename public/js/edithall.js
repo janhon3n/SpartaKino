@@ -27,7 +27,7 @@ $(document).ready(function () {
 				street: $('form#theaterForm input[name="theater[address][street]"').val(),
 				city: $('form#theaterForm input[name="theater[address][city]"').val(),
 				postcode: $('form#theaterForm input[name="theater[address][postcode]"').val()
-				}
+			}
 		}
 		
 		// Save theater
@@ -61,6 +61,7 @@ $(document).ready(function () {
 				h.cols = data.cols;
 				h.elements = data.svgElements;
 				h.seats = data.seats;
+				h.wheelchair_seats = data.wheelchairSeats;
 				console.log(h);
 
 				url = '/api/halls/';
