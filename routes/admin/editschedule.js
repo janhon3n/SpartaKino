@@ -12,21 +12,25 @@ router.get('/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})',func
 });
 
 router.get('/theater/:theater_id([0-9a-f]{24})/week/:week([0-9])', function (req, res, next) {
-	req.dm.Theater.findOne({_id : req.params.theater_id}, function(err, theater){
+	req.dm.Hall.findOne({theater: req.params.theater_id}, function(err, hall){
 		if(err) return next(err);
-		req.dm.Hall.findOne({theater : req.params.theater_id}, function(err, hall){
-			if(err) return next(err);
-			res.render("editschedule", { user: req.session.user, theater: theater, hall: hall, week: req.params.week});
-		});
+		res.redirect('/admin/editschedule/theater/'+req.params.theater_id+'/hall/'+hall._id+'/week/'+req.params.week);
 	});
 });
 
 router.get('/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})/week/:week([0-9])', function(req,res,next){
 	req.dm.Theater.findOne({_id: req.params.theater_id}, function(err,theater){
 		if(err) return next(err);
-		req.dm.Hall.findOne({_id : req.params.hall_id}, function(err, hall){
+		req.dm.Hall.find({theater: req.params.theater_id}, "name _id", function(err, halls){
 			if(err) return next(err);
-			res.render("editschedule", { user: req.session.user, theater: theater, hall: hall, week: req.params.week});
+			var hall;
+			for(var i = 0; i < halls.length; i++){
+				if(halls[i]._id.equals(req.params.hall_id)){
+					hall = halls[i];
+					break;
+				}
+			}
+			res.render("editschedule", { user: req.session.user, theater: theater, hall: hall, halls: halls, week: req.params.week});
 		});
 	});
 });

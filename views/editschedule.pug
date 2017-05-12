@@ -4,7 +4,14 @@ block append scripts
 block content
 	div.padding#editschedule(theater_id=theater._id, hall_id=hall._id, week=week)
 		h1= "Edit screening schedule for " + theater.name + " " + hall.name
-		a(href="/admin/editschedule/editscreening/theater/" + theater._id + "/hall/" + hall._id) Create new screening
+		div.formRow
+			label Change hall:
+			select#hallSelect
+				each h in halls
+					if hall._id.equals(h._id)
+						option(value=h._id selected)= h.name
+					else
+						option(value=h._id)= h.name
 		div#scheduleOptions
 		div.hideable.tableSection
 			h2.hidebutton List of screenings
@@ -18,6 +25,7 @@ block content
 							th.medium Resorvations
 							th.small
 							th.small
+			a(href="/admin/editschedule/editscreening/theater/" + theater._id + "/hall/" + hall._id) Create new screening
 		div.hideable.tableSection
 			h2.hidebutton Timetable
 			div#scheduleTableContainer.hidecontent.tableContainer

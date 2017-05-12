@@ -84,4 +84,9 @@ $(document).ready(function(){
 			});
 		}
 	});
+	
+	$("select#hallSelect").on("change", function(){
+		console.log(this.value);
+		redirect("/admin/editschedule/theater/"+theater_id+"/hall/"+this.value+"/week/"+week);
+	});
 });
