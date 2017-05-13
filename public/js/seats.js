@@ -1,4 +1,3 @@
-console.log("pöö");
 $(document).ready(function(){
 	var hall_id = $("div#seats").attr("hall_id");
 	var screening_id = $("div#seats").attr("screening_id");
@@ -22,17 +21,27 @@ $(document).ready(function(){
 	
 	$("div#seats form").submit(function(e){
 		$("div#info").html("");
-		console.log("getting picked");
 		var picked = seatPicker.getPicked();
+		var incorrect = false;
 		if(picked.normal.length != tickets.normal){
-			e.preventDefault();
+			incorrect = true;
 			$("div#info").append('<div>Pick '+(tickets.normal - picked.normal.length) + ' more normal seats</div>');
 		}
 		if(picked.wheelchair.length != tickets.wheelchair){
-			e.preventDefault();
+			incorrect = true;
 			$("div#info").append('<div>Pick '+(tickets.wheelchair - picked.wheelchair.length) + ' more wheelchair seats</div>');
 		}
-		
-		
+		if(incorrect){
+			e.preventDefault();
+		} else {
+			for(var i = 0; i < picked.normal.length; i++){
+				$("div#seats form").append("<input type='hidden' name='picked[normal]["+i+"][row]' value='"+picked.normal[i].row+"'>");
+				$("div#seats form").append("<input type='hidden' name='picked[normal]["+i+"][col]' value='"+picked.normal[i].col+"'>");
+			}
+			for(var i = 0; i < picked.wheelchair.length; i++){
+				$("div#seats form").append("<input type='hidden' name='picked[wheelchair]["+i+"][row]' value='"+picked.wheelchair[i].row+"'>");
+				$("div#seats form").append("<input type='hidden' name='picked[wheelchair]["+i+"][col]' value='"+picked.wheelchair[i].col+"'>");				
+			}
+		}
 	});
 });

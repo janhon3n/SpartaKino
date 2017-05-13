@@ -23,18 +23,20 @@ router.get('/id/:id([0-9a-f]{24})/resorvations/screening/:screening_id([0-9a-f]{
 		if(!hall) return next({error: 'Hall not found'});
 		req.dm.Screening.findOne({_id: req.params.screening_id}, function(err, screening){
 			if(err) return next(err);
-			for(var i = 0; i < hall.elements.length; i++){
-				for(var u = 0; u < screening.resorvations.length; u++){
-					if(hall.elements[i].col == screening.resorvations[u].col && hall.elements[i].row == screening.resorvations[u].row){
-						//seat is reserved
-						if(hall.elements[i].name == "chair"){
-							hall.elements[i].set("reserved", true, {strict:false});
+			req.dm.Resorvation.find({screening: screening._id}, function(err, resorvations){
+				for(var i = 0; i < hall.elements.length; i++){
+					for(var u = 0; u < resorvations.length; u++){
+						if(hall.elements[i].col == resorvations[u].col && hall.elements[i].row == resorvations[u].row){
+							//seat is reserved
+							if(hall.elements[i].name == "chair"){
+								hall.elements[i].set("reserved", true, {strict:false});
+							}
+							break;
 						}
-						break;
 					}
 				}
-			}
-			res.json(hall);
+				res.json(hall);
+			});
 		});
 	});
 });

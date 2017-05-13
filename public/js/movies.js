@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var moviesSave;
 
 	function createMovieHtml(m){
-		html = '<div class="movie coolImage" onclick=\'redirect("/movies/movie/'+m._id+'")\'">'
+		html = '<div class="movie coolImage popUp" onclick=\'redirect("/movies/movie/'+m._id+'")\'">'
 			+ '<img src="/public/img/movies/s_'+m.imagefile+'">'
 			+ '<div class="movieInfo">'+m.title+'</div>'
 		    + '</div>';

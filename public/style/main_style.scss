@@ -112,8 +112,9 @@ a:hover{
 }
 .coolImage{
 	border-radius:5px;
+}
+.popUp{
 	box-shadow:0 0 12px black;
-
 }
 
 .clearBoth {
@@ -123,6 +124,7 @@ a:hover{
 /* TABLE */
 .tableContainer{
 	overflow:hidden;
+	overflow-x:auto;
 }
 
 div.tableSection{
@@ -189,7 +191,6 @@ table{
 	}
 }
 
-
 div.confirmPrompt {
 	text-align:right;
 	display:none;
@@ -213,6 +214,10 @@ div.confirmPrompt {
 	}
 }
 
+div.infobox{
+	margin:20px;
+	padding:5px;
+}
 
 div#maincontainer {
 	max-width:1200px;

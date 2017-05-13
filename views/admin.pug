@@ -7,7 +7,7 @@ block content
 	div.padding#admin
 		h1 Admin controls
 		
-		div.tableSection.hideable
+		div.tableSection.hideable.popUp
 			h2.hidebutton Movies
 			div.hidecontent.tableContainer
 				div.confirmContainer
@@ -25,9 +25,9 @@ block content
 							td.shrink= m.description
 							td.small.edit.button(onclick="redirect('/admin/editmovie/"+m._id+"')") edit
 							td.small.delete.button delete
-				a(href="/admin/editmovie") Add a movie
+		a(href="/admin/editmovie") Add a movie
 
-		div.tableSection.hideable
+		div.tableSection.hideable.popUp
 			h2.hidebutton Users
 			div.hidecontent.tableContainer
 				div.confirmContainer
@@ -40,10 +40,9 @@ block content
 						tr(user_id=u._id type="user" name=u.email)
 							td.shrink= u.email
 							td.medium.center= u.type
-							td.small.delete.button
-								a.delete(user_id=u._id) delete
+							td.small.delete.button delete
 				
-		div.tableSection.hideable
+		div.tableSection.hideable.popUp
 			h2.hidebutton Theaters
 			div.hidecontent.tableContainer
 				div.confirmContainer
@@ -61,5 +60,5 @@ block content
 							td.medium.edit.button(onclick="redirect('/admin/editschedule/theater/"+t._id+"/week/0')") edit schedule
 							td.small.edit.button(onclick="redirect('/admin/edittheater/"+t._id+"')") edit
 							td.small.delete.button delete
-				a(href="/admin/edittheater") Add a theater
+		a(href="/admin/edittheater") Add a theater
 					

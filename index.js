@@ -37,22 +37,6 @@ app.use(session({secret: "aJboIc779c2cCOIJoac"}))
 app.use(function(req, res, next){
 	req.dm = dm;
 	
-
-	// NEXT IS TO LOGIN AS ADMIN AUTOMATICALLY
-	// PLS DELETE AFTER TESTING PHASE
-
-	req.session.user = {
-		"id": 2,
-		"username": "admin",
-		"passhash": "$2a$10$Nnfbqc6njoC9C4ZWgu.tTuQk/UVeo4p17G.WHjCLwegJfiU2uYGO2",
-		"address": {
-			"street": "Yliopistonkatu 5",
-			"city": "Turku",
-			"postcode": 20100
-		},
-		"type": "admin"
-	}
-
 	if(typeof req.cookies.id == 'undefined'){
 		//add new id to client with no id. expires after 3 years.
 		res.cookie('id', idGiver++, {expire: 94608000000})
@@ -68,6 +52,14 @@ app.use(function(req,res,next){
 	next();
 });
 
+/* Middleware to check if user is logged in */
+var requireLogin = function(req,res,next){
+	if(req.session.user == undefined){
+		res.redirect('/login')
+	}
+	next();
+}
+
 /* Middleware to check if user is admin */
 var requireAdmin = function(req,res,next){
 	if(req.session.user == undefined || req.session.user.type !== "admin") {
@@ -80,6 +72,9 @@ var requireAdmin = function(req,res,next){
 //routes
 var movies = require('./routes/movies.js')
 app.use('/movies', movies)
+
+var tickets = require('./routes/tickets.js')
+app.use('/tickets', requireLogin, tickets)
 
 var login = require('./routes/login.js')
 app.use('/login', login)
@@ -101,6 +96,9 @@ app.use('/api/halls/', hallsapi)
 
 var screeningsapi = require('./routes/api/screeningsapi.js')
 app.use('/api/screenings/', screeningsapi)
+
+var resorvationsapi = require('./routes/api/resorvationsapi.js')
+app.use('/api/resorvations/', resorvationsapi)
 
 var user = require('./routes/user.js')
 app.use('/user/', user)

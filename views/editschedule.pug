@@ -13,7 +13,7 @@ block content
 					else
 						option(value=h._id)= h.name
 		div#scheduleOptions
-		div.hideable.tableSection
+		div.hideable.tableSection.popUp
 			h2.hidebutton List of screenings
 			div#scheduleListContainer.hidecontent.tableContainer
 					div.confirmContainer
@@ -25,8 +25,8 @@ block content
 							th.medium Resorvations
 							th.small
 							th.small
-			a(href="/admin/editschedule/editscreening/theater/" + theater._id + "/hall/" + hall._id) Create new screening
-		div.hideable.tableSection
+		a(href="/admin/editschedule/editscreening/theater/" + theater._id + "/hall/" + hall._id) Create new screening
+		div.hideable.tableSection.popUp
 			h2.hidebutton Timetable
 			div#scheduleTableContainer.hidecontent.tableContainer
 				table#scheduleTable

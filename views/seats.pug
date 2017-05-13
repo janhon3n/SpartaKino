@@ -13,6 +13,8 @@ block content
 		div#seatpicker Loading...
 		
 		div#info
-		form(action="/movies/screening/"+screening._id+"/tickets/confirm" method="post")
+		form(action="/tickets/screening/"+screening._id+"/confirm" method="post")
+			input(type="hidden" name="tickets[normal]" value=tickets.normal)
+			input(type="hidden" name="tickets[wheelchair]" value=tickets.wheelchair)
 			div.formRow
 				input(type="submit" value="Next")

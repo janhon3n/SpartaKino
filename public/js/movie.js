@@ -7,7 +7,7 @@ $(document).ready(function(){
 		html = '<tr><td class="small">'+s.time+'</td>'
 			+ '<td class="medium">'+s.hallName+'</td>'
 			+ '<td class="medium">'+s.resorvations+'</td>'
-			+ '<td class="medium redirect" onclick=\'redirect("/movies/screening/'+s._id+'/tickets")\'>Get tickets</td>';
+			+ '<td class="medium redirect" onclick=\'redirect("/tickets/screening/'+s._id+'/tickets")\'>Get tickets</td>';
 		return html;
 	}
 	

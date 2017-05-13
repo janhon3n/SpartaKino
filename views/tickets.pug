@@ -4,26 +4,28 @@ block append scripts
 block content
 	div.padding#tickets
 		h1= "Select the amount of tickets"
-		form(action="/movies/screening/"+screening._id+"/tickets/seats" method="post")
-			h3 Your hall:
-			div.subdiv
-				div
-					b= hall.name
-				div= "Normal seats: " + hall.seats
-				div= "Wheelchair seats: " + hall.wheelchair_seats
-			h3 Choose your tickets:
-			div.formRow
-				label Normal:
-				input(type="number" name="tickets[normal]" min=0 max=20)
-				label
-					b= screening.price
-					span € per ticket
-			div.formRow
-				label Wheelchair:
-				input(type="number" name="tickets[wheelchair]" min=0 max=20)
-				label
-					b= screening.price
-					span € per ticket
-			div.formRow
-				input(type="submit" value="Next")
-	
+		form(action="/tickets/screening/"+screening._id+"/seats" method="post")
+			p
+				h3 Your hall:
+				div.subdiv
+					div
+						b= screening.hall.theater.name + " - " + screening.hall.name
+					div= "Normal seats available: " + available.normal + " / " + screening.hall.seats
+					div= "Wheelchair seats available: " + available.wheelchair + " / " + screening.hall.wheelchair_seats
+			p
+				h3 Choose your tickets:
+				div.formRow
+					label Normal:
+					input(type="number" name="tickets[normal]" min=0 max=available.normal)
+					label
+						b= screening.price
+						span € per ticket
+				div.formRow
+					label Wheelchair:
+					input(type="number" name="tickets[wheelchair]" min=0 max=available.wheelchair)
+					label
+						b= screening.price
+						span € per ticket
+				div.formRow
+					input(type="submit" value="Next")
+		

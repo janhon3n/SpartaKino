@@ -1,5 +1,8 @@
 extends layout.pug
 
+block append scripts
+	script(src="/public/js/user.js")
+
 block content
 	div.padding#user
 		h1= user.email
@@ -8,3 +11,30 @@ block content
 				li= 'Street address: ' + user.address.street
 				li= 'City: ' + user.address.city
 				li= 'Postal code: ' + user.address.postcode
+				
+		div.tableSection.hideable.popUp
+			h2.hidebutton Your resorvations
+			div.hidecontent.tableContainer
+				div.confirmContainer
+				table#resorvationsTable
+					tr
+						th.medium Movie
+						th.small Theater
+						th.small Hall
+						th.tiny Row
+						th.tiny Seat
+						th.small Seat type
+						th.small Date
+						th.small Time
+						th.small
+					each r in resorvations
+						tr(resorvation_id=r._id type="resorvation" name=moment(r.screening.datetime).format("DD.MM.YYYY - HH:mm"))
+							td.medium= r.screening.movie.title
+							td.small= r.screening.hall.theater.name
+							td.small= r.screening.hall.name
+							td.tiny.center= r.row
+							td.tiny.center= r.col
+							td.small.center= r.type
+							td.small.center= moment(r.screening.datetime).format("DD.MM.YYYY")
+							td.small.center= moment(r.screening.datetime).format("HH:mm")
+							td.small.delete.button delete

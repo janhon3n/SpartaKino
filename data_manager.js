@@ -14,7 +14,6 @@ var connectWithRetry = function() {
 }
 connectWithRetry();
 
-
 console.log('Connected to MongoDB')
 
 
@@ -77,7 +76,7 @@ movieSchema.pre('save', updateDates);
 
 
 var hallSchema = new Schema({
-	theater: {type: ObjectId, required: true},
+	theater: {type: ObjectId, required: true, ref:"Theater"},
 	name: {type: String, required: true},
 	rows: {type: Number, required: true},
 	cols: {type: Number, required: true},
@@ -105,21 +104,21 @@ var theaterSchema = new Schema({
 theaterSchema.pre('save', updateDates);
 
 var resorvationSchema = new Schema({
-	user: {type: ObjectId, required: true},
-	screening: {type: ObjectId, required: true},
+	user: {type: ObjectId, required: true, ref:"User"},
+	screening: {type: ObjectId, required: true, ref:"Screening"},
 	row: {type: Number, required: true},
 	col: {type: Number, required: true},
+	type: {type: String, enum: ['normal', 'wheelchair'], required: true},
 	created_at: 'Moment',
 	updated_at: 'Moment'
 })
 resorvationSchema.pre('save', updateDates);
 
 var screeningSchema = new Schema({
-	movie: {type: ObjectId, required: true},
-	hall: {type: ObjectId, required: true},
+	movie: {type: ObjectId, required: true, ref:"Movie"},
+	hall: {type: ObjectId, required: true, ref:"Hall"},
 	datetime: {type: 'Moment', required: true},
 	price: {type: Number, required: true},
-	resorvations: [resorvationSchema],
 	created_at: 'Moment',
 	updated_at: 'Moment'
 })

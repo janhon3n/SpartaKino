@@ -1,0 +1,69 @@
+extends layout.pug
+block append scripts
+	script(src="/public/js/seatpicker.js")
+	script(src="/public/js/seats.js")
+block content
+	div.padding#confirm(hall_id=hall._id screening_id=screening._id)
+		h1 Confirm your resorvation
+		p
+			div.infoBox.backgroundContent
+				h3 Movie
+				h4= movie.title
+				ul
+					li
+						b Year:
+						span= " "+movie.year
+					li
+						b Director:
+						span= " "+movie.director
+					if movie.actors.length > 0
+						li 
+							b Actors:
+							ul
+								for a in movie.actors
+									li= a.name
+			div.infoBox.backgroundContent
+				h3 Screening
+				ul
+					li
+						b Theater:
+						span= " "+theater.name
+					li
+						b Hall:
+						span= " "+hall.name
+					li
+						b Showtime:
+						span= " "+moment(screening.datetime).format("DD.MM.YYYY - HH:mm")
+			div.infoBox.backgroundContent
+				h3 Tickets
+				ul
+					- var totalPrice = 0;
+					if seats.normal.length > 0
+						- totalPrice += seats.normal.length * screening.price
+						li 
+							b Normal tickets:
+							span= " "+ seats.normal.length
+							ul
+								li= screening.price + "€ per ticket"
+					if seats.wheelchair.length > 0
+						- totalPrice += seats.wheelchair.length * screening.price
+						li 
+							b Wheelchair tickets:
+							span= " "+ seats.wheelchair.length
+							ul
+								li= screening.price + "€ per ticket"
+					li
+						b Total cost:
+						span= " " + totalPrice.toFixed(2) + "€"
+							
+								
+			form(action="/tickets/screening/"+screening._id+"/finish" method="post")
+				each s, index in seats.normal
+					input(type="hidden" name="seats["+index+"][row]" value=s.row)
+					input(type="hidden" name="seats["+index+"][col]" value=s.col)
+					input(type="hidden" name="seats["+index+"][type]" value="normal")
+				each s, index in seats.wheelchair
+					input(type="hidden" name="seats["+index+"][row]" value=s.row)
+					input(type="hidden" name="seats["+index+"][col]" value=s.col)
+					input(type="hidden" name="seats["+index+"][type]" value="wheelchair")
+				input(type="submit" value="Confirm resorvation")
