@@ -58,12 +58,15 @@ block content
 							
 								
 			form(action="/tickets/screening/"+screening._id+"/finish" method="post")
-				each s, index in seats.normal
+				- var index = 0
+				each s in seats.normal
 					input(type="hidden" name="seats["+index+"][row]" value=s.row)
 					input(type="hidden" name="seats["+index+"][col]" value=s.col)
 					input(type="hidden" name="seats["+index+"][type]" value="normal")
-				each s, index in seats.wheelchair
+					- index++
+				each s in seats.wheelchair
 					input(type="hidden" name="seats["+index+"][row]" value=s.row)
 					input(type="hidden" name="seats["+index+"][col]" value=s.col)
 					input(type="hidden" name="seats["+index+"][type]" value="wheelchair")
+					- index++
 				input(type="submit" value="Confirm resorvation")

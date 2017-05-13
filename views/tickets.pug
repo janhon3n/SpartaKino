@@ -14,18 +14,18 @@ block content
 					div= "Wheelchair seats available: " + available.wheelchair + " / " + screening.hall.wheelchair_seats
 			p
 				h3 Choose your tickets:
-				div.formRow
-					label Normal:
-					input(type="number" name="tickets[normal]" min=0 max=available.normal)
-					label
+				div.subdiv
+					div.formRow
+						label Normal:
+						input(type="number" name="tickets[normal]" min=0 max=available.normal)
 						b= screening.price
 						span € per ticket
-				div.formRow
-					label Wheelchair:
-					input(type="number" name="tickets[wheelchair]" min=0 max=available.wheelchair)
-					label
+					div.formRow
+						label Wheelchair:
+						input(type="number" name="tickets[wheelchair]" min=0 max=available.wheelchair)
 						b= screening.price
 						span € per ticket
+
 				div.formRow
 					input(type="submit" value="Next")
 		

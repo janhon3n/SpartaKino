@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-function countAvailable(resorvations){
+function countAvailable(resorvations, screening){
 	normal = resorvations.filter(function(r){
 		return (r.type == 'normal')
 	});
@@ -21,7 +21,7 @@ router.get('/screening/:id([0-9a-f]{24})/tickets', function(req, res, next){
 		if(err) return next(err);
 		req.dm.Resorvation.find({screening: screening._id}, "_id type", function(err, resorvations){
 			if(err) return next(err);
-			var availableCount = countAvailable(resorvations);
+			var availableCount = countAvailable(resorvations, screening);
 			res.render("tickets", {user: req.session.user, screening: screening, available: availableCount});
 		});
 	});
@@ -35,13 +35,16 @@ router.post('/screening/:id([0-9a-f]{24})/seats', function(req, res, next){
 	  .populate([{path: 'movie'}, {path: 'hall'}])
 	  .exec(function(err, screening){
 		if(err) return next(err);
-		var availableCount = countAvailable(resorvations);
+		req.dm.Resorvation.find({screening: screening._id}, "_id type", function(err, resorvations){
+			if(err) return next(err);
+			var availableCount = countAvailable(resorvations, screening);
 		
-		if(!tickets || (tickets.normal < 1 && tickets.wheelchair < 1) || tickets.normal > availableCount.normal || tickets.wheelchair > availableCount.wheelchair){
-			res.render("tickets", {user: req.session.user, screening: screening, movie: movie});		
-		}
+			if(!tickets || (tickets.normal < 1 && tickets.wheelchair < 1) || tickets.normal > availableCount.normal || tickets.wheelchair > availableCount.wheelchair){
+				res.render("tickets", {user: req.session.user, screening: screening, movie: movie});		
+			}
 
-		res.render("seats", {user: req.session.user, screening: screening, movie: screening.movie, hall: screening.hall, tickets: req.body.tickets});			
+			res.render("seats", {user: req.session.user, screening: screening, movie: screening.movie, hall: screening.hall, tickets: req.body.tickets});			
+		});
 	});
 });
 
@@ -56,15 +59,17 @@ router.post('/screening/:id([0-9a-f]{24})/confirm', function(req, res, next){
 	  .populate([{path: 'movie'}, {path: 'hall', populate: {path: 'theater'}}])
 	  .exec(function(err, screening){
 		if(err) return next(err);
-		
-		var availableCount = countAvailable(resorvations);		
-		if(!tickets || (tickets.normal < 1 && tickets.wheelchair < 1) || tickets.normal > availableCount.normal || tickets.wheelchair > availableCount.wheelchair){
-			return res.render("tickets", {user: req.session.user, screening: screening, movie: movie});		
-		}
-		if(tickets.normal != seats.normal.length || tickets.wheelchair != seats.wheelchair.length){
-			return res.render("seats",  {user: req.session.user, screening: screening, movie: movie, hall: hall, tickets: req.body.tickets});
-		} 
-		res.render("confirm", {user: req.session.user, screening: screening, movie: movie, theater: theater, hall: hall, seats: seats});		
+		req.dm.Resorvation.find({screening: screening._id}, "_id type", function(err, resorvations){
+			if(err) return next(err);
+			var availableCount = countAvailable(resorvations, screening);	
+			if(!tickets || (tickets.normal < 1 && tickets.wheelchair < 1) || tickets.normal > availableCount.normal || tickets.wheelchair > availableCount.wheelchair){
+				return res.render("tickets", {user: req.session.user, screening: screening, movie: movie});		
+			}
+			if(tickets.normal != seats.normal.length || tickets.wheelchair != seats.wheelchair.length){
+				return res.render("seats",  {user: req.session.user, screening: screening, movie: movie, hall: hall, tickets: req.body.tickets});
+			} 
+			res.render("confirm", {user: req.session.user, screening: screening, movie: screening.movie, theater: screening.hall.theater, hall: screening.hall, seats: seats});		
+		});
 	});
 });
 

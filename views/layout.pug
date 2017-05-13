@@ -19,10 +19,8 @@ html
 						if user != undefined && user != null
 							div#otherlinks
 								if user.type === "admin"
-									a(href="/admin")
-										li.link Admin controls
-								a(href="/user")
-									li.link Own reservations
+									li.link(onclick="redirect('/admin')") Admin controls
+									li.link(onclick="redirect('/user')") Own reservations
 							div#loginlinks
 								a(href="/logout")
 									li.link Log out

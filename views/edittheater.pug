@@ -9,7 +9,7 @@ block content
 		else
 			h1 Create a new theater
 				
-		form#theaterForm(method="post")
+		form#theaterForm.backgroundContent(method="post")
 			if(theater)
 				input#theaterId(type="hidden" value=theater._id)
 			div.formrow

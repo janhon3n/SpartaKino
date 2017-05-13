@@ -3,11 +3,7 @@ block append scripts
 	script(src='/public/js/movies.js')
 block append content
 	div#movies
-		div#search Search:
-			div#searchContent
-				input#title(type="text",placeholder="Title")
-				select#theater
-					option(value="turku") Turku
-					option(value="turku") Helsinki
+		div#search= "Search: "
+			input#title(type="text",placeholder="Title")
 			button.button#updateButton Update list
 		div#results.backgroundContent Loading...
