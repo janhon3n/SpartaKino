@@ -339,12 +339,20 @@ header {
 		float:left;
 		
 		h1{
+			text-shadow:2px 2px 2px black;
 			margin:7px;
 			padding:0px;
 			font-family:isisFont;
 			font-size:48px;
 			text-decoration:none;
-			}
+			transition:color 0.1s;
+			webkit-transition:color 0.1s;
+		}
+	}
+	div#logo:hover {
+		h1 {
+			color:$color-highlight;
+		}
 	}
 	div#links {
 		display:flex;
@@ -631,14 +639,10 @@ div#content {
 }
 
 /* Hall editor and seat picker common style */
-div#edittheater div.editor, div#seats div#seatpicker {
+div#edittheater div.editor,  div#seats div#seatpicker{
 	overflow-x:auto;
-	padding:20px;
+	padding: 10px;
 	color:white;
-
-	div.editorwrap {
-		width:1000px;
-	}
 	svg{
 		background-color:#111;
 		
@@ -653,7 +657,10 @@ div#edittheater div.editor, div#seats div#seatpicker {
 	}
 }
 div#seatPicker {
-width:100%;
+	width:100%;
+	color:black;
+	padding:0px;
+	margin:10px;
 	svg#seatPickerSvg {
 		border:10px solid $color-primary-2;
 		box-shadow:0 0 10px $color-primary-2;
@@ -699,4 +706,49 @@ table#scheduleTable {
 			}
 		}
 	}
+}
+
+/* tickets styling */
+div#ticketsGuide{
+	box-shadow:0 0 10px black;
+	border-radius:5px;
+	background-color:$color-primary-4;
+	display:inline-block;
+	border:1px solid black;
+	vertical-align:top;
+	margin-right:20px;
+	margin-bottom:20px;
+	padding:5px;
+	
+	div.step{
+		background-color:$color-primary-3;
+		border-radius:5px;
+		color:white;
+		margin:10px;
+		padding:10px;
+		font-weight:bold;
+	}
+	div.step:before{
+		content:url("/public/img/svg/undone.svg");
+	}
+	div.step.done{
+		color:lightgreen;
+	}
+	div.step.done:before{
+		content:url("/public/img/svg/done.svg");
+	}
+	div.step.current{
+		color:$color-highlight;
+	}
+	div.step.current:before{
+		content:url("/public/img/svg/current.svg");
+	}
+	
+}
+div#ticketsMain{
+	max-width:100%;
+	border-left:1px solid black;
+	padding-left:10px;
+	display:inline-block;
+	vertical-align:top;
 }

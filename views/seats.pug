@@ -4,17 +4,24 @@ block append scripts
 	script(src="/public/js/seats.js")
 block content
 	div.padding#seats(hall_id=hall._id screening_id=screening._id tickets_normal=tickets.normal tickets_wheelchair=tickets.wheelchair)
-		h1 Pick your seats
-		label= "Normal seats: "
-			b= tickets.normal
-		label= "Wheelchair seats: "
-			b= tickets.wheelchair
-	
-		div#seatpicker Loading...
+		div#ticketsGuide
+			div.step.done Select the amount of tickets
+			div.step.current Pick your seats
+			div.step Confirm your resorvation
+		div#ticketsMain
+			h1 Pick your seats
+			p Selects the seats you want by clicking on them. Green seats are free. You can unselect chosen seats by clicking on them again.
+			label= "Normal seats: "
+				b= tickets.normal
+			label= "Wheelchair seats: "
+				b= tickets.wheelchair
 		
-		div#info
-		form(action="/tickets/screening/"+screening._id+"/confirm" method="post")
-			input(type="hidden" name="tickets[normal]" value=tickets.normal)
-			input(type="hidden" name="tickets[wheelchair]" value=tickets.wheelchair)
-			div.formRow
-				input(type="submit" value="Next")
+			div#seatpicker Loading...
+			
+			div#info
+			form(action="/tickets/screening/"+screening._id+"/confirm" method="post")
+				input(type="hidden" name="tickets[normal]" value=tickets.normal)
+				input(type="hidden" name="tickets[wheelchair]" value=tickets.wheelchair)
+				div.formRow
+					input(type="submit" value="Next")
+					button(type="button" onclick="redirect('/')") Cancel resorvation

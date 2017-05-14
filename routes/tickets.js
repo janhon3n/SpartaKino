@@ -86,7 +86,7 @@ router.post('/screening/:id([0-9a-f]{24})/finish', function(req,res,next){
 		});
 	});
 	if(error) return next(error);
-	res.redirect("/");
+	res.redirect("/user");
 });
 
 //export this router to use in our index.js

@@ -3,7 +3,8 @@ block append scripts
 	script(src='/public/js/movies.js')
 block append content
 	div#movies
-		div#search= "Search: "
-			input#title(type="text",placeholder="Title")
+		div#search
+			label= "Search: "
+			input#title(type="text",placeholder="Movie title")
 			button.button#updateButton Update list
 		div#results.backgroundContent Loading...

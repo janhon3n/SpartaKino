@@ -8,6 +8,8 @@ and then sets up routes,
 and finally sets up error handling and runs the app.
 */
 
+var DEBUGGING = false;
+
 var config = require('./config.js')
 var express = require('express')
 var cookieParser = require('cookie-parser')
@@ -145,12 +147,20 @@ app.all('*', function(req, res){
 //   json api
 app.use('/api', function(err, req, res, next){
 	console.log(err);
-	res.json({error:err});
+	if(DEBUGGING){
+		res.json({error:err});
+	} else {
+		res.json({error:""});
+	}
 });
 //   html pages
 app.use('/', function(err,req,res,next){
 	console.log(err);
-	res.render('error', {user:req.session.user, error:err});
+	if(DEBUGGING){
+		res.render('error', {user:req.session.user, error:err});
+	} else {
+		res.render('error', {user:req.session.user, error:"You don't need to worry about this"});
+	}
 });
 
 server = app.listen(3000, function () {

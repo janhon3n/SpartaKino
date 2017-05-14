@@ -3,29 +3,36 @@ block append scripts
 	srcipt(src="public/js/tickets.js")
 block content
 	div.padding#tickets
-		h1= "Select the amount of tickets"
-		form(action="/tickets/screening/"+screening._id+"/seats" method="post")
-			p
-				h3 Your hall:
-				div.subdiv
-					div
-						b= screening.hall.theater.name + " - " + screening.hall.name
-					div= "Normal seats available: " + available.normal + " / " + screening.hall.seats
-					div= "Wheelchair seats available: " + available.wheelchair + " / " + screening.hall.wheelchair_seats
-			p
-				h3 Choose your tickets:
-				div.subdiv
-					div.formRow
-						label Normal:
-						input(type="number" name="tickets[normal]" min=0 max=available.normal)
-						b= screening.price
-						span € per ticket
-					div.formRow
-						label Wheelchair:
-						input(type="number" name="tickets[wheelchair]" min=0 max=available.wheelchair)
-						b= screening.price
-						span € per ticket
-
-				div.formRow
-					input(type="submit" value="Next")
+		div#ticketsGuide
+			div.step.current Select the amount of tickets
+			div.step Pick your seats
+			div.step Confirm your resorvation
 		
+		div#ticketsMain
+			h1= "Select the amount of tickets"
+			form(action="/tickets/screening/"+screening._id+"/seats" method="post")
+				p
+					h3 Your hall:
+					div.subdiv
+						div
+							b= screening.hall.theater.name + " - " + screening.hall.name
+						div= "Normal seats available: " + available.normal + " / " + screening.hall.seats
+						div= "Wheelchair seats available: " + available.wheelchair + " / " + screening.hall.wheelchair_seats
+				p
+					h3 Choose your tickets:
+					div.subdiv
+						div.formRow
+							label Normal:
+							input(type="number" name="tickets[normal]" min=0 max=available.normal)
+							b= " "+screening.price
+							span € per ticket
+						div.formRow
+							label Wheelchair:
+							input(type="number" name="tickets[wheelchair]" min=0 max=available.wheelchair)
+							b= " "+screening.price
+							span € per ticket
+
+					div.formRow
+						input(type="submit" value="Next")
+						button(type="button" onclick="redirect('/')") Cancel resorvation
+			
