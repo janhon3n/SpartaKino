@@ -93,25 +93,80 @@ function setupTableSorting(){
 		$(this).parentsUntil("table").find("tr").each(function(){
 			$(this).attr("sortdata", $(this).find("td").eq(index).text());
 		});
-		$(this).parentsUntil("table").find("th").removeClass("sortasc");
-		$(this).addClass("sortasc");
 		var arrayOfRows = $(this).parentsUntil("table").find("tr:has(td)").toArray();
-		console.log(arrayOfRows)
-		arrayOfRows.sort(sortBySortdata);
+		if($(this).hasClass("sortasc")){
+			$(this).parentsUntil("table").find("th").removeClass("sortasc").removeClass("sortdesc");
+			$(this).addClass("sortdesc");
+			arrayOfRows.sort(sortBySortdataDesc);			
+		} else {
+			$(this).parentsUntil("table").find("th").removeClass("sortasc").removeClass("sortdesc");
+			$(this).addClass("sortasc");
+			arrayOfRows.sort(sortBySortdataAsc);
+		}
+		for(var i = 0; i < arrayOfRows.length - 1; i++){
+			$(arrayOfRows[i]).before($(arrayOfRows[i+1]));
+		}
 	});
 	
 }
 
-function sortBySortdata(a,b){
-	var aName = $(a).attr('sortdata');
-	var bName = $(b).attr('sortdata');
-	if(aName < bName) {
-		$(a).after($(b));
-		return -1;
-	} else if(aName > bName){
-		$(b).after($(a));
-		return 1;
-	} else {
-		return 0;
-	};
+function sortBySortdataAsc(a,b){
+	var aVal = $(a).attr('sortdata');
+	var bVal = $(b).attr('sortdata');
+	if(moment(aVal).isValid() && moment(bVal).isValid()){
+		aVal = moment(aVal);
+		bVal = moment(bVal);
+		
+		if(aVal.isBefore(bVal)) {
+			return -1;
+		} else if(aVal.isAfter(bVal)){
+			return 1;
+		} else {
+			return 0;
+		}
+		
+	} else{
+		if(!isNaN(aVal) && !isNaN(bVal)) {
+			aVal = Number(aVal);
+			bVal = Number(bVal);
+		}
+		
+		if(aVal > bVal) {
+			return -1;
+		} else if(aVal < bVal){
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+}
+function sortBySortdataDesc(a,b){
+	var aVal = $(a).attr('sortdata');
+	var bVal = $(b).attr('sortdata');
+	if(moment(aVal).isValid() && moment(bVal).isValid()){
+		aVal = moment(aVal);
+		bVal = moment(bVal);
+		
+		if(aVal.isBefore(bVal)) {
+			return 1;
+		} else if(aVal.isAfter(bVal)){
+			return -1;
+		} else {
+			return 0;
+		}
+		
+	} else{
+		if(!isNaN(aVal) && !isNaN(bVal)) {
+			aVal = Number(aVal);
+			bVal = Number(bVal);
+		}
+		
+		if(aVal > bVal) {
+			return 1;
+		} else if(aVal < bVal){
+			return -1;
+		} else {
+			return 0;
+		}
+	}
 }

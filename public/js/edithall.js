@@ -92,10 +92,10 @@ $(document).ready(function () {
 			+ '<label>Hall name:</label>'
 			+ '<input class="hallname" type="text" required>'
 			+ '</div>'
-			+ '<div class="hideable">'
+			+ '<p><div class="hideable">'
 			+ '<h3 class="hidebutton">Editor</h3>'
 			+ '<div class="editor hidecontent"></div>'
-			+ '<div class="deletebutton">Delete</div>'
+			+ '</div></p><div><a class="deletebutton">Delete</a></div>'
 			+ '<hr></div>');
 
 		if(hall)
