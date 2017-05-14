@@ -9,7 +9,7 @@ block append scripts
 block content
 	div.padding#editmovie
 		if movie != undefined
-			h1= 'Edit movie'
+			h1= 'Edit movie '+ movie.title
 		else
 			h1= 'Add new movie'
 		form#movieForm.backgroundContent(action="?" method="post")
@@ -35,12 +35,12 @@ block content
 					else
 						input(type="number" min="1800" max="2050" name="movie[year]")
 				div.inlineInput
-					label.inline Lenght:
+					label.inline= "Lenght:"
 					if movie != undefined
 						input(type="number" min="1" max="1000" name="movie[length]" value=movie.length)
 					else
 						input(type="number" min="1" max="1000" name="movie[length]")
-					
+					span= " min"
 				
 			div.formrow
 				label(for="movie[director]") Director:
@@ -67,7 +67,7 @@ block content
 					button#removeActorButton(type="button") -
 			
 			div.formrow
-				div#cropContainer
+				div#cropContainer.popUp
 					if movie && movie.imagefile != "default.jpg" && movie.imagecropper && movie.imagepath
 						img#cropImage(src=movie.imagepath.orginal imagefile=movie.imagefile cdatax=movie.imagecropper.x cdatay=movie.imagecropper.y cdatawidth=movie.imagecropper.width cdataheight=movie.imagecropper.height)
 					else

@@ -8,7 +8,6 @@ $color-primary-3: #730300;
 $color-primary-4: #880c09;
 
 $color-light-0: #FAFAFA;
-$color-light-1: #f2fbff;
 $color-red: #af0e0e;
 $color-highlight: #70959e;
 
@@ -69,14 +68,33 @@ div.subdiv {
 	margin:10px;
 }
 
-input, select, button, option{
+input, select, button, option, textarea{
 	font-size:100%;
 	padding:5px;
 	margin:0px;
+	border:1px solid gray;
+	box-shadow: 1px 1px 1px gray;
 }
-button, input[type="submit"],{
+input, textarea {
+	background-color:$color-light-0;
+}	
+input:focus, select:focus, button:focus, option:focus, textarea:focus {
+	outline:$color-highlight outset 1px;
+}
+button, input[type="submit"]{
+	margin:5px;
+	padding:6px;
 	padding-left:20px;
 	padding-right:20px;
+	cursor:pointer;
+	border-radius:3px;
+	background-color:$color-primary-4;
+	color:white;
+	transition:background-color 0.1s;
+	webkit-transition:background-color 0.1s;
+}
+button:hover, input[type="submit"]:hover{
+	background-color:$color-highlight;
 }
 textarea{
 	width:100%;
@@ -112,14 +130,13 @@ label {
 /* FORM */
 form {
 	padding:15px;
-	background-color:$color-light-0;
 	border-radius:10px;
 	
 	div.formblock{
 		margin-bottom:20px;
 	}
 	div.formRow{
-	margin-top:8px;
+	margin-top:15px;
 		label{
 			background-color:$color-primary-4;
 			color:white;
@@ -200,6 +217,8 @@ table{
 	tr th{
 		background-color:$color-primary-3;
 		color:white;
+		overflow-x:hidden;
+		white-space:nowrap;
 	}
 	th.sortable {
 		cursor:pointer;
@@ -526,13 +545,30 @@ div#content {
 		}
 		form#imageUpload{
 			position:relative;
-			top:-60px;
+			top:-80px;
 			width:1000px;
 			overflow-x:hidden;
 		}
 		div#submitRow{
 			position:relative;
 			top:50px;
+		}
+		
+		div#actorButtons {
+			button {
+				height:20px;
+				width:20px;
+				padding:0px;
+				margin:1px;
+				background-color:$color-primary-4;
+				color:white;
+				border:1px solid black;
+				font-weight:bold;
+				cursor:pointer;
+			}
+			button:hover{
+				background-color:$color-highlight;
+			}
 		}
 	}
 	

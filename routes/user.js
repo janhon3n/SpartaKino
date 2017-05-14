@@ -16,6 +16,7 @@ router.get('/', function(req, res, next){
 		  .populate({path: 'screening', populate: [{path: 'movie'}, {path: 'hall', populate: {path: 'theater'}}]})
 		  .exec(function(err, resorvations){
 			if(err) return next(err);
+			console.log(resorvations);
 			res.render('user', {user: user, resorvations: resorvations});
 		});
 	});

@@ -18,23 +18,25 @@ block content
 				div.confirmContainer
 				table#resorvationsTable
 					tr
-						th.medium Movie
-						th.small Theater
-						th.small Hall
-						th.tiny Row
-						th.tiny Seat
-						th.small Seat type
-						th.small Date
-						th.small Time
+						th.medium.sortable Movie
+						th.small.sortable Theater
+						th.small.sortable Hall
+						th.tiny.sortable Row
+						th.tiny.sortable Seat
+						th.small.sortable Seat type
+						th.small.sortable Date
+						th.small.sortable Time
 						th.small
 					each r in resorvations
-						tr(resorvation_id=r._id type="resorvation" name=moment(r.screening.datetime).format("DD.MM.YYYY - HH:mm"))
-							td.medium= r.screening.movie.title
-							td.small= r.screening.hall.theater.name
-							td.small= r.screening.hall.name
-							td.tiny.center= r.row
-							td.tiny.center= r.col
-							td.small.center= r.type
-							td.small.center= moment(r.screening.datetime).format("DD.MM.YYYY")
-							td.small.center= moment(r.screening.datetime).format("HH:mm")
-							td.small.delete.button delete
+						if(r.screening)
+							tr(resorvation_id=r._id type="resorvation" name=moment(r.screening.datetime).format("DD.MM.YYYY - HH:mm"))
+								td.medium= r.screening.movie.title
+								td.small= r.screening.hall.theater.name
+								td.small= r.screening.hall.name
+								td.tiny.center= r.row
+								td.tiny.center= r.col
+								td.small.center= r.type
+								td.small.center= moment(r.screening.datetime).format("DD.MM.YYYY")
+								td.small.center= moment(r.screening.datetime).format("HH:mm")
+								td.small.delete.button delete
+						
