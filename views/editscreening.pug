@@ -7,7 +7,7 @@ block append scripts
 block content
 	div.padding#editscreening
 		if screening
-			h1= "Edit screening at "+screening.time
+			h1= "Edit screening at "+moment(screening.datetime).format("DD.MM.YYYY - HH:mm")
 		else 
 			h1= "Create new screening"
 			
@@ -22,7 +22,7 @@ block content
 				div.inlineInput
 					label.inline Time:
 					if screening
-						input(type="time" name="screening[time]" value=moment(screening.time).format('HH:mm') required)
+						input(type="time" name="screening[time]" value=moment(screening.datetime).format('HH:mm') required)
 					else
 						input(type="time" name="screening[time]" value=(moment().format('HH:mm')) required)
 			div.formRow
@@ -30,7 +30,10 @@ block content
 				select(name="screening[movie]")
 					if(movies)
 						each m in movies
-							option(value=m._id)= m.title
+							if screening && m._id.equals(screening.movie)
+								option(value=m._id selected="selected")= m.title
+							else
+								option(value=m._id)= m.title
 			div.formRow
 				label Ticket price:
 				if screening
@@ -38,7 +41,7 @@ block content
 				else
 					input(type="number" name="screening[price]" step="0.01" max="100" min="0" required)
 				
-				span €
+				span= " €"
 				
 			if !screening
 				div.formRow

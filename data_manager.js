@@ -45,6 +45,9 @@ var userSchema = new Schema({
 	updated_at: 'Moment'
 });
 userSchema.pre('save', updateDates);
+userSchema.pre('remove', function(next){
+	this.model('Resorvation').remove({user: this._id}, next);
+});
 
 var movieSchema = new Schema({
 	title: {type: String, required:true},
@@ -73,7 +76,9 @@ movieSchema.virtual('imagepath.big').get(function(){
 	return '/public/img/movies/b_'+this.imagefile;
 });
 movieSchema.pre('save', updateDates);
-
+movieSchema.pre('remove', function(next){
+	this.model('Screening').remove({movie: this._id}, next);
+});
 
 var hallSchema = new Schema({
 	theater: {type: ObjectId, required: true, ref:"Theater"},
@@ -92,7 +97,9 @@ var hallSchema = new Schema({
 	updated_at: 'Moment'
 });
 hallSchema.pre('save', updateDates);
-
+hallSchema.pre('remove', function (next) {
+    this.model('Screening').remove({ hall: this._id }, next);
+});
 
 var theaterSchema = new Schema({
 	name: {type: String, required: true},
@@ -102,6 +109,9 @@ var theaterSchema = new Schema({
 	updated_at: 'Moment'
 });
 theaterSchema.pre('save', updateDates);
+theaterSchema.pre('remove', function(next){
+	this.model('Hall').remove({ theater: this._id }, next);
+});
 
 var resorvationSchema = new Schema({
 	user: {type: ObjectId, required: true, ref:"User"},
@@ -123,6 +133,9 @@ var screeningSchema = new Schema({
 	updated_at: 'Moment'
 })
 screeningSchema.pre('save', updateDates);
+screeningSchema.pre('remove', function(next){
+	this.model('Resorvation').remove({screening: this._id}, next);
+});
 
 var User = mongoose.model('User', userSchema);
 var Movie = mongoose.model('Movie', movieSchema);

@@ -55,7 +55,7 @@ $(document).ready(function(){
 										+'<td class="small center">'+s.date+'</td>'
 										+'<td class="small center">'+s.time+'</td>'
 										+'<td class="medium">'+s.movietitle+'</td>'
-										+'<td class="small">'+s.resorvationsAmount.normal.reserved + ' / ' + s.resorvationsAmount.normal.max + '</td>'
+										+'<td class="medium center">'+s.resorvationsAmount.normal.reserved + ' / ' + s.resorvationsAmount.normal.max + ' normal, '+s.resorvationsAmount.wheelchair.reserved + ' / ' + s.resorvationsAmount.wheelchair.max + ' wheelchair</td>'
 										+'<td class="edit small" onclick=\'redirect("/admin/editschedule/editscreening/theater/'+theater_id+'/hall/'+hall_id+'/'+s._id+'")\'>edit</td>'
 										+'<td class="delete small">delete</td></tr>');
 
@@ -65,7 +65,10 @@ $(document).ready(function(){
 										//create timetable item
 										createScreeningElevator((s.minutes / 1440) * 100, (s.length / 1440) * 100, s);
 										if(s.minutes + s.length > 1440){
-											createScreeningElevator((s.minutes / 1440) * 100 - 100, (s.length / 1440) * 100, s);
+											s.day += 1;
+											if(s.day < 7){
+												createScreeningElevator((s.minutes / 1440) * 100 - 100, (s.length / 1440) * 100, s);
+											}
 										}
 									}
 								setupTableDeletes();

@@ -20,6 +20,7 @@ var path = require('path');
 var app = express()
 var dm = require('./data_manager.js')
 app.locals.moment = require('moment');
+var moment = require('moment');
 var idGiver = 0;
 
 app.set('view engine', 'pug')
@@ -37,6 +38,8 @@ app.use(sassMiddleware({
 app.use(bodyParser.urlencoded({ extended: true })) //To parse URL encoded data
 app.use(bodyParser.json()) //To parse json data
 app.use(cookieParser()) //To parse cookies
+
+
 
 
 
