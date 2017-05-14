@@ -13,9 +13,9 @@ block content
 				div.confirmContainer
 				table#moviesTable
 					tr
-						th.medium Title
-						th.small Year
-						th.shrink Description
+						th.medium.sortable Title
+						th.small.sortable Year
+						th.shrink.sortable Description
 						th.small
 						th.small
 					each m in movies
@@ -33,8 +33,8 @@ block content
 				div.confirmContainer
 				table#usersTable
 					tr
-						th.shrink Email
-						th.medium Account type
+						th.shrink.sortable Email
+						th.medium.sortable Account type
 						th.small
 					each u in users
 						tr(user_id=u._id type="user" name=u.email)
@@ -48,8 +48,8 @@ block content
 				div.confirmContainer
 				table#theatersTable
 					tr
-						th.medium Name
-						th.shrink Address
+						th.medium.sortable Name
+						th.shrink.sortable Address
 						th.medium
 						th.small
 						th.small

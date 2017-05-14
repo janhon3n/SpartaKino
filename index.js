@@ -1,3 +1,13 @@
+/*
+The main file of the project.
+Run this if you want to run Spartakino.
+
+This file requires needed modules,
+then sets up middleware for requests,
+and then sets up routes,
+and finally sets up error handling and runs the app.
+*/
+
 var config = require('./config.js')
 var express = require('express')
 var cookieParser = require('cookie-parser')
@@ -69,7 +79,7 @@ var requireAdmin = function(req,res,next){
 }
 
 
-//routes
+//Routes
 var movies = require('./routes/movies.js')
 app.use('/movies', movies)
 
@@ -144,5 +154,5 @@ app.use('/', function(err,req,res,next){
 });
 
 server = app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+  console.log('Spartakino running on port 3000!')
 })

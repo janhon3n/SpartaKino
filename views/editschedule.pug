@@ -19,29 +19,32 @@ block content
 					div.confirmContainer
 					table#scheduleList
 						tr
-							th.small Date
-							th.small Time
-							th.shrink Movie
+							th.small.sortable Date
+							th.small.sortable Time
+							th.shrink.sortable Movie
 							th.medium Resorvations
 							th.small
 							th.small
 		a(href="/admin/editschedule/editscreening/theater/" + theater._id + "/hall/" + hall._id) Create new screening
+		
 		div.hideable.tableSection.popUp
 			h2.hidebutton Timetable
 			div#scheduleTableContainer.hidecontent.tableContainer
 				table#scheduleTable
 					tr
 						th.tiny
-						th Monday
-						th Tuesday
-						th Wednesday
-						th Thursday
-						th Friday
-						th Saturday
-						th Sunday
+						th= "Sunday " + moment().add(week * 7, 'days').day(0).format("DD.MM.YYYY")
+						th= "Monday " + moment().add(week * 7, 'days').day(1).format("DD.MM.YYYY")
+						th= "Tuesday " + moment().add(week * 7, 'days').day(2).format("DD.MM.YYYY")
+						th= "Wednesday " + moment().add(week * 7, 'days').day(3).format("DD.MM.YYYY")
+						th= "Thursday " + moment().add(week * 7, 'days').day(4).format("DD.MM.YYYY")
+						th= "Friday " + moment().add(week * 7, 'days').day(5).format("DD.MM.YYYY")
+						th= "Saturday " + moment().add(week * 7, 'days').day(6).format("DD.MM.YYYY")
 					tr.content
 						td.tiny
 							div(type="time")
+						td
+							div(type="day" day="0")
 						td
 							div(type="day" day="1")
 						td
@@ -54,5 +57,6 @@ block content
 							div(type="day" day="5")
 						td
 							div(type="day" day="6")
-						td
-							div(type="day" day="0")
+		a(href="/admin/editschedule/theater/"+ theater._id +"/hall/"+ hall._id +"/week/"+prevweek) Previous week
+		span.notext= " | "
+		a(href="/admin/editschedule/theater/"+ theater._id +"/hall/"+ hall._id +"/week/"+nextweek) Next week

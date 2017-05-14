@@ -1,18 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var helperFunctions = require('../helper_functions.js');
 
-function countAvailable(resorvations, screening){
-	normal = resorvations.filter(function(r){
-		return (r.type == 'normal')
-	});
-	wheelchair = resorvations.filter(function(r){
-		return (r.type == 'wheelchair')
-	});
-	var availableCount = {};
-	availableCount.normal = screening.hall.seats - normal.length;
-	availableCount.wheelchair = screening.hall.wheelchair_seats - wheelchair.length;
-	return availableCount;
-}
 
 router.get('/screening/:id([0-9a-f]{24})/tickets', function(req, res, next){
 	req.dm.Screening.findOne({_id: req.params.id})
@@ -21,7 +10,7 @@ router.get('/screening/:id([0-9a-f]{24})/tickets', function(req, res, next){
 		if(err) return next(err);
 		req.dm.Resorvation.find({screening: screening._id}, "_id type", function(err, resorvations){
 			if(err) return next(err);
-			var availableCount = countAvailable(resorvations, screening);
+			var availableCount = helperFunctions.countAvailableResorvations(resorvations, screening);
 			res.render("tickets", {user: req.session.user, screening: screening, available: availableCount});
 		});
 	});
@@ -37,7 +26,7 @@ router.post('/screening/:id([0-9a-f]{24})/seats', function(req, res, next){
 		if(err) return next(err);
 		req.dm.Resorvation.find({screening: screening._id}, "_id type", function(err, resorvations){
 			if(err) return next(err);
-			var availableCount = countAvailable(resorvations, screening);
+			var availableCount = helperFunctions.countAvailableResorvations(resorvations, screening);
 		
 			if(!tickets || (tickets.normal < 1 && tickets.wheelchair < 1) || tickets.normal > availableCount.normal || tickets.wheelchair > availableCount.wheelchair){
 				res.render("tickets", {user: req.session.user, screening: screening, movie: movie});		
@@ -61,7 +50,7 @@ router.post('/screening/:id([0-9a-f]{24})/confirm', function(req, res, next){
 		if(err) return next(err);
 		req.dm.Resorvation.find({screening: screening._id}, "_id type", function(err, resorvations){
 			if(err) return next(err);
-			var availableCount = countAvailable(resorvations, screening);	
+			var availableCount = helperFunctions.countAvailableResorvations(resorvations, screening);	
 			if(!tickets || (tickets.normal < 1 && tickets.wheelchair < 1) || tickets.normal > availableCount.normal || tickets.wheelchair > availableCount.wheelchair){
 				return res.render("tickets", {user: req.session.user, screening: screening, movie: movie});		
 			}

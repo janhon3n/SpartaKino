@@ -30,7 +30,9 @@ router.get('/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})/week/
 					break;
 				}
 			}
-			res.render("editschedule", { user: req.session.user, theater: theater, hall: hall, halls: halls, week: req.params.week});
+			var nextweek = Number(req.params.week) + 1;
+			var prevweek = Number(req.params.week) - 1;
+			res.render("editschedule", { user: req.session.user, theater: theater, hall: hall, halls: halls, week: req.params.week, nextweek: nextweek, prevweek: prevweek});
 		});
 	});
 });
@@ -74,15 +76,14 @@ router.post('/editscreening/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9
 	if(req.body.showtimes.radio == "multiple")
 		weeks = Number(req.body.showtimes.weeks);
 	var screening = req.body.screening;
-	screening.datetime = new Date(screening.date + " " + screening.time);
 	screening.hall = req.params.hall_id;
 	console.log(screening);
 	
 	//create screenings
 	for(var i = 1; i <= weeks; i++){
-		var date = moment(screening.date).add((i-1) * 7, 'days').format('YYYY-MM-DD');
+		var date = moment(screening.date).add((i-1) * 7, 'days');
 		var screeni = JSON.parse(JSON.stringify(screening));
-		screeni.date = date;
+		screeni.datetime = new moment(date.format("YYYY-MM-DD") + " " + screening.time, "YYYY-MM-DD HH:mm");
 		var screeningSave = new req.dm.Screening(screeni);
 		screeningSave.save(function(err){
 			console.log(err);

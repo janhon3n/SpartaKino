@@ -9,7 +9,10 @@ router.get('/', function(req,res,next){
 	});
 });
 router.get('/theater/:theater_id([0-9a-f]{24})/hall/:hall_id([0-9a-f]{24})', function(req, res, next){
-	req.dm.Screening.find({hall: req.params.hall_id}, function(err, screenings){
+	req.dm.Screening.find({hall: req.params.hall_id})
+	  .sort({datetime: 1})
+	  .exec(function(err, screenings){
+			
 		if(err) return next(err);
 		res.json(screenings);
 	});

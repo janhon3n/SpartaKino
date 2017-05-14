@@ -10,10 +10,7 @@ $(document).ready(function(){
 	}
 	var now = moment();
 	var day = now.weekday();
-	var weekstart = now.clone().weekday(0).hours(0).minutes(0).seconds(0);
-	console.log(weekstart);
-	
-
+	var weekstart = now.clone().weekday(0).hours(0).minutes(0).seconds(0).add(Number(week) * 7, 'days');
 
 	
 	$.get('/api/screenings/theater/'+theater_id+'/hall/'+hall_id, function(screenings){
@@ -33,43 +30,51 @@ $(document).ready(function(){
 							return false;
 						});
 						if(movie.length != 1){
-							console.log('Movie for screning doesnt exist');
+							console.log('Movie for screening doesnt exist');
 						} else {
-							s.movietitle = movie[0].title;
-							s.length = movie[0].length;
-							var date = moment(s.datetime);
-							s.day = date.day();
-							s.date = date.format("DD.MM.YYYY");
-							s.time = date.format("HH:mm");
-							s.name = s.date + " " +s.time;
-							s.minutes = (date.hours() * 60) + date.minutes();
-							console.log(s.minutes);
-							var enddate = moment(date);
-							enddate.minutes(enddate.minutes() + s.length);
-							s.endtime = enddate.hours() + ":" + enddate.minutes();
-						
-							
-							//create list row
-							$('div#editschedule table#scheduleList').append('<tr name="'+s.name +'" screening_id="'+s._id+'" type="screening">'
-								+'<td class="small center">'+s.date+'</td>'
-								+'<td class="small center">'+s.time+'</td>'
-								+'<td>'+s.movietitle+'</td>'
-								+'<td>'+s.resorvations.count + s.hall.seats + '</td>'
-								+'<td class="edit small" onclick=\'redirect("/admin/editschedule/editscreening/theater/'+theater_id+'/hall/'+hall_id+'/'+s._id+'")\'>edit</td>'
-								+'<td class="delete small">delete</td></tr>');
-
+							$.get('/api/resorvations/screening/'+s._id+'/amount', function(amount){
+								if(amount.error){
+									console.log(amount.error);
+								} else {
+									s.movietitle = movie[0].title;
+									s.length = movie[0].length;
+									var date = moment(s.datetime);
+									s.day = date.day();
+									s.date = date.format("DD.MM.YYYY");
+									s.time = date.format("HH:mm");
+									s.name = s.date + " " +s.time;
+									s.minutes = (date.hours() * 60) + date.minutes();
+									s.resorvationsAmount = amount;
+									console.log(s.minutes);
+									var enddate = date.clone();
+									enddate.minutes(enddate.minutes() + s.length);
+									s.endtime = enddate.format("HH:mm");
 								
-							//draw to timetable if on this week
-							if(weekstart.isBefore(date) && weekstart.clone().add(7, "days").isAfter(date)){
-								//create timetable item
-								createScreeningElevator((s.minutes / 1440) * 100, (s.length / 1440) * 100, s);
-								if(s.minutes + s.length > 1440){
-									createScreeningElevator((s.minutes / 1440) * 100 - 100, (s.length / 1440) * 100, s);
+									//create list row
+									$('div#editschedule table#scheduleList').append('<tr name="'+s.name +'" screening_id="'+s._id+'" type="screening">'
+										+'<td class="small center">'+s.date+'</td>'
+										+'<td class="small center">'+s.time+'</td>'
+										+'<td class="medium">'+s.movietitle+'</td>'
+										+'<td class="small">'+s.resorvationsAmount.normal.reserved + ' / ' + s.resorvationsAmount.normal.max + '</td>'
+										+'<td class="edit small" onclick=\'redirect("/admin/editschedule/editscreening/theater/'+theater_id+'/hall/'+hall_id+'/'+s._id+'")\'>edit</td>'
+										+'<td class="delete small">delete</td></tr>');
+
+										
+									//draw to timetable if on this week
+									if(weekstart.isBefore(date) && weekstart.clone().add(7, "days").isAfter(date)){
+										//create timetable item
+										createScreeningElevator((s.minutes / 1440) * 100, (s.length / 1440) * 100, s);
+										if(s.minutes + s.length > 1440){
+											createScreeningElevator((s.minutes / 1440) * 100 - 100, (s.length / 1440) * 100, s);
+										}
+									}
+								setupTableDeletes();
 								}
-							}
+							});
 						}
 					});
-					setupTableDeletes();
+					
+					// Add now marker to show current time
 					$('table#scheduleTable tr.content div[type="day"][day="'+day+'"]').append('<div class="nowmarker elevator"'
 					+ 'style="top:'+(((now.hours() * 60 + now.minutes()) / 1440) * 100)+'%;">'
 					+ '</div>');
@@ -89,4 +94,7 @@ $(document).ready(function(){
 		console.log(this.value);
 		redirect("/admin/editschedule/theater/"+theater_id+"/hall/"+this.value+"/week/"+week);
 	});
+	
+	setupTableSorting();
+	
 });

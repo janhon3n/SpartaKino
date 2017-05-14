@@ -34,6 +34,7 @@ body{
 	background-color:$color-primary-0;
 	height:100%;
 	min-width:410px;
+	overflow-y:hidden;
 }
 div#maincontainer {
 	max-width:1200px;
@@ -44,6 +45,10 @@ div#maincontainer {
 	box-shadow:0 0 5px 0px black;
 	max-height:100%;
 	border-radius:0 0 10px 10px;
+	
+	@media screen and (max-width:800px){
+		border:none;
+	}
 }
 ::-webkit-scrollbar {
     width: 0.8em;
@@ -86,6 +91,9 @@ margin-bottom:5px;
 }
 .hidden{
 	display:none;
+}
+.notext {
+cursor:default;
 }
 div.inlineInput {
 	display:inline-block;
@@ -185,6 +193,15 @@ table{
 	tr th{
 		background-color:$color-primary-3;
 		color:white;
+	}
+	th.sortable {
+		cursor:pointer;
+	}
+	th.sortable.sortasc:after {
+		content: url("/public/img/svg/arrow_down.svg");
+	}
+	th.sortable.sortasc:before {
+		content: url("/public/img/svg/arrow_invis.svg");
 	}
 	tr{
 		box-sizing:border-box;
@@ -629,7 +646,7 @@ table#scheduleTable {
 			}
 			.nowmarker{
 			height:5px;
-			background-color:$color-red;
+			background-color:white;
 			}
 		}
 	}

@@ -70,13 +70,48 @@ function deleteRow($el, callback){
 	});
 }
 function setupTableDeletes() {
-	$("table td.delete").click(function(){
-		$el = $(this).closest('tr');
-		$confirmEl = $el.closest('.tableContainer').find('div.confirmContainer');
-		confirmPrompt($confirmEl, 'Delete ' + $el.attr("type") +' '+ $el.attr("name") + '?', 'Delete', 'Cancel', function(callback){
-			deleteRow($el, callback);
-		}, function(callback){
-			callback();
-		});
+	$("table td.delete").each(function(){
+		if($(this).attr("deleteSet") != "true"){
+			$(this).click(function(){
+				$el = $(this).closest('tr');
+				$confirmEl = $el.closest('.tableContainer').find('div.confirmContainer');
+				confirmPrompt($confirmEl, 'Delete ' + $el.attr("type") +' '+ $el.attr("name") + '?', 'Delete', 'Cancel', function(callback){
+					deleteRow($el, callback);
+				}, function(callback){
+					callback();
+				});
+			});
+		}
+	$(this).attr("deleteSet", "true");
 	});
+}
+
+function setupTableSorting(){
+	console.log("Setting up table sorting");
+	$("table th.sortable").click(function(){
+		var index = $(this).index();
+		$(this).parentsUntil("table").find("tr").each(function(){
+			$(this).attr("sortdata", $(this).find("td").eq(index).text());
+		});
+		$(this).parentsUntil("table").find("th").removeClass("sortasc");
+		$(this).addClass("sortasc");
+		var arrayOfRows = $(this).parentsUntil("table").find("tr:has(td)").toArray();
+		console.log(arrayOfRows)
+		arrayOfRows.sort(sortBySortdata);
+	});
+	
+}
+
+function sortBySortdata(a,b){
+	var aName = $(a).attr('sortdata');
+	var bName = $(b).attr('sortdata');
+	if(aName < bName) {
+		$(a).after($(b));
+		return -1;
+	} else if(aName > bName){
+		$(b).after($(a));
+		return 1;
+	} else {
+		return 0;
+	};
 }
