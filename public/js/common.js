@@ -113,9 +113,9 @@ function setupTableSorting(){
 function sortBySortdataAsc(a,b){
 	var aVal = $(a).attr('sortdata');
 	var bVal = $(b).attr('sortdata');
-	if(moment(aVal).isValid() && moment(bVal).isValid()){
-		aVal = moment(aVal);
-		bVal = moment(bVal);
+	if(moment(aVal, 'DD.MM.YYYY').isValid() && moment(bVal, 'DD.MM.YYYY').isValid()){
+		aVal = moment(aVal, 'DD.MM.YYYY');
+		bVal = moment(bVal, 'DD.MM.YYYY');
 		
 		if(aVal.isBefore(bVal)) {
 			return -1;
@@ -143,9 +143,9 @@ function sortBySortdataAsc(a,b){
 function sortBySortdataDesc(a,b){
 	var aVal = $(a).attr('sortdata');
 	var bVal = $(b).attr('sortdata');
-	if(moment(aVal).isValid() && moment(bVal).isValid()){
-		aVal = moment(aVal);
-		bVal = moment(bVal);
+	if(moment(aVal, 'DD.MM.YYYY').isValid() && moment(bVal, 'DD.MM.YYYY').isValid()){
+		aVal = moment(aVal, 'DD.MM.YYYY');
+		bVal = moment(bVal, 'DD.MM.YYYY');
 		
 		if(aVal.isBefore(bVal)) {
 			return 1;

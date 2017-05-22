@@ -162,7 +162,7 @@ app.use('/', function(err,req,res,next){
 	if(DEBUGGING){
 		res.render('error', {user:req.session.user, error:err});
 	} else {
-		res.render('error', {user:req.session.user, error:"You don't need to worry about this"});
+		res.render('error', {user:req.session.user, error:"Information about this error has been stored."});
 	}
 });
 

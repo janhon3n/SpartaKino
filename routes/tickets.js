@@ -29,7 +29,7 @@ router.post('/screening/:id([0-9a-f]{24})/seats', function(req, res, next){
 			var availableCount = helperFunctions.countAvailableResorvations(resorvations, screening);
 		
 			if(!tickets || (tickets.normal < 1 && tickets.wheelchair < 1) || tickets.normal > availableCount.normal || tickets.wheelchair > availableCount.wheelchair){
-				res.render("tickets", {user: req.session.user, screening: screening, movie: movie});		
+				res.render("tickets", {user: req.session.user, screening: screening, movie: screening.movie});		
 			}
 
 			res.render("seats", {user: req.session.user, screening: screening, movie: screening.movie, hall: screening.hall, tickets: req.body.tickets});			
